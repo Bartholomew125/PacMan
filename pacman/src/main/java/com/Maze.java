@@ -10,6 +10,7 @@ public class Maze {
         this.width = width;
         this.height = height;
         this.pacman = pacman;
+        // Set starting position of pacman
     }
 
     public void update() {

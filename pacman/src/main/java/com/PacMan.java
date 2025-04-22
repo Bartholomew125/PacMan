@@ -15,10 +15,10 @@ public class PacMan {
      * @param x
      * @param y
      */
-    public PacMan(float x, float y) {
-        this.x = x;
-        this.y = y;
-        this.dx = 1;
+    public PacMan() {
+        this.x = 0;
+        this.y = 0;
+        this.dx = 0;
         this.dy = 0;
         this.image = new Image("file:src/main/resources/pacman.png");
     }
@@ -50,6 +50,6 @@ public class PacMan {
 
     public Image getImage() {
         // Return the image of pacman
-        return new Image("file:src/main/resources/pacman.png");
+        return image;
     }
 }
