@@ -1,15 +1,12 @@
 package com;
 
-import javafx.scene.image.Image;
-
 public class PacMan {
     
     float x;
     float y;
     float dx;
     float dy;
-    Image image;
-
+    
     /**
      * Creates a new PacMan moving to the right.
      * @param x
@@ -20,7 +17,6 @@ public class PacMan {
         this.y = 0;
         this.dx = 0;
         this.dy = 0;
-        this.image = new Image("file:src/main/resources/pacman.png");
     }
 
     public void move() {
@@ -48,8 +44,4 @@ public class PacMan {
         this.dy = 1;
     }
 
-    public Image getImage() {
-        // Return the image of pacman
-        return image;
-    }
 }
