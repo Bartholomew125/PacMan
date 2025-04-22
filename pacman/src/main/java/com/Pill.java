@@ -1,4 +1,4 @@
-package com.example;
+package com;
 
 public abstract class Pill {
     protected int value;
