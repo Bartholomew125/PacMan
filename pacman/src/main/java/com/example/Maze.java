@@ -1,45 +1,35 @@
 package com.example;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 public class Maze {
-    
+
     int width;
     int height;
     PacMan pacman;
     String[][] maze;
 
-
     public Maze() {
-
         this.maze = this.readMazeFromFile();
-
-
         this.pacman = new PacMan();
     }
 
-    private String[][] readMazeFromFile(){
+    private String[][] readMazeFromFile() {
         String fileName = "maze.txt";
-        String path = "src/main/resources/";
-        
-        // Handle any expections that might occur
+        String pathName = "src/main/resources/com/example/";
+        Path path = Paths.get(pathName + fileName);
+
         try {
-            // Read the file
-            FileInputStream file = new FileInputStream("src/main/resources/maze.txt");
-
-            // Read byte for byte
-            while (file.read() != -1) {
-                int c = file.read();
-                file.
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Found no file named "+fileName+" in path "+path);
-        } catch (IOException e) {
-            System.out.println("Error while reading "+path+fileName+"\n"+e);
+            return Files.lines(path)
+                    .map(line -> line.split(""))
+                    .toArray(String[][]::new);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return new String[0][0];
         }
     }
 
