@@ -12,9 +12,9 @@ public class PacMan {
      * @param x
      * @param y
      */
-    public PacMan() {
-        this.x = 0;
-        this.y = 0;
+    public PacMan(float x, float y) {
+        this.x = x;
+        this.y = y;
         this.dx = 0;
         this.dy = 0;
     }
@@ -42,6 +42,14 @@ public class PacMan {
     public void down() {
         this.dx = 0;
         this.dy = 1;
+    }
+
+    public float getX() {
+        return this.x;
+    }
+
+    public float getY() {
+        return this.y;
     }
 
 }
