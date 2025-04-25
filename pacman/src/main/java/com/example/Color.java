@@ -1,4 +1,4 @@
-package com;
+package com.example;
 // Removed package declaration to match the expected package structure
 
 import java.util.Hashtable;

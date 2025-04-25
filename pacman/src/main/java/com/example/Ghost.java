@@ -1,4 +1,4 @@
-package com;
+package com.example;
 
 public abstract class Ghost {
     protected Color color;

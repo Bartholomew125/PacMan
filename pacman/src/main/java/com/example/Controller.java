@@ -1,4 +1,4 @@
-package com;
+package com.example;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
