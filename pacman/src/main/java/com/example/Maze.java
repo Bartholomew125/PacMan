@@ -15,6 +15,8 @@ public class Maze {
 
     public Maze() {
         this.maze = this.readMazeFromFile();
+        this.width = this.maze[0].length;
+        this.height = this.maze.length;
         Pos2D pos = this.locatePacman();
         this.pacman = new PacMan(pos.getX(), pos.getY());
     }
@@ -41,7 +43,14 @@ public class Maze {
      * @return Position of pacman
      */
     private Pos2D locatePacman() {
-        return this.locateCharacter("p")[0];
+        Pos2D[] poses = this.locateCharacter("p");
+        if (poses.length != 1) {
+            System.out.println("There isint exactly one p in the maze");
+            return new Pos2D(-1, -1);
+        }
+        else {
+            return poses[0];
+        }
     }
 
     /**
@@ -54,9 +63,9 @@ public class Maze {
         // Starting list with variable length
         ArrayList<Pos2D> positions = new ArrayList<Pos2D>();
 
-        for (int y = 0; y < this.maze.length; y++) {
-            for (int x = 0; x < this.maze[y].length; x++) {
-                if (this.maze[y][x] == c) {
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                if (this.maze[y][x].equals(c)) {
                     positions.add(new Pos2D(x, y));
                 }
             }
@@ -75,5 +84,17 @@ public class Maze {
         // Check for collisions with ghosts
         // Check for collisions with pellets
         // Check for game over
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
+
+    public PacMan getPacMan() {
+        return this.pacman;
     }
 }
