@@ -48,27 +48,20 @@ public class View {
     public void render() {
         this.surface.getChildren().clear();
 
-        // Maze
-        String[][] maze = this.maze.getMaze();
-        for (int y = 0; y < this.maze.getHeight(); y++) {
-            for (int x = 0; x < this.maze.getWidth(); x++) {
-                if (maze[y][x].equals("#")) {
-                    ImageView imageView = new ImageView(wallImage);
-                    imageView.setX(x * squareSize);
-                    imageView.setY(y * squareSize);
-                    this.getSurface().getChildren().add(imageView);
-                }
-            }
+        // Add the walls to the surface
+        for (Pos2D wall : this.maze.getWalls()) {
+            this.addImageToSurface(wallImage, wall.getX(), wall.getY());
         }
 
-        // Pacman
-        float x = this.maze.getPacMan().getX() * this.squareSize;
-        float y = this.maze.getPacMan().getY() * this.squareSize;
-        ImageView imageView = new ImageView(pacmanImage);
-        imageView.setX(x);
-        imageView.setY(y);
-        this.getSurface().getChildren().add(imageView);
+        // Add pacman to the surface
+        this.addImageToSurface(pacmanImage, this.maze.getPacMan().getX(), this.maze.getPacMan().getY());
+    }
 
+    private void addImageToSurface(Image image, float x, float y) {
+        ImageView imageView = new ImageView(image);
+        imageView.setX(x * this.squareSize);
+        imageView.setY(y * this.squareSize);
+        this.getSurface().getChildren().add(imageView);
     }
 
     /**
