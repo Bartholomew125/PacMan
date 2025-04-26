@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Define Article %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{mdframed}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{psfrag}
+\usepackage{pgfplots}
+\usepackage{bm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Other Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\geometry{a4paper}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\orangebox[1]{\fcolorbox{ocre}{mygray}{\hspace{1em}#1\hspace{1em}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% English Environments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{mytheoremstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\newtheoremstyle{myproblemstyle}{3pt}{3pt}{\normalfont}{0cm}{\rmfamily\bfseries}{}{1em}{{\color{black}\thmname{#1}~\thmnumber{#2}}\thmnote{\,--\,#3}}
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowGreen,linecolor=deepGreen,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{theorem}{Theorem}[section]
+\theoremstyle{mytheoremstyle}
+\newmdtheoremenv[linewidth=1pt,backgroundcolor=shallowBlue,linecolor=deepBlue,leftmargin=0pt,innerleftmargin=20pt,innerrightmargin=20pt,]{definition}{Definition}[section]
+\theoremstyle{myproblemstyle}
+\newmdtheoremenv[linecolor=black,leftmargin=0pt,innerleftmargin=10pt,innerrightmargin=10pt,]{problem}{Problem}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Plotting Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=8cm,compat=1.9}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Title & Author %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\textbf{Objektorienteret Programmering Projekt PacMan}}
+\author{Andreas K. L. \quad Aske W. F. \quad Magnus R. K.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+    \newpage
+    \tableofcontents
+    \newpage
+
+\section{Beskrivelse}\label{sec:Beskrivelse} % (fold)
+
+\begin{itemize}
+  \item Antag, at læseren af jeres rapport har læst kravsspecifikationen fra
+  projektbeskrivelsen i slutningen af dette dokument, og undlad at gentage
+  unødvendige detaljer derfra.
+  \item Formålet med denne sektion er at dokumentere eventuelle afvigelser fra
+  kravsspecifikationen.
+  \item Har I, for eksempel, gjort jer forsimplende antagelser ift.
+  specifikationen? Eller tolket eventuelle tvetydigheder i specifikationen?
+  Tilføjet nye krav? Beskriv hvilke og hvordan I evt. har tolket
+  specifikationen.
+  \item Hold det kort, især hvis I har få afvigelser.
+\end{itemize}
+\section{design}\label{sec:design} % (fold)
+% section Beskrivelse (end)
+
+\begin{itemize}
+  \item Inkludér et UML-diagram og en beskrivelse af jeres design.
+  \item Giv en kort beskrivelse af jeres diagram:
+  \begin{itemize}
+    \item Hvad er de forskellige dele?
+    \item Har I anvendt designmønstre i jeres design? I så fald, hvor i
+    diagrammet findes disse? Det er ikke et krav at anvende designmønstre, men
+    kan være en god idé.
+  \end{itemize}
+  \item Dokumentér designbeslutninger hvor I har anvendt SOLID, DRY, eller andre
+  OO-principper. 
+  \item Hvis I i løbet af projektet har forfinet jeres design,
+  giv da en kort beskrivelse af hvilke ændringer I har foretaget og hvorfor.
+\end{itemize}
+% section design (end)
+
+\section{Implementation}\label{sec:Implementation} % (fold)
+\begin{itemize}
+  \item Formålet med denne rapportsektion er at give den interesserede læser et
+  overblik over de interessante implementationsdetaljer, som er værd at kigge
+  nærmere på i jeres kodebase, samt nødvendige detaljer for at køre jeres kode.
+  \item Angiv hvilken version af Java I har brugt til at teste og kompilere
+  jeres kode, og inkludérkorte instruktioner til hvordan man kompilerer og kører
+  koden.
+  \item Giv en beskrivelse på højniveau af interessante implementationsaspekter.
+  F.eks., aspekter, I har brugt særligt meget tid eller energi på.
+  \item Det kunne f.eks. være mere avancerede aspekter såsom hvordan I håndterer
+  AI, hvordan I håndterer spilhandlinger, animation, eller andet.
+  \item Hold beskrivelsen overordnet. Vi kan læse jeres kode for detaljerne.
+\end{itemize}
+% section Implementation (end)
+
+\section{Kvalitetssikring}\label{sec:Kvalitetssikring} % (fold)
+\begin{itemize}
+  \item Beskriv hvordan I har testet, at jeres kode lever op til
+  kravsspecifikationen. Har I, f.eks., benyttet unit tests? Manuelle tests?
+  \item Ville I have taget en anden tilgang til kvalitetssikring hvis I skulle
+  designe og implementere projektet forfra?
+\end{itemize}
+% section Kvalitetssikring (end)
+
+\section{Proces}\label{sec:Proces} % (fold)
+\begin{itemize}
+  \item Arbejdede I i faser i løbet af projektet?
+  \item Hvordan gik samarbejdet, og hvordan sikrede I lige deltagelse?
+  \item Brugte I tekniske værktøjer til at få samarbejdet til at glide nemmere
+  på tværs af maskiner?
+  \item Har I brugt AI som støtte under udviklingen af jeres projekt? I så fald,
+  hvordan?
+\end{itemize}
+% section Proces (end)
+
+\section{Diskussion}\label{sec:Diskussion} % (fold)
+\begin{itemize}
+  \item Ville I gøre noget anderledes hvis I skulle implementere projektet
+  forfra?
+  \item Var der dele af projektbeskrivelsen I ikke nåede? I så fald, hvordan er
+  disse dele kompatible med jeres design? Ville I foretage ændringer for at
+  imødekomme ændringer?
+\end{itemize}
+% section Diskussion (end)
+
+\end{document}
