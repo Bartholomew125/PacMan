@@ -36,7 +36,7 @@ public class Main extends Application {
 
         // The game loop is represented as the handle method in the
         // AnimationTimer
-        AnimationTimer AT = new AnimationTimer() {
+        AnimationTimer animationTimer = new AnimationTimer() {
 
             // The current nanoTime to be used as timing
             long t0 = System.nanoTime();
@@ -52,7 +52,7 @@ public class Main extends Application {
             }
         };
 
-        AT.start();
+        animationTimer.start();
 
         stage.setScene(scene);
         stage.show();

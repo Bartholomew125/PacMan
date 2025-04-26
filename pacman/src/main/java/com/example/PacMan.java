@@ -3,7 +3,7 @@ package com.example;
 /**
  * The PacMan class which represents the pacman
  */
-public class PacMan {
+public class PacMan extends Moveable{
 
     /**
      * Creates a new PacMan moving to the right.
