@@ -64,7 +64,6 @@ public class View {
         // Pacman
         float x = this.maze.getPacMan().getX() * this.squareSize;
         float y = this.maze.getPacMan().getY() * this.squareSize;
-        System.out.println(x + "," + y);
         ImageView imageView = new ImageView(pacmanImage);
         imageView.setX(x);
         imageView.setY(y);

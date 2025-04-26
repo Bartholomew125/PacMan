@@ -45,4 +45,12 @@ public class Pos2D {
         this.y = y;
     }
 
+    public double distanceTo(float x, float y) {
+        return Math.sqrt(Math.pow(x-this.x,2) + Math.pow(y-this.y,2));
+    }
+
+    public String toString() {
+        return "("+this.getX()+","+this.getY()+")";
+    }
+
 }
