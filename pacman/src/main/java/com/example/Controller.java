@@ -5,10 +5,12 @@ import javafx.scene.input.KeyEvent;
 
 public class Controller {
     
+    Maze maze;
     PacMan pacman;
 
-    public Controller(PacMan pacman) {
-        this.pacman = pacman;
+    public Controller(Maze maze) {
+        this.maze = maze;
+        this.pacman = maze.getPacMan();
     }
 
     public void handleKeyPress(KeyEvent event) {

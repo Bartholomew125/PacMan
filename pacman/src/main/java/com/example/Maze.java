@@ -19,6 +19,7 @@ public class Maze {
         this.height = this.maze.length;
         Pos2D pos = this.locatePacman();
         this.pacman = new PacMan(pos.getX(), pos.getY());
+        this.pacman.setMovementMultiplier(0.1f);
     }
 
     private String[][] readMazeFromFile() {
@@ -84,6 +85,7 @@ public class Maze {
         // Check for collisions with ghosts
         // Check for collisions with pellets
         // Check for game over
+        this.pacman.move();
     }
 
     public int getWidth() {

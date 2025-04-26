@@ -3,8 +3,6 @@ package com.example;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 /**
  * The viewe class in the MVC model. It is responsible for taking the maze
@@ -37,6 +35,8 @@ public class View {
     }
 
     public void render() {
+        this.surface.getChildren().clear();
+
         // Maze
         String[][] maze = this.maze.getMaze();
         for (int y = 0; y < this.maze.getHeight(); y++) {
@@ -53,6 +53,7 @@ public class View {
         // Pacman
         float x = this.maze.getPacMan().getX() * this.squareSize;
         float y = this.maze.getPacMan().getY() * this.squareSize;
+        System.out.println(x+","+y);
         ImageView imageView = new ImageView(pacmanImage);
         imageView.setX(x);
         imageView.setY(y);

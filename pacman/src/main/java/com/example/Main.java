@@ -4,7 +4,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -19,14 +18,13 @@ public class Main extends Application {
 
         Maze maze = new Maze();
         View viewer = new View(maze, 20);
-        //Controller controller = new Controller(maze);
+        Controller controller = new Controller(maze);
 
         root.getChildren().add(viewer.getSurface());
         Scene scene = new Scene(root, viewer.getWidth(), viewer.getHeight());
+        scene.setOnKeyPressed(event -> controller.handleKeyPress(event));
 
-        viewer.render();
-
-        final int fps = 2;
+        final int fps = 60;
 
         AnimationTimer AT = new AnimationTimer() {
             long t0 = System.nanoTime();
@@ -34,8 +32,9 @@ public class Main extends Application {
             public void handle(long t1) {
                 if ((t1 - t0) >= Math.pow(10, 9) / fps) {
                     t0 = t1;
-                    //controller.update();
-                    //viewer.update();
+                    viewer.render();
+                    maze.update();
+
                 }
             }
         };

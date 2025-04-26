@@ -6,6 +6,7 @@ public class PacMan {
     float y;
     float dx;
     float dy;
+    float movementMultiplier;
     
     /**
      * Creates a new PacMan moving to the right.
@@ -17,11 +18,12 @@ public class PacMan {
         this.y = y;
         this.dx = 0;
         this.dy = 0;
+        this.movementMultiplier = 1;
     }
 
     public void move() {
-        this.x += this.dx;
-        this.y += this.dy;
+        this.x += this.dx * this.movementMultiplier;
+        this.y += this.dy * this.movementMultiplier;
     }
 
     public void left() {
@@ -50,6 +52,10 @@ public class PacMan {
 
     public float getY() {
         return this.y;
+    }
+
+    public void setMovementMultiplier(float c) {
+        this.movementMultiplier = c;
     }
 
 }
