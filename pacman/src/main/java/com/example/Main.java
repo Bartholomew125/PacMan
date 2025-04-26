@@ -4,30 +4,26 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
  * JavaFX App
  */
-public class PacManGame extends Application {
-
-    ImageView imageView;
+public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
 
-        this.imageView = new ImageView();
-        Group root = new Group(imageView);
+        Group root = new Group();
 
         Maze maze = new Maze();
         View viewer = new View(maze, 20);
         //Controller controller = new Controller(maze);
 
+        root.getChildren().add(viewer.getSurface());
         Scene scene = new Scene(root, viewer.getWidth(), viewer.getHeight());
 
-        root.getChildren().add(viewer.getSurface());
         viewer.render();
 
         final int fps = 2;
