@@ -11,11 +11,11 @@ import java.nio.file.Path;
  */
 public class Maze {
 
-    int width;
-    int height;
-    PacMan pacman;
-    String[][] maze; // The 2D array of strings which represents the maze.
-    Pos2D[] walls;
+    private int width;
+    private int height;
+    private PacMan pacman;
+    private String[][] maze; // The 2D array of strings which represents the maze.
+    private Pos2D[] walls;
 
     public Maze() {
         this.maze = this.readMazeFromFile();
@@ -93,6 +93,10 @@ public class Maze {
 
     public String[][] getMaze() {
         return this.maze;
+    }
+
+    public Pos2D[] getWalls() {
+        return this.walls;
     }
 
     /**
