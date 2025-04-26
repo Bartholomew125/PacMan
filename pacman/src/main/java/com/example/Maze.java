@@ -15,6 +15,7 @@ public class Maze {
     int height;
     PacMan pacman;
     String[][] maze; // The 2D array of strings which represents the maze.
+    Pos2D[] walls;
 
     public Maze() {
         this.maze = this.readMazeFromFile();
@@ -24,6 +25,8 @@ public class Maze {
         Pos2D pos = this.locatePacman();
         this.pacman = new PacMan(pos.getX(), pos.getY());
         this.pacman.setMovementMultiplier(0.1f);
+
+        walls = this.locateCharacter("#");
     }
 
     /**
@@ -97,7 +100,14 @@ public class Maze {
      */
     public void update() {
         // Update the maze
+
         // Check for collisions with walls
+        for (Pos2D wall : this.walls) {
+            if (wall.distanceTo(this.getPacMan().getX(),
+                    this.getPacMan().getY()) < 1) {
+                this.getPacMan().stop();
+            }
+        }
         // Check for collisions with ghosts
         // Check for collisions with pellets
         // Check for game over
