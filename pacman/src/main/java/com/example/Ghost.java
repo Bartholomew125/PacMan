@@ -1,7 +1,10 @@
 package com.example;
 
+/**
+ * This is the abstract ghost class from which actual ghosts should extend.
+ */
 public abstract class Ghost {
-    protected Color color;
+    // protected Color color;
     protected float x;
     protected float y;
 
@@ -21,6 +24,4 @@ public abstract class Ghost {
         this.y += 1;
     }
 
-    
-    
 }

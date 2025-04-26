@@ -1,5 +1,8 @@
 package com.example;
 
+/**
+ * The implementation of the Small Pill.
+ */
 public class SmallPill extends Pill{
 
     public SmallPill(float x, float y) {

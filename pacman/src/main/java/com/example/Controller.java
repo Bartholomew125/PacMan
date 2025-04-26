@@ -3,8 +3,12 @@ package com.example;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * The controller class which is responsible for controlling the pacman and
+ * making him move in the right way.
+ */
 public class Controller {
-    
+
     Maze maze;
     PacMan pacman;
 
@@ -13,6 +17,10 @@ public class Controller {
         this.pacman = maze.getPacMan();
     }
 
+    /**
+     * Handles keypresses from the scene
+     * @param event
+     */
     public void handleKeyPress(KeyEvent event) {
         KeyCode key = event.getCode();
 

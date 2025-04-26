@@ -1,6 +1,9 @@
 package com.example;
 
-public class LargePill extends Pill{
+/**
+ * The implementation of the Large Pill which makes pacman able to eat ghosts.
+ */
+public class LargePill extends Pill {
 
     public LargePill(float x, float y) {
         this.size = 20;
