@@ -10,7 +10,7 @@ public abstract class Moveable {
     
 
     /**
-     * Moves moveable depending on movementmultiplier and direction.
+     * Moves Moveable depending on movementmultiplier and direction.
      */
     public void move() {
         this.x += this.dx * movementMultiplier;
@@ -18,7 +18,7 @@ public abstract class Moveable {
     }
 
     /**
-     * Moves movable left.
+     * Moves Movable left.
      */
     public void left() {
         this.dx = -1;
@@ -26,7 +26,7 @@ public abstract class Moveable {
     }
 
     /**
-     * Moves moveable to the right.
+     * Moves Moveable to the right.
      */
     public void right(){
         this.dx = 1;
@@ -34,7 +34,7 @@ public abstract class Moveable {
     }
 
     /**
-     * Moves moveable down.
+     * Moves Moveable down.
      */
     public void down(){
         this.dx = 0;
@@ -42,7 +42,7 @@ public abstract class Moveable {
     }
 
     /**
-     * Moves moveable up.
+     * Moves Moveable up.
      */
     public void up(){
         this.dx = 0;
@@ -50,7 +50,7 @@ public abstract class Moveable {
     }
 
     /**
-     * @return moveables x-value. 
+     * @return Moveables x-value. 
      */
     public float getX(){
         return this.x;
@@ -58,14 +58,14 @@ public abstract class Moveable {
 
 
     /**
-     * @return moveables y-value.
+     * @return Moveables y-value.
      */
     public float getY(){
         return this.y;
     }
 
     /**
-     * Sets moveables movementmultiplier.
+     * Sets Moveables movementmultiplier.
      * @param multiplier
      */
     public void setMovementMultiplier(float multiplier){
