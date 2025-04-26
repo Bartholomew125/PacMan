@@ -7,7 +7,6 @@ public abstract class Moveable {
     protected float dx;
     protected float dy;
     protected float movementMultiplier;
-    
 
     /**
      * Moves Moveable depending on movementmultiplier and direction.
@@ -28,7 +27,7 @@ public abstract class Moveable {
     /**
      * Moves Moveable to the right.
      */
-    public void right(){
+    public void right() {
         this.dx = 1;
         this.dy = 0;
     }
@@ -36,7 +35,7 @@ public abstract class Moveable {
     /**
      * Moves Moveable down.
      */
-    public void down(){
+    public void down() {
         this.dx = 0;
         this.dy = 1;
     }
@@ -44,32 +43,42 @@ public abstract class Moveable {
     /**
      * Moves Moveable up.
      */
-    public void up(){
+    public void up() {
         this.dx = 0;
         this.dy = -1;
     }
 
     /**
-     * @return Moveables x-value. 
+     * @return Moveables x-value.
      */
-    public float getX(){
+    public float getX() {
         return this.x;
     }
-
 
     /**
      * @return Moveables y-value.
      */
-    public float getY(){
+    public float getY() {
         return this.y;
     }
 
     /**
      * Sets Moveables movementmultiplier.
+     * 
      * @param multiplier
      */
-    public void setMovementMultiplier(float multiplier){
+    public void setMovementMultiplier(float multiplier) {
         this.movementMultiplier = multiplier;
     }
-}
 
+    /**
+     * Stops the Movable in its place by removing its speed, and rounding its
+     * positions to nearest integer.
+     */
+    public void stop() {
+        this.dx = 0;
+        this.dy = 0;
+        this.x = Math.round(x);
+        this.y = Math.round(y);
+    }
+}
