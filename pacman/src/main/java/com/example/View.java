@@ -1,7 +1,8 @@
 package com.example;
 
 import javafx.scene.Group;
-import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -18,19 +19,45 @@ public class View {
     private Maze maze;
     private Group surface = new Group();
 
+    private Image wallImage;
+    private Image pacmanImage;
+
     public View(Maze maze, int squareSize) {
         this.squareSize = squareSize;
         this.maze = maze;
         this.width = maze.getWidth() * this.squareSize;
         this.height = maze.getHeight() * this.squareSize;
+
+        this.wallImage = new Image(
+                "file:src/main/resources/com/example/wall.png", squareSize,
+                squareSize, true, false);
+        this.pacmanImage = new Image(
+                "file:src/main/resources/com/example/pacman.png", squareSize,
+                squareSize, true, false);
     }
 
     public void render() {
+        // Maze
+        String[][] maze = this.maze.getMaze();
+        for (int y = 0; y < this.maze.getHeight(); y++) {
+            for (int x = 0; x < this.maze.getWidth(); x++) {
+                if (maze[y][x].equals("#")) {
+                    ImageView imageView = new ImageView(wallImage);
+                    imageView.setX(x * squareSize);
+                    imageView.setY(y * squareSize);
+                    this.getSurface().getChildren().add(imageView);
+                }
+            }
+        }
+
+        // Pacman
         float x = this.maze.getPacMan().getX() * this.squareSize;
         float y = this.maze.getPacMan().getY() * this.squareSize;
-        System.out.println(x+","+y);
-        Circle pacman = new Circle(x, y, 10, Color.YELLOW);
-        this.surface.getChildren().add(pacman);
+        ImageView imageView = new ImageView(pacmanImage);
+        imageView.setX(x);
+        imageView.setY(y);
+        this.getSurface().getChildren().add(imageView);
+
     }
 
     public Group getSurface() {
