@@ -8,6 +8,14 @@ public abstract class Moveable {
     protected float dy;
     protected float movementMultiplier;
 
+    public Moveable(float x, float y, float dx, float dy, float movementMultiplier) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.movementMultiplier = movementMultiplier;
+    }
+    
     /**
      * Moves Moveable depending on movementmultiplier and direction.
      */
