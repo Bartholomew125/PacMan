@@ -1,0 +1,12 @@
+{
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "java.format.settings.url": "eclipse-formatter.xml",
+    "[java]": {
+        "editor.insertSpaces": true
+    }
+}
