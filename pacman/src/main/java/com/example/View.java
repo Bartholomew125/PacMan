@@ -19,6 +19,7 @@ public class View {
 
     private Image wallImage;
     private Image pacmanImage;
+    private Image smallPill;
 
     /**
      * Create a new view of a maze, and a square size
@@ -39,7 +40,7 @@ public class View {
                 squareSize, true, false);
         this.pacmanImage = new Image(
                 "file:src/main/resources/com/example/pacman.png", squareSize,
-                squareSize, true, false);
+                squareSize, true, false); 
     }
 
     /**

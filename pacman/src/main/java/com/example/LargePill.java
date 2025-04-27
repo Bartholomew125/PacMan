@@ -1,5 +1,9 @@
 package com.example;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 /**
  * The implementation of the Large Pill which makes pacman able to eat ghosts.
  */
@@ -24,10 +28,24 @@ public class LargePill extends Pill {
     } 
 
     public void getPowerUp(){ 
-        long ptime = System.currentTimeMillis(); 
-        //TO DO: Figure out timer for powerup mode
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(15000), ae -> IsActive())); 
+        timeline.setCycleCount(1); 
+        timeline.play(); 
+        if (IsActive()==false){ 
+            timeline.stop();
+        } else { PowerMode();
+
+        }
 
 
+    } 
+
+    public boolean IsActive(){ 
+        return false;
+    } 
+
+    public void PowerMode(){ 
+        //Confused on which class controls Pacman Powerups
 
     }
 }
