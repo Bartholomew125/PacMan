@@ -10,5 +10,24 @@ public class LargePill extends Pill {
         this.value = 50;
         this.x = x;
         this.y = y;
+    } 
+
+    public LargePill newLargePill(){ 
+        return new LargePill(x, y);
+    } 
+
+    public LargePill newPowerUp(){ 
+        LargePill powerup = new LargePill(x,y); 
+        powerup.getPowerUp(); 
+        return powerup;
+
+    } 
+
+    public void getPowerUp(){ 
+        long ptime = System.currentTimeMillis(); 
+        //TO DO: Figure out timer for powerup mode
+
+
+
     }
 }
