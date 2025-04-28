@@ -41,6 +41,9 @@ public class View {
         this.pacmanImage = new Image(
                 "file:src/main/resources/com/example/pacman.png", squareSize,
                 squareSize, true, false); 
+        this.smallPill = new Image(
+            "file:src/main/resources/com/example/smallPill.png", squareSize,
+            squareSize, true, false); 
     }
 
     /**

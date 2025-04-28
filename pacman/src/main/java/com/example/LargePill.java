@@ -20,12 +20,16 @@ public class LargePill extends Pill {
         return new LargePill(x, y);
     } 
 
+    //generating af largepill with a powerup
+
     public LargePill newPowerUp(){ 
         LargePill powerup = new LargePill(x,y); 
         powerup.getPowerUp(); 
         return powerup;
 
     } 
+
+    //timer for powerup
 
     public void getPowerUp(){ 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(15000), ae -> IsActive())); 
