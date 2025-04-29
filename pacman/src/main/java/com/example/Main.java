@@ -33,6 +33,7 @@ public class Main extends Application {
 
         // The framerate of the game
         final int fps = 60;
+        final double spf =  Math.pow(10, 9) / fps;
 
         // The game loop is represented as the handle method in the
         // AnimationTimer
@@ -43,7 +44,7 @@ public class Main extends Application {
 
             public void handle(long t1) {
                 // Every frame, enter this if statement, and update stuff
-                if ((t1 - t0) >= Math.pow(10, 9) / fps) {
+                if ((t1 - t0) >= spf) {
                     t0 = t1;
                     viewer.render();
                     maze.update();
