@@ -19,6 +19,7 @@ public class View {
 
     private Image wallImage;
     private Image pacmanImage;
+    private Image smallPill;
 
     /**
      * Create a new view of a maze, and a square size
@@ -39,7 +40,10 @@ public class View {
                 squareSize, true, false);
         this.pacmanImage = new Image(
                 "file:src/main/resources/com/example/pacman.png", squareSize,
-                squareSize, true, false);
+                squareSize, true, false); 
+        this.smallPill = new Image(
+            "file:src/main/resources/com/example/smallPill.png", squareSize,
+            squareSize, true, false); 
     }
 
     /**
@@ -54,7 +58,13 @@ public class View {
         }
 
         // Add pacman to the surface
-        this.addImageToSurface(pacmanImage, this.maze.getPacMan().getX(), this.maze.getPacMan().getY());
+        this.addImageToSurface(pacmanImage, this.maze.getPacMan().getX(), this.maze.getPacMan().getY()); 
+
+        // Add some dots
+        for (Pill pill : this.maze.getSmallPills()){ 
+            this.addImageToSurface(smallPill, pill.getX(), pill.getY());
+        }
+
     }
 
     private void addImageToSurface(Image image, float x, float y) {

@@ -6,7 +6,8 @@ package com.example;
 public abstract class Ghost {
     // protected Color color;
     protected float x;
-    protected float y;
+    protected float y; 
+
 
     public void moveLeft() {
         this.x -= 1;
