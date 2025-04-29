@@ -84,9 +84,13 @@ public abstract class Moveable {
      * positions to nearest integer.
      */
     public void stop() {
+        if (this.dx == 0) {
+            this.y = Math.round(this.y);
+        }
+        if (this.dy == 0) {
+            this.x = Math.round(this.x);
+        }
         this.dx = 0;
         this.dy = 0;
-        this.x = Math.round(x);
-        this.y = Math.round(y);
     }
 }
