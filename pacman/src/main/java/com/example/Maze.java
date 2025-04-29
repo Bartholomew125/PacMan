@@ -16,8 +16,8 @@ public class Maze {
     private PacMan pacman;
     private String[][] maze; // The 2D array of strings which represents the maze.
     private Pos2D[] walls; 
-    private LargePill largep; 
-    private SmallPill[] smallp;
+    private LargePills largePills; 
+    private SmallPills[] smallPills;
 
 
     public Maze() {
@@ -31,10 +31,10 @@ public class Maze {
 
         walls = this.locateCharacter("#");  
 
-        Pos2D[] ppos = locateSmallPill();
-        this.smallp = new SmallPill[ppos.length];
+        Pos2D[] ppos = locateSmallPills();
+        this.smallPills = new SmallPills[ppos.length];
         for (int i = 0; i < ppos.length; i++) {
-            this.smallp[i] = new SmallPill(ppos[i].getX(), ppos[i].getY());
+            this.smallPills[i] = new SmallPills(ppos[i].getX(), ppos[i].getY());
         } 
 
         //Pos2D lppos = locateLargePill(); 
@@ -83,7 +83,7 @@ public class Maze {
         } 
     } 
 
-    private Pos2D[] locateSmallPill(){ 
+    private Pos2D[] locateSmallPills() { 
         Pos2D[] smalldots = this.locateCharacter("."); 
 
         return smalldots;
@@ -160,7 +160,7 @@ public class Maze {
         return this.pacman;
     } 
 
-    public SmallPill[] getSmallPills(){ 
-        return this.smallp;
+    public SmallPills[] getSmallPills() { 
+        return this.smallPills;
     }
 }
