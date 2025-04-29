@@ -1,7 +1,5 @@
 package com.example;
 
-import javafx.geometry.Point2D;
-
 public class AGhost extends Ghost { 
     private Float[][] aigrid = new Float[20][20]; 
     private AGhost ghost;
@@ -34,11 +32,11 @@ public class AGhost extends Ghost {
 
 
         //path for the ai
-        Float[][] path = getgrid(aigrid, start, goal);  
+        /*Float[][] path = getgrid(aigrid, start, goal);  
 
         if (path != null && aigridsize() > 0){ 
             MoveGhost(ghost, new Point2D(y+1, x+1));
-        }  
+        }*/  
 
     } 
 
@@ -46,7 +44,7 @@ public class AGhost extends Ghost {
         return aigrid.length;
     } 
 
-    public Float[][] getgrid(){ 
+    public void getgrid(){ 
 
 
     }

@@ -58,7 +58,13 @@ public class View {
         }
 
         // Add pacman to the surface
-        this.addImageToSurface(pacmanImage, this.maze.getPacMan().getX(), this.maze.getPacMan().getY());
+        this.addImageToSurface(pacmanImage, this.maze.getPacMan().getX(), this.maze.getPacMan().getY()); 
+
+        // Add some dots
+        for (Pill pill : this.maze.getSmallPills()){ 
+            this.addImageToSurface(smallPill, pill.getX(), pill.getY());
+        }
+
     }
 
     private void addImageToSurface(Image image, float x, float y) {

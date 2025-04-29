@@ -16,16 +16,15 @@ public class LargePill extends Pill {
         this.y = y;
     } 
 
-    public LargePill newLargePill(){ 
-        return new LargePill(x, y);
-    } 
 
     //generating af largepill with a powerup
 
-    public LargePill newPowerUp(){ 
-        LargePill powerup = new LargePill(x,y); 
-        powerup.getPowerUp(); 
-        return powerup;
+    public LargePill newLargePill(){ 
+        LargePill largePill = new LargePill(x,y);  
+        largePill.getSize();
+        largePill.getValue();
+        largePill.getPowerUp(); 
+        return largePill;
 
     } 
 

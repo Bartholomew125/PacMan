@@ -16,12 +16,12 @@ public class SmallPill extends Pill{
 
 
     public SmallPill newSmallPill(){  
-        return new SmallPill(x,y);
-    }  
-
-    public void Attributes(SmallPill smallp){ 
+        SmallPill smallp = new SmallPill(x,y); 
         smallp.getSize(); 
         smallp.getValue(); 
+        return smallp;
+
     }  
+
 
 }
