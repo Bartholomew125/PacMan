@@ -14,11 +14,8 @@ public class LargePill extends Pill {
      * @param x
      * @param y
      */
-    public LargePill(float x, float y) {
-        this.size = 20;
-        this.value = 50;
-        this.x = x;
-        this.y = y;
+    public LargePill(int x, int y) {
+        super(x, y, 50, 20);
     } 
 
 
