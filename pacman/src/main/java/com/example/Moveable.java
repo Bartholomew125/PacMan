@@ -11,7 +11,7 @@ public abstract class Moveable {
     protected float dy;
     protected double movementMultiplier;
 
-    public Moveable(float x, float y, float dx, float dy, float movementMultiplier) {
+    public Moveable(float x, float y, float dx, float dy, double movementMultiplier) {
         this.x = x;
         this.y = y;
         this.dx = dx;
