@@ -6,10 +6,7 @@ public class AGhost extends Ghost {
     private float start,goal;
 
     public AGhost(float x, float y){ 
-        this.x = x; 
-        this.y = y; 
-
-
+        super(x, y, 0, 0, 1, new Color("red"));
     }  
 
     public void CreateGhost(){ 
