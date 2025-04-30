@@ -1,12 +1,15 @@
 package com.example;
 
+/**
+ * The movable class represents anything that needs to be moved.
+ */
 public abstract class Moveable {
 
     protected float x;
     protected float y;
     protected float dx;
     protected float dy;
-    protected float movementMultiplier;
+    protected double movementMultiplier;
 
     public Moveable(float x, float y, float dx, float dy, float movementMultiplier) {
         this.x = x;
@@ -75,7 +78,7 @@ public abstract class Moveable {
      * 
      * @param multiplier
      */
-    public void setMovementMultiplier(float multiplier) {
+    public void setMovementMultiplier(double multiplier) {
         this.movementMultiplier = multiplier;
     }
 
