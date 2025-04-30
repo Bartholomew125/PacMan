@@ -17,7 +17,7 @@ public abstract class Ghost extends Moveable{
      * @param multiplier
      * @param color
      */
-    public Ghost(float x, float y, float dx, float dy, double multiplier, Color color) {
+    protected Ghost(float x, float y, float dx, float dy, double multiplier, Color color) {
         super(x, y, dx, dy, multiplier);
         this.color = color;
     }
