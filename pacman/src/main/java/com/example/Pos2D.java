@@ -46,14 +46,22 @@ public class Pos2D {
     }
 
     /**
-     * Calculates the euclidian distance from this position to the given one.
-     * 
+     * Calculate the euclidian distance from this position to the movable.
      * @param x
      * @param y
      * @return
      */
     public double distanceTo(Moveable moveable) {
         return Math.sqrt(Math.pow(moveable.getX() - this.x, 2) + Math.pow(moveable.getY() - this.y, 2));
+    }
+
+    /**
+     * Calculates the euclidian distance from this position to the given one.
+     * @param pos
+     * @return
+     */
+    public double distanceTo(Pos2D pos) {
+        return Math.sqrt(Math.pow(pos.getX() - this.x, 2) + Math.pow(pos.getY() - this.y, 2));
     }
 
     /**
