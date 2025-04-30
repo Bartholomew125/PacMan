@@ -105,7 +105,7 @@ public class Pos2DTest {
         Pos2D position = new Pos2D(2, 2);
         
         // Assert: check whether the distanace between the given object and its own coordinates is 0.
-        assertEquals(0, position.distanceTo(position.getX(),position.getY()));
+        assertEquals(0, position.distanceTo(position));
     }
 
     /**
