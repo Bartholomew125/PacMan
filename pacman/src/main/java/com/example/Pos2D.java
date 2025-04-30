@@ -52,8 +52,8 @@ public class Pos2D {
      * @param y
      * @return
      */
-    public double distanceTo(float x, float y) {
-        return Math.sqrt(Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2));
+    public double distanceTo(Moveable moveable) {
+        return Math.sqrt(Math.pow(moveable.getX() - this.x, 2) + Math.pow(moveable.getY() - this.y, 2));
     }
 
     /**
