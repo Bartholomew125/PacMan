@@ -7,9 +7,9 @@ import javafx.util.Duration;
 /**
  * The implementation of the Large Pill which makes pacman able to eat ghosts.
  */
-public class LargePill extends Pill {
+public class LargePills extends Pill {
 
-    public LargePill(float x, float y) {
+    public LargePills(float x, float y) {
         this.size = 20;
         this.value = 50;
         this.x = x;
@@ -19,8 +19,8 @@ public class LargePill extends Pill {
 
     //generating af largepill with a powerup
 
-    public LargePill newLargePill(){ 
-        LargePill largePill = new LargePill(x,y);  
+    public LargePills newLargePill(){ 
+        LargePills largePill = new LargePills(x,y);  
         largePill.getSize();
         largePill.getValue();
         largePill.getPowerUp(); 
