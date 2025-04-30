@@ -1,12 +1,15 @@
 package com.example;
 
+import java.util.ArrayList;
+
 public class Game {
 
     private Maze maze;
     private PacMan pacman;
-    private Pill[] smallPills;
-    private Pill[] largePills;
+    private ArrayList<Pill> smallPills;
+    private ArrayList<Pill> largePills;
     private Ghost[] ghosts;
+    private int score;
 
     public Game() {
         // Create maze
@@ -19,18 +22,18 @@ public class Game {
 
         // Create small pills
         Pos2D[] smallPillPositions = this.maze.locateSmallPills();
-        this.smallPills = new Pill[smallPillPositions.length];
+        this.smallPills = new ArrayList<Pill>();
         for (int i = 0; i < smallPillPositions.length; i++) {
-            this.smallPills[i] = new SmallPill(smallPillPositions[i].getX(),
-                                               smallPillPositions[i].getY());
+            this.smallPills.add(new SmallPill(smallPillPositions[i].getX(),
+                                              smallPillPositions[i].getY()));
         }
 
         // Create large pills
         Pos2D[] largePillPositions = this.maze.locateLargePills();
-        this.largePills = new Pill[largePillPositions.length];
+        this.largePills = new ArrayList<Pill>();
         for (int i = 0; i < largePillPositions.length; i++) {
-            this.largePills[i] = new LargePill(largePillPositions[i].getX(),
-                                               largePillPositions[i].getY());
+            this.largePills.add(new LargePill(largePillPositions[i].getX(),
+                                              largePillPositions[i].getY()));
         }
 
         // Create ghosts
@@ -40,6 +43,25 @@ public class Game {
             this.ghosts[i] = new AGhost(ghostPositions[i].getX(),
                                         ghostPositions[i].getY());
         }
+
+        this.score = 0;
+    }
+
+    /**
+     * Make pacman eat a pill.
+     * @param pill
+     */
+    public void pacmanEatSmallPill(Pill pill) {
+        this.increaseScore(pill.getValue());
+        this.smallPills.remove(pill);
+    }
+
+    /**
+     * Increasee score by some value.
+     * @param value
+     */
+    public void increaseScore(int value) {
+        this.score = this.score + value;
     }
 
     /**
@@ -59,8 +81,12 @@ public class Game {
     /**
      * @return The small pills of the game
      */
-    public Pill[] getSmallPills() {
-        return this.smallPills;
+    public Pill[] getSmallPillsArray() {
+        return this.smallPills.toArray(new Pill[this.smallPills.size()]);
+    }
+
+    public int getScore() {
+        return this.score;
     }
 
 }
