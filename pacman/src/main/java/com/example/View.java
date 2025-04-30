@@ -63,7 +63,7 @@ public class View {
         this.addImageToSurface(pacmanImage, this.game.getPacMan().getX(), this.game.getPacMan().getY()); 
 
         // Add the small pills
-        for (Pill pill : this.game.getSmallPills()){ 
+        for (Pill pill : this.game.getSmallPillsArray()){ 
             this.addImageToSurface(smallPillImage, pill.getX(), pill.getY());
         }
 
