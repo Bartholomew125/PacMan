@@ -54,7 +54,6 @@ public class Controller {
 
         if (this.currentNanoTime
                 - this.previousNanoTime >= this.nanosecondsPerFrame) {
-            System.out.println("hello");
             this.previousNanoTime = currentNanoTime;
             this.handleCollisions();
 
@@ -69,10 +68,20 @@ public class Controller {
     private void handleCollisions() {
 
         PacMan pacman = this.game.getPacMan();
-        for (Wall wall : this.game.getMaze().getWalls()) {
-            if (wall.distanceTo(pacman.getX(),
-                    pacman.getY()) < 1) {
+        Wall[] walls = this.game.getMaze().getWalls();
+        Pill[] smallPills = this.game.getSmallPillsArray();
+
+
+        for (Wall wall : walls) {
+            if (wall.distanceTo(pacman) < 1) {
                 pacman.stop();
+            }
+        }
+
+        for (Pill pill : smallPills) {
+            if (pill.distanceTo(pacman) < 1) {
+                this.game.pacmanEatSmallPill(pill);
+                System.out.println(this.game.getScore());
             }
         }
 
