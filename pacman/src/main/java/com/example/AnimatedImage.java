@@ -7,11 +7,13 @@ public class AnimatedImage {
     private Image[] frames;
     private double duration;
     private int squareSize;
+    private int rotation;
 
 
     public AnimatedImage(double nanoTimePerFrame, int squareSize) {
         this.duration = nanoTimePerFrame;
         this.squareSize = squareSize;
+        this.rotation = 0;
     }
 
     /**
@@ -25,7 +27,7 @@ public class AnimatedImage {
      * @param fileName
      * @param files
      */
-    public void setFrames(String folder, String fileName, int files) {
+    public void loadFramesFromDirectory(String folder, String fileName, int files) {
         this.frames = new Image[files];
         for (int i = 0; i < files; i++) {
             this.frames[i] = new Image("file:src/main/resources/com/example/"+folder+"/"+fileName+i+".png", 
@@ -40,5 +42,20 @@ public class AnimatedImage {
     public Image getFrame(double time) {
         int index = (int) ((time % (this.frames.length * this.duration)) / this.duration);
         return this.frames[index];
+    }
+
+    /**
+     * Set the rotation of the animation
+     * @param rotation
+     */
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
+    /**
+     * @return The rotation of the animation
+     */
+    public int getRotation() {
+        return this.rotation;
     }
 }
