@@ -1,9 +1,12 @@
 package com.example;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
+
 public class AGhost extends Ghost { 
-    private Float[][] aigrid = new Float[20][20]; 
+    private Integer[][] aigrid = new Integer[20][20]; 
     private AGhost ghost;
-    private float start,goal;
+    private ArrayList<Integer> start,goal;
 
     public AGhost(float x, float y){ 
         super(x, y, 0, 0, 1, new Color("red"));
@@ -15,25 +18,21 @@ public class AGhost extends Ghost {
         
     } 
 
-    public void getInfo(){ 
-
-        //starting float point for the ai
-        this.start = aigrid[5][5]; 
-
-        
-        //goal float point for the ai
-        //TO DO: figure out how to implement a tracker for pacman
-        this.goal =  aigrid[10][10];
-        
-        this.aigrid = aigrid;
+    private void getInfo(){ 
 
 
         //path for the ai
-        /*Float[][] path = getgrid(aigrid, start, goal);  
+        ArrayList<Pos2D> path = new ArrayList<Pos2D>(); 
+        for (int i = 0; i < aigridsize(); i++) {
 
-        if (path != null && aigridsize() > 0){ 
-            MoveGhost(ghost, new Point2D(y+1, x+1));
-        }*/  
+            
+        }
+
+        
+            
+        
+
+
 
     } 
 
@@ -41,7 +40,9 @@ public class AGhost extends Ghost {
         return aigrid.length;
     } 
 
-    public void getgrid(){ 
+    public boolean visited(){ 
+        return false;
+
 
 
     }
