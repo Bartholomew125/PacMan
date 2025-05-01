@@ -20,8 +20,8 @@ public class Pos2DTest {
         Pos2D position = new Pos2D(1, 2);
         
         // Assert: check that x and y are set correctly.
-        assertEquals(1, position.x);
-        assertEquals(2, position.y);
+        assertEquals(1, position.getX());
+        assertEquals(2, position.getY());
     }
 
     /**
@@ -55,7 +55,7 @@ public class Pos2DTest {
         position.setX(12);
         
         // Assert: check whether field contains expected value.
-        assertEquals(12, position.x);
+        assertEquals(12, position.getX());
     }
 
      /**
@@ -89,7 +89,7 @@ public class Pos2DTest {
         position.setY(14);
         
         // Assert: check whether field contains expected value.
-        assertEquals(14, position.y);
+        assertEquals(14, position.getY());
     }
 
     /**
@@ -105,7 +105,7 @@ public class Pos2DTest {
         Pos2D position = new Pos2D(2, 2);
         
         // Assert: check whether the distanace between the given object and its own coordinates is 0.
-        assertEquals(0, position.distanceTo(position.x,position.y));
+        assertEquals(0, position.distanceTo(position));
     }
 
     /**

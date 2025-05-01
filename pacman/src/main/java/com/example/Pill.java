@@ -4,11 +4,17 @@ package com.example;
  * An abstract pill class for the pills in the maze. The position for the pill
  * will be set in the constructor of the pills that extend it.
  */
-public abstract class Pill {
+public abstract class Pill extends Pos2D{
     protected int value;
     protected int size;
-    protected float x;
-    protected float y;
+    protected int x;
+    protected int y;
+
+    protected Pill(int x, int y, int value, int size) {
+        super(x, y);
+        this.value = value;
+        this.size = size;
+    }
 
     /**
      * @return The value of the pill
@@ -23,19 +29,4 @@ public abstract class Pill {
     public int getSize() {
         return this.size;
     }
-
-    /**
-     * @return The x position of the pill
-     */
-    public float getX() {
-        return this.x;
-    }
-
-    /**
-     * @return The y position of the pill
-     */
-    public float getY() {
-        return y;
-    }
-
 }

@@ -5,8 +5,8 @@ package com.example;
  */
 public class Pos2D {
 
-    int x;
-    int y;
+    private int x;
+    private int y;
 
     public Pos2D(int x, int y) {
         this.x = x;
@@ -45,12 +45,30 @@ public class Pos2D {
         this.y = y;
     }
 
-    public double distanceTo(float x, float y) {
-        return Math.sqrt(Math.pow(x-this.x,2) + Math.pow(y-this.y,2));
+    /**
+     * Calculate the euclidian distance from this position to the movable.
+     * @param x
+     * @param y
+     * @return
+     */
+    public double distanceTo(Moveable moveable) {
+        return Math.sqrt(Math.pow(moveable.getX() - this.x, 2) + Math.pow(moveable.getY() - this.y, 2));
     }
 
+    /**
+     * Calculates the euclidian distance from this position to the given one.
+     * @param pos
+     * @return
+     */
+    public double distanceTo(Pos2D pos) {
+        return Math.sqrt(Math.pow(pos.getX() - this.x, 2) + Math.pow(pos.getY() - this.y, 2));
+    }
+
+    /**
+     * @return A textual representation of the position.
+     */
     public String toString() {
-        return "("+this.getX()+","+this.getY()+")";
+        return "(" + this.getX() + "," + this.getY() + ")";
     }
 
 }

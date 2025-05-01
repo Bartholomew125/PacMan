@@ -9,32 +9,85 @@ import javafx.scene.input.KeyEvent;
  */
 public class Controller {
 
-    Maze maze;
-    PacMan pacman;
+    private View view;
+    private Game game;
+    private long previousNanoTime;
+    private long currentNanoTime;
+    private final double nanosecondsPerFrame;
 
-    public Controller(Maze maze) {
-        this.maze = maze;
-        this.pacman = maze.getPacMan();
+    public Controller(Game game, View view, int fps) {
+        this.game = game;
+        this.view = view;
+        this.previousNanoTime = System.nanoTime();
+
+        // The framerate of the game
+        this.nanosecondsPerFrame = Math.pow(10, 9) / fps;
     }
 
     /**
      * Handles keypresses from the scene
+     * 
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
         KeyCode key = event.getCode();
-
+        PacMan pacman = this.game.getPacMan();
         if (key == KeyCode.LEFT) {
-            this.pacman.left();
+            pacman.left();
+            this.view.getPacmanAnimation().setRotation(180);
         }
         if (key == KeyCode.RIGHT) {
-            this.pacman.right();
+            pacman.right();
+            this.view.getPacmanAnimation().setRotation(0);
         }
         if (key == KeyCode.UP) {
-            this.pacman.up();
+            pacman.up();
+            this.view.getPacmanAnimation().setRotation(-90);
         }
         if (key == KeyCode.DOWN) {
-            this.pacman.down();
+            pacman.down();
+            this.view.getPacmanAnimation().setRotation(90);
         }
+    }
+
+    /**
+     * Update everything in the maze
+     */
+    public void update(long nanoTime) {
+        this.currentNanoTime = nanoTime;
+
+        if (this.currentNanoTime
+                - this.previousNanoTime >= this.nanosecondsPerFrame) {
+            this.previousNanoTime = currentNanoTime;
+            this.handleCollisions();
+
+            this.game.getPacMan().move();
+            this.view.render(nanoTime);
+        }
+    }
+
+    /**
+     * Handle the collisions of the game
+     */
+    private void handleCollisions() {
+
+        PacMan pacman = this.game.getPacMan();
+        Wall[] walls = this.game.getMaze().getWalls();
+        Pill[] smallPills = this.game.getSmallPillsArray();
+
+
+        for (Wall wall : walls) {
+            if (wall.distanceTo(pacman) < 1) {
+                pacman.stop();
+            }
+        }
+
+        for (Pill pill : smallPills) {
+            if (pill.distanceTo(pacman) < 1) {
+                this.game.pacmanEatSmallPill(pill);
+                System.out.println(this.game.getScore());
+            }
+        }
+
     }
 }
