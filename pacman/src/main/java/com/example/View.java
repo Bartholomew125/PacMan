@@ -1,8 +1,11 @@
 package com.example;
 
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 /**
  * The view class in the MVC model. It is responsible for taking the maze
@@ -18,7 +21,7 @@ public class View {
     private Group surface = new Group();
 
     private Image wallImage;
-    private Image pacmanImage;
+    private AnimatedImage pacmanAnimation;
     private Image smallPillImage;
 
     /**
@@ -38,21 +41,28 @@ public class View {
         // Load the images
         this.wallImage = new Image(
                 "file:src/main/resources/com/example/wall.png", squareSize,
-                squareSize, true, false);
-        this.pacmanImage = new Image(
-                "file:src/main/resources/com/example/pacman.png", squareSize,
-                squareSize, true, false); 
+                squareSize, false, false);
+
+        this.pacmanAnimation = new AnimatedImage(300000000,this.squareSize);
+        this.pacmanAnimation.setFrames("pacmanFrames", "frame", 2);
+
         this.smallPillImage = new Image(
             "file:src/main/resources/com/example/smallPill.png", squareSize,
-            squareSize, true, false); 
+            squareSize, false, false); 
     }
 
     /**
      * Render everything to the surface
      */
-    public void render() {
+    public void render(double time) {
         // Clear the surface
         this.surface.getChildren().clear();
+
+        Canvas canvas = new Canvas(this.width, this.height);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, 0, this.width, this.height);
+        this.surface.getChildren().add(canvas);
 
         // Add the walls to the surface
         for (Wall wall : this.game.getMaze().getWalls()) {
@@ -60,7 +70,7 @@ public class View {
         }
 
         // Add pacman to the surface
-        this.addImageToSurface(pacmanImage, this.game.getPacMan().getX(), this.game.getPacMan().getY()); 
+        this.addImageToSurface(pacmanAnimation.getFrame(time), this.game.getPacMan().getX(), this.game.getPacMan().getY()); 
 
         // Add the small pills
         for (Pill pill : this.game.getSmallPillsArray()){ 

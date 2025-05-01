@@ -58,7 +58,7 @@ public class Controller {
             this.handleCollisions();
 
             this.game.getPacMan().move();
-            this.view.render();
+            this.view.render(nanoTime);
         }
     }
 
