@@ -74,12 +74,33 @@ public abstract class Moveable {
     }
 
     /**
+     * @return The x direction of the moveable
+     */
+    public float getDX() {
+        return this.dx;
+    }
+
+    /**
+     * @return The y direrction of the moveable
+     */
+    public float getDY() {
+        return this.dy;
+    }
+
+    /**
      * Sets Moveables movementmultiplier.
      * 
      * @param multiplier
      */
     public void setMovementMultiplier(double multiplier) {
         this.movementMultiplier = multiplier;
+    }
+
+    /**
+     * @return The movement multiplier of the 
+     */
+    public double getMovementMultiplier() {
+        return this.movementMultiplier;
     }
 
     /**
