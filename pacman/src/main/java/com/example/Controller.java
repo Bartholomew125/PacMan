@@ -34,15 +34,19 @@ public class Controller {
         PacMan pacman = this.game.getPacMan();
         if (key == KeyCode.LEFT) {
             pacman.left();
+            this.view.getPacmanAnimation().setRotation(180);
         }
         if (key == KeyCode.RIGHT) {
             pacman.right();
+            this.view.getPacmanAnimation().setRotation(0);
         }
         if (key == KeyCode.UP) {
             pacman.up();
+            this.view.getPacmanAnimation().setRotation(-90);
         }
         if (key == KeyCode.DOWN) {
             pacman.down();
+            this.view.getPacmanAnimation().setRotation(90);
         }
     }
 
