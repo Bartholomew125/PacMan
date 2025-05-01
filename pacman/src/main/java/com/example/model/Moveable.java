@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 /**
  * The movable class represents anything that needs to be moved.

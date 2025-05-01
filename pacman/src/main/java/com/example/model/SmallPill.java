@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 /**
  * The implementation of the Small Pill.

@@ -1,4 +1,6 @@
-package com.example;
+package com.example.model;
+
+import javafx.scene.paint.Color;
 
 /**
  * This is the abstract ghost class from which actual ghosts should extend.

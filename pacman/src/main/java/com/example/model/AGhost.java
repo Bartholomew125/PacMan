@@ -1,4 +1,5 @@
-package com.example;
+package com.example.model;
+
 
 public class AGhost extends Ghost { 
     private Float[][] aigrid = new Float[20][20]; 

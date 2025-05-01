@@ -1,4 +1,8 @@
-package com.example;
+package com.example.view;
+
+import com.example.model.Game;
+import com.example.model.Pill;
+import com.example.model.Wall;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;

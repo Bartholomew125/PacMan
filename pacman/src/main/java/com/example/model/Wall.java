@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 /**
  * The wall class simply represents the position of a wall.
