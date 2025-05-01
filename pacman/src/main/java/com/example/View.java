@@ -44,7 +44,7 @@ public class View {
                 squareSize, false, false);
 
         this.pacmanAnimation = new AnimatedImage(300000000,this.squareSize);
-        this.pacmanAnimation.setFrames("pacmanFrames", "frame", 2);
+        this.pacmanAnimation.loadFramesFromDirectory("pacmanFrames", "frame", 2);
 
         this.smallPillImage = new Image(
             "file:src/main/resources/com/example/smallPill.png", squareSize,
@@ -58,6 +58,7 @@ public class View {
         // Clear the surface
         this.surface.getChildren().clear();
 
+        // Set background to black
         Canvas canvas = new Canvas(this.width, this.height);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
@@ -66,15 +67,15 @@ public class View {
 
         // Add the walls to the surface
         for (Wall wall : this.game.getMaze().getWalls()) {
-            this.addImageToSurface(wallImage, wall.getX(), wall.getY());
+            this.addImageToSurface(wallImage, wall.getX(), wall.getY(), 0);
         }
 
         // Add pacman to the surface
-        this.addImageToSurface(pacmanAnimation.getFrame(time), this.game.getPacMan().getX(), this.game.getPacMan().getY()); 
+        this.addImageToSurface(pacmanAnimation.getFrame(time), this.game.getPacMan().getX(), this.game.getPacMan().getY(), this.pacmanAnimation.getRotation()); 
 
         // Add the small pills
         for (Pill pill : this.game.getSmallPillsArray()){ 
-            this.addImageToSurface(smallPillImage, pill.getX(), pill.getY());
+            this.addImageToSurface(smallPillImage, pill.getX(), pill.getY(), 0);
         }
 
     }
@@ -85,11 +86,16 @@ public class View {
      * @param x
      * @param y
      */
-    private void addImageToSurface(Image image, float x, float y) {
+    private void addImageToSurface(Image image, float x, float y, int rotation) {
         ImageView imageView = new ImageView(image);
         imageView.setX(x * this.squareSize);
         imageView.setY(y * this.squareSize);
+        imageView.setRotate(rotation);
         this.getSurface().getChildren().add(imageView);
+    }
+
+    public AnimatedImage getPacmanAnimation() {
+        return this.pacmanAnimation;
     }
 
     /**
