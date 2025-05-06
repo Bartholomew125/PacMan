@@ -10,7 +10,6 @@ public abstract class Moveable {
     protected float dx;
     protected float dy;
     protected double movementMultiplier;
-    protected boolean isEdible;
 
     public Moveable(float x, float y, float dx, float dy, double movementMultiplier) {
         this.x = x;
@@ -73,10 +72,6 @@ public abstract class Moveable {
     public float getY() {
         return this.y;
     }
-    
-    public boolean getEdible() {
-        return this.edible;
-  }
 
     /**
      * @return The x direction of the moveable
