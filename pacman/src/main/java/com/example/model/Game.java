@@ -57,6 +57,15 @@ public class Game {
     }
 
     /**
+     * Make pacman eat a large pill.
+     * @param pill
+     */
+    public void pacmanEatLargePill(Pill pill) {
+        this.increaseScore(pill.getValue());
+        this.largePills.remove(pill);
+    }
+
+    /**
      * Increasee score by some value.
      * @param value
      */
@@ -83,6 +92,13 @@ public class Game {
      */
     public Pill[] getSmallPillsArray() {
         return this.smallPills.toArray(new Pill[this.smallPills.size()]);
+    }
+
+    /**
+     * @return The large pills of the game
+     */
+    public Pill[] getLargePillsArray() {
+        return this.largePills.toArray(new Pill[this.largePills.size()]);
     }
 
     public int getScore() {
