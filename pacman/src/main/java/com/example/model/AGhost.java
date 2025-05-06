@@ -1,4 +1,6 @@
-package com.example;
+package com.example.model;
+
+import javafx.scene.paint.Color;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ public class AGhost extends Ghost {
     private ArrayList<Integer> start,goal;
 
     public AGhost(float x, float y){ 
-        super(x, y, 0, 0, 1, new Color("red"));
+        super(x, y, 0, 0, 1, Color.RED);
     }  
 
     public void CreateGhost(){ 

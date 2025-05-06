@@ -1,5 +1,9 @@
 package com.example;
 
+import com.example.controller.Controller;
+import com.example.model.Game;
+import com.example.view.View;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;

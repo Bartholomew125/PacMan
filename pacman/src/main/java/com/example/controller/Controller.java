@@ -1,4 +1,10 @@
-package com.example;
+package com.example.controller;
+
+import com.example.model.Game;
+import com.example.model.PacMan;
+import com.example.model.Pill;
+import com.example.model.Wall;
+import com.example.view.View;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;

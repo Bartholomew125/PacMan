@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 /**
  * The PacMan class which represents the pacman

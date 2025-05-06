@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 /**
  * A simple class for representing a 2D position

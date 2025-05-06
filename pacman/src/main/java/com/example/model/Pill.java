@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 /**
  * An abstract pill class for the pills in the maze. The position for the pill

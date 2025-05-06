@@ -1,6 +1,9 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
+
+import com.example.model.PacMan;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -22,14 +25,14 @@ public class PacManTest {
         PacMan pacmanObject = new PacMan(1, 0);
 
         // Assert: check that x and y are set correctly.
-        assertEquals(1, pacmanObject.x);
-        assertEquals(0, pacmanObject.y);
+        assertEquals(1, pacmanObject.getX());
+        assertEquals(0, pacmanObject.getY());
 
         // Assert: check that dx and dy are set to 0 by default.
-        assertEquals(0, pacmanObject.dx);
-        assertEquals(0, pacmanObject.dy);
+        assertEquals(0, pacmanObject.getDX());
+        assertEquals(0, pacmanObject.getDY());
 
         // Assert: check that PacMan is moving to the right.
-        assertEquals(1, pacmanObject.movementMultiplier);
+        assertEquals(1, pacmanObject.getMovementMultiplier());
     }
 }

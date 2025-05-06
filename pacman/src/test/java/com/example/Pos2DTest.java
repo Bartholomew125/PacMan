@@ -1,6 +1,9 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
+
+import com.example.model.Pos2D;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 
