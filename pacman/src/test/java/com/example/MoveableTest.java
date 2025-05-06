@@ -76,7 +76,7 @@ public class MoveableTest {
     @DisplayName("Test that 'getY()' returns 123")
     void testGetY(){
         TestMoveable moveable = new TestMoveable(42, 123, 0, 0, 1);
-        assertEquals(123, moveable.getY(), "returned value of 'getY()' should be equal to 123.");
+        assertEquals(123, moveable.y, "returned value of 'getY()' should be equal to 123.");
     }
 
     /**

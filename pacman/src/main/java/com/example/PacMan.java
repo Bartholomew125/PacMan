@@ -12,6 +12,6 @@ public class PacMan extends Moveable{
      * @param y
      */
     public PacMan(float x, float y) {
-        super(x, y, 0, 0, 1);
+        super(x, y, 1, 0, 1);
     }
 }

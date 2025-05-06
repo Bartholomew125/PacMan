@@ -7,6 +7,7 @@ public abstract class Moveable {
     protected float dx;
     protected float dy;
     protected float movementMultiplier;
+    protected boolean isEdible;
 
     public Moveable(float x, float y, float dx, float dy, float movementMultiplier) {
         this.x = x;
@@ -69,6 +70,10 @@ public abstract class Moveable {
     public float getY() {
         return this.y;
     }
+    
+    public boolean getEdible() {
+        return this.edible;
+  }
 
     /**
      * Sets Moveables movementmultiplier.

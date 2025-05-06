@@ -26,7 +26,7 @@ public class PacManTest {
         assertEquals(0, pacmanObject.y);
 
         // Assert: check that dx and dy are set to 0 by default.
-        assertEquals(0, pacmanObject.dx);
+        assertEquals(1, pacmanObject.dx);
         assertEquals(0, pacmanObject.dy);
 
         // Assert: check that PacMan is moving to the right.
