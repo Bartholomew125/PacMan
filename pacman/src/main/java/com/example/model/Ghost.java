@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 /**
  * This is the abstract ghost class from which actual ghosts should extend.
  */
-public abstract class Ghost extends Moveable{
+public abstract class Ghost extends Moveable {
     protected Color color;
     protected float x;
     protected float y;
@@ -13,6 +13,7 @@ public abstract class Ghost extends Moveable{
 
     /**
      * Create a new ghost which is a moveable with a color.
+     * 
      * @param x
      * @param y
      * @param dx
@@ -37,5 +38,13 @@ public abstract class Ghost extends Moveable{
      */
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setIsAfraid(boolean isAfraid){
+        this.isAfraid = isAfraid;
+    }
+    
+    public boolean getIsAfraid(){
+        return this.isAfraid;
     }
 }
