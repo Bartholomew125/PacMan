@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 import javafx.scene.paint.Color;
@@ -9,8 +10,6 @@ public class AGhost extends Ghost {
     public AGhost(float x, float y){ 
         super(x, y, 0, 0, 1, Color.RED);
     }  
-
-
 
 
     public static class Info{ 
@@ -88,7 +87,13 @@ public class AGhost extends Ghost {
         nodedetails[i][j].f = 0.0; 
         nodedetails[i][j].h = 0.0; 
         nodedetails[i][j].g = 0.0; 
-        nodedetails[i][j].parent = new Pos2D(i, j);
+        nodedetails[i][j].parent = new Pos2D(i, j); 
+
+        // implementing priority queue 
+
+        PriorityQueue<Node> newNodes = new PriorityQueue<>();
+        
+
     }
 
 
@@ -97,7 +102,7 @@ public class AGhost extends Ghost {
         
         //TO DO: Real goal
         //Pacman pacman = new PacMan(dx, dy);
-        //Pos goal = new Pos(pacman); 
+        //Pos2D goal = new Pos2D(pacman); 
 
         Pos2D fakegoal = new Pos2D(10,10);
      }
