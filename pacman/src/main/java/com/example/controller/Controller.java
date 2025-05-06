@@ -80,6 +80,7 @@ public class Controller {
         PacMan pacman = this.game.getPacMan();
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
+        Pill[] largePills = this.game.getLargePillsArray();
 
 
         for (Wall wall : walls) {
@@ -89,8 +90,15 @@ public class Controller {
         }
 
         for (Pill pill : smallPills) {
-            if (pill.distanceTo(pacman) < 1) {
+            if (pill.distanceTo(pacman) < 0.5) {
                 this.game.pacmanEatSmallPill(pill);
+                System.out.println(this.game.getScore());
+            }
+        }
+
+        for (Pill pill : largePills) {
+            if (pill.distanceTo(pacman) < 0.8) {
+                this.game.pacmanEatLargePill(pill);
                 System.out.println(this.game.getScore());
             }
         }
