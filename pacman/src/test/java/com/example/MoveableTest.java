@@ -1,5 +1,8 @@
 package com.example;
 import org.junit.jupiter.api.Test;
+
+import com.example.model.Moveable;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 
@@ -19,8 +22,8 @@ public class MoveableTest {
     void testRight(){
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.right();
-        assertEquals(1, moveable.dx, "dx should be equal to 1 after calling 'right()'.");
-        assertEquals(0, moveable.dy, "dy should be equal to 0 after calling 'right()'.");
+        assertEquals(1, moveable.getDX(), "dx should be equal to 1 after calling 'right()'.");
+        assertEquals(0, moveable.getDY(), "dy should be equal to 0 after calling 'right()'.");
     }
 
     /**
@@ -31,8 +34,8 @@ public class MoveableTest {
     void testLeft(){
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.left();
-        assertEquals(-1, moveable.dx, "dx should be equal to -1 after calling 'left()'.");
-        assertEquals(0, moveable.dy, "dy should be equal to 0 after calling 'left()'.");
+        assertEquals(-1, moveable.getDX(), "dx should be equal to -1 after calling 'left()'.");
+        assertEquals(0, moveable.getDY(), "dy should be equal to 0 after calling 'left()'.");
     }
     /**
      * Test that calling down() sets the movement in the positive y-direction.
@@ -42,8 +45,8 @@ public class MoveableTest {
     void testDown(){
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.down();
-        assertEquals(0, moveable.dx, "dx should be eqaul to 0 after calling 'down()'.");
-        assertEquals(1, moveable.dy, "dy should be eqaul to 1 after calling 'down()'.");
+        assertEquals(0, moveable.getDX(), "dx should be eqaul to 0 after calling 'down()'.");
+        assertEquals(1, moveable.getDY(), "dy should be eqaul to 1 after calling 'down()'.");
     }
 
     /**
@@ -54,8 +57,8 @@ public class MoveableTest {
     void testUp(){
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.up();
-        assertEquals(0, moveable.dx, "dx should be equal to 0 after callling 'up()'.");
-        assertEquals(-1, moveable.dy, "dy should be equal to -1 after callling 'up()'.");
+        assertEquals(0, moveable.getDX(), "dx should be equal to 0 after callling 'up()'.");
+        assertEquals(-1, moveable.getDY(), "dy should be equal to -1 after callling 'up()'.");
 
     }
 
@@ -87,6 +90,6 @@ public class MoveableTest {
     void testSetMovementMultiplier(){
         TestMoveable moveable = new TestMoveable(42, 123, 0, 0, 0);
         moveable.setMovementMultiplier(23);
-        assertEquals(23, moveable.movementMultiplier, "movementMultiplier should be equal to 23 after calling 'setMovenmentmultiplier(23)'.");
+        assertEquals(23, moveable.getMovementMultiplier(), "movementMultiplier should be equal to 23 after calling 'setMovenmentmultiplier(23)'.");
     }
 }

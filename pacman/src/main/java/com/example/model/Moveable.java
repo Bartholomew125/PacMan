@@ -1,15 +1,18 @@
-package com.example;
+package com.example.model;
 
+/**
+ * The movable class represents anything that needs to be moved.
+ */
 public abstract class Moveable {
 
     protected float x;
     protected float y;
     protected float dx;
     protected float dy;
-    protected float movementMultiplier;
+    protected double movementMultiplier;
     protected boolean isEdible;
 
-    public Moveable(float x, float y, float dx, float dy, float movementMultiplier) {
+    public Moveable(float x, float y, float dx, float dy, double movementMultiplier) {
         this.x = x;
         this.y = y;
         this.dx = dx;
@@ -76,12 +79,33 @@ public abstract class Moveable {
   }
 
     /**
+     * @return The x direction of the moveable
+     */
+    public float getDX() {
+        return this.dx;
+    }
+
+    /**
+     * @return The y direrction of the moveable
+     */
+    public float getDY() {
+        return this.dy;
+    }
+
+    /**
      * Sets Moveables movementmultiplier.
      * 
      * @param multiplier
      */
-    public void setMovementMultiplier(float multiplier) {
+    public void setMovementMultiplier(double multiplier) {
         this.movementMultiplier = multiplier;
+    }
+
+    /**
+     * @return The movement multiplier of the 
+     */
+    public double getMovementMultiplier() {
+        return this.movementMultiplier;
     }
 
     /**

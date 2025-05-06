@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,33 +13,24 @@ public class Maze {
 
     private int width;
     private int height;
-    private PacMan pacman;
-    private String[][] maze; // The 2D array of strings which represents the maze.
-    private Pos2D[] walls; 
-    private LargePills largePills; 
-    private SmallPills[] smallPills;
+    private String[][] textMaze; // The 2D array of strings which represents the maze.
+    private Wall[] walls;
 
-
+    /**
+     * Create a new maze
+     */
     public Maze() {
-        this.maze = this.readMazeFromFile();
-        this.width = this.maze[0].length;
-        this.height = this.maze.length;
-
-        Pos2D pos = this.locatePacman();
-        this.pacman = new PacMan(pos.getX(), pos.getY());
-        this.pacman.setMovementMultiplier(0.1f);
-
-        walls = this.locateCharacter("#");  
-
-        Pos2D[] ppos = locateSmallPills();
-        this.smallPills = new SmallPills[ppos.length];
-        for (int i = 0; i < ppos.length; i++) {
-            this.smallPills[i] = new SmallPills(ppos[i].getX(), ppos[i].getY());
-        } 
-
-        //Pos2D lppos = locateLargePill(); 
-        //this.largep = new LargePill(lppos.getX(), lppos.getY());
-
+        // Read the maze from the file and get its width and height.
+        this.textMaze = this.readMazeFromFile();
+        this.width = this.textMaze[0].length;
+        this.height = this.textMaze.length;
+        
+        // Locate all the walls and create the wall array.
+        Pos2D[] wallPositions = this.locateCharacter("#");
+        this.walls = new Wall[wallPositions.length];
+        for (int i = 0; i < wallPositions.length; i++) {
+            this.walls[i] = new Wall(wallPositions[i].getX(), wallPositions[i].getY());
+        }
     }
 
     /**
@@ -70,26 +61,45 @@ public class Maze {
      * 
      * @return Position of pacman
      */
-    private Pos2D locatePacman() {
-        Pos2D[] poses = this.locateCharacter("p");
+    public Pos2D locatePacman() {
+        Pos2D[] pacmanPositions = this.locateCharacter("p");
         // Check if there is exactly one pacman, and return an invalid positions
         // if there isint
-        if (poses.length != 1) {
+        if (pacmanPositions.length != 1) {
             System.out.println("There isint exactly one p in the maze");
             return new Pos2D(-1, -1);
         }
         else {
-            return poses[0];
+            return pacmanPositions[0];
         } 
     } 
 
-    private Pos2D[] locateSmallPills() { 
-        Pos2D[] smalldots = this.locateCharacter("."); 
-
-        return smalldots;
-
+    /**
+     * Locate all the small pills in the maze
+     * @return The positions of the small pills
+     */
+    public Pos2D[] locateSmallPills() { 
+        Pos2D[] smallPillPositions = this.locateCharacter("."); 
+        return smallPillPositions;
     } 
 
+    /**
+     * Locate all the large pills in the maze
+     * @return The positions of the large pills
+     */
+    public Pos2D[] locateLargePills() {
+        Pos2D[] largePillPositions = this.locateCharacter("*");
+        return largePillPositions;
+    }
+
+    /**
+     * Locate all the ghosts in the maze
+     * @return The positions of the ghosts
+     */
+    public Pos2D[] locateGhosts() {
+        Pos2D[] ghostPositions = this.locateCharacter("g");
+        return ghostPositions;
+    }
 
     /**
      * Locates all instances of a character c in the maze and returns them as an
@@ -104,7 +114,7 @@ public class Maze {
         // Go through the maze, and find all positions (row, col) where c is
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
-                if (this.maze[y][x].equals(c)) {
+                if (this.textMaze[y][x].equals(c)) {
                     positions.add(new Pos2D(x, y));
                 }
             }
@@ -112,31 +122,18 @@ public class Maze {
         return positions.toArray(new Pos2D[positions.size()]);
     }
 
-    public String[][] getMaze() {
-        return this.maze;
-    }
-
-    public Pos2D[] getWalls() {
-        return this.walls;
+    /**
+     * @return The maze file
+     */
+    public String[][] getTextMaze() {
+        return this.textMaze;
     }
 
     /**
-     * Update everything in the maze
+     * @return The walls of the maze
      */
-    public void update() {
-        // Update the maze
-
-        // Check for collisions with walls
-        for (Pos2D wall : this.walls) {
-            if (wall.distanceTo(this.getPacMan().getX(),
-                    this.getPacMan().getY()) < 1) {
-                this.getPacMan().stop();
-            }
-        }
-        // Check for collisions with ghosts
-        // Check for collisions with pellets
-        // Check for game over
-        this.pacman.move();
+    public Wall[] getWalls() {
+        return this.walls;
     }
 
     /**
@@ -151,16 +148,5 @@ public class Maze {
      */
     public int getHeight() {
         return this.height;
-    }
-
-    /**
-     * @return The pacman in the maze
-     */
-    public PacMan getPacMan() {
-        return this.pacman;
-    } 
-
-    public SmallPills[] getSmallPills() { 
-        return this.smallPills;
     }
 }
