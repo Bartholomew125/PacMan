@@ -4,7 +4,7 @@ import com.example.model.Game;
 import com.example.model.PacMan;
 import com.example.model.Pill;
 import com.example.model.Wall;
-import com.example.view.View;
+import com.example.view.GameView;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -15,13 +15,13 @@ import javafx.scene.input.KeyEvent;
  */
 public class Controller {
 
-    private View view;
+    private GameView view;
     private Game game;
     private long previousNanoTime;
     private long currentNanoTime;
     private final double nanosecondsPerFrame;
 
-    public Controller(Game game, View view, int fps) {
+    public Controller(Game game, GameView view, int fps) {
         this.game = game;
         this.view = view;
         this.previousNanoTime = System.nanoTime();
