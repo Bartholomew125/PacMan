@@ -2,7 +2,7 @@ package com.example;
 
 import com.example.controller.Controller;
 import com.example.model.Game;
-import com.example.view.View;
+import com.example.view.GameView;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -18,12 +18,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
+        int width = 500;
+
         // The root from which all other screen objects will attach
         Group root = new Group();
 
         // Create the Game, Viewer and Controller
         Game game = new Game();
-        View viewer = new View(game, 20);
+        double positionScaler = width/game.getMaze().getWidth();
+        GameView viewer = new GameView(width,(int) (game.getMaze().getHeight()*positionScaler),positionScaler, game);
         Controller controller = new Controller(game, viewer, 60);
 
         // Attach the viewers surface to the root, so it is displayed
