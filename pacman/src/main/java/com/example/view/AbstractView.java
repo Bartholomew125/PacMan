@@ -3,6 +3,7 @@ package com.example.view;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
 public abstract class AbstractView implements View {
      
@@ -40,6 +41,13 @@ public abstract class AbstractView implements View {
         this.getSurface().getChildren().add(imageView);
     }
 
+    public void addTextToSurface(Text text, int x, int y, int rotation) {
+        text.setX(x);
+        text.setY(y);
+        text.setRotate(rotation);
+        this.getSurface().getChildren().add(text);
+    }
+
     public Group getSurface() {
         return this.surface;
     }
@@ -50,6 +58,14 @@ public abstract class AbstractView implements View {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public double getPositionScaler() {
