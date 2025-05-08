@@ -91,14 +91,28 @@ public class Game {
     }
 
     /**
-     * @return The small pills of the game
+     * @return A pointer to the array of small pills int the game.
+     */
+    public ArrayList<Pill> getSmallPills() {
+        return this.smallPills;
+    }
+
+    /**
+     * @return A pointer to the array of large pills int the game.
+     */
+    public ArrayList<Pill> getLargePills() {
+        return this.largePills;
+    }
+
+    /**
+     * @return A a array copy of the small pills.
      */
     public Pill[] getSmallPillsArray() {
         return this.smallPills.toArray(new Pill[this.smallPills.size()]);
     }
 
     /**
-     * @return The large pills of the game
+     * @return A a array copy of the large pills.
      */
     public Pill[] getLargePillsArray() {
         return this.largePills.toArray(new Pill[this.largePills.size()]);
@@ -115,8 +129,7 @@ public class Game {
             this.ghosts[i].setIsEdible(state.ghostIsEdible);
             this.ghosts[i].setIsAfraid(state.ghostIsAfraid);
             this.ghosts[i].setMovementMultiplier(state.ghostMovementMultiplier);
-            }
         }
     }
-
 }
+
