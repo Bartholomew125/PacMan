@@ -4,6 +4,7 @@ package com.example.model;
  * The PacMan class which represents the pacman
  */
 public class PacMan extends Moveable{
+    
 
     /**
      * Creates a new PacMan moving to the right.
@@ -12,6 +13,6 @@ public class PacMan extends Moveable{
      * @param y
      */
     public PacMan(float x, float y) {
-        super(x, y, 0, 0, 1);
+        super(x, y, 1, 0, 1);
     }
 }

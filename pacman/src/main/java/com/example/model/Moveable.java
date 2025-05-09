@@ -10,6 +10,7 @@ public abstract class Moveable {
     protected float dx;
     protected float dy;
     protected double movementMultiplier;
+    protected boolean isEdible;
 
     public Moveable(float x, float y, float dx, float dy, double movementMultiplier) {
         this.x = x;
@@ -18,7 +19,7 @@ public abstract class Moveable {
         this.dy = dy;
         this.movementMultiplier = movementMultiplier;
     }
-    
+
     /**
      * Moves Moveable depending on movementmultiplier and direction.
      */
@@ -97,7 +98,7 @@ public abstract class Moveable {
     }
 
     /**
-     * @return The movement multiplier of the 
+     * @return The movement multiplier of the
      */
     public double getMovementMultiplier() {
         return this.movementMultiplier;
@@ -116,5 +117,13 @@ public abstract class Moveable {
         }
         this.dx = 0;
         this.dy = 0;
+    }
+
+    public boolean getIsEdible() {
+        return this.isEdible;
+    }
+    
+    public void setIsEdible(boolean isEdible){
+        this.isEdible = isEdible;
     }
 }

@@ -27,6 +27,7 @@ public class View {
     private Image wallImage;
     private AnimatedImage pacmanAnimation;
     private Image smallPillImage;
+    private Image largePillImage;
 
     /**
      * Create a new view of a maze, and a square size
@@ -51,8 +52,9 @@ public class View {
         this.pacmanAnimation.loadFramesFromDirectory("pacmanFrames", "frame", 2);
 
         this.smallPillImage = new Image(
-            "file:src/main/resources/com/example/smallPill.png", squareSize,
-            squareSize, false, false); 
+            "file:src/main/resources/com/example/smallPill.png", squareSize,squareSize, false, false); 
+        this.largePillImage = new Image(
+            "file:src/main/resources/com/example/largePill.png", squareSize, squareSize, false, false);
     }
 
     /**
@@ -80,6 +82,10 @@ public class View {
         // Add the small pills
         for (Pill pill : this.game.getSmallPillsArray()){ 
             this.addImageToSurface(smallPillImage, pill.getX(), pill.getY(), 0);
+        }
+
+        for (Pill pill : this.game.getLargePillsArray()) {
+            this.addImageToSurface(largePillImage, pill.getX(), pill.getY(), 0);
         }
 
     }
