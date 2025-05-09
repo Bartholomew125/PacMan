@@ -27,7 +27,8 @@ public class View {
     private Image wallImage;
     private AnimatedImage pacmanAnimation;
     private Image smallPillImage;
-    private Image largePillImage;
+    private Image largePillImage; 
+    private Image greenGhost;
 
     /**
      * Create a new view of a maze, and a square size
@@ -54,7 +55,9 @@ public class View {
         this.smallPillImage = new Image(
             "file:src/main/resources/com/example/smallPill.png", squareSize,squareSize, false, false); 
         this.largePillImage = new Image(
-            "file:src/main/resources/com/example/largePill.png", squareSize, squareSize, false, false);
+            "file:src/main/resources/com/example/largePill.png", squareSize, squareSize, false, false); 
+        this.greenGhost = new Image(
+            "file:src/main/resources/com/example/GreenGhost.png", squareSize, squareSize, false, false);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.Game;
+import com.example.model.Ghost;
 import com.example.model.PacMan;
 import com.example.model.Pill;
 import com.example.model.Wall;
@@ -80,7 +81,8 @@ public class Controller {
         PacMan pacman = this.game.getPacMan();
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
-        Pill[] largePills = this.game.getLargePillsArray();
+        Pill[] largePills = this.game.getLargePillsArray(); 
+        Ghost ghosts = this.game.getOneGhost();
 
 
         for (Wall wall : walls) {
@@ -101,7 +103,14 @@ public class Controller {
                 this.game.pacmanEatLargePill(pill);
                 System.out.println(this.game.getScore());
             }
+        }  
+
+        for (Wall wall : walls){ 
+            if (wall.distanceTo(ghosts)< 1) { 
+                ghosts.stop();
+            }
         }
+
 
     }
 }

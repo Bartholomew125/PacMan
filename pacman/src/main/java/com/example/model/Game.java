@@ -106,7 +106,16 @@ public class Game {
 
     public int getScore() {
         return this.score;
+    } 
+
+    public Ghost[] getGhosts(){ 
+        return this.ghosts;
+    } 
+
+    public Ghost getOneGhost(){ 
+        return this.ghosts[0];
     }
+
 
     public void setState(State state) {
         pacman.isEdible = state.pacmanIsEdible;
@@ -116,7 +125,7 @@ public class Game {
             this.ghosts[i].setIsAfraid(state.ghostIsAfraid);
             this.ghosts[i].setMovementMultiplier(state.ghostMovementMultiplier);
             }
-        }
     }
+    
 
 }
