@@ -28,7 +28,7 @@ public class View {
     private AnimatedImage pacmanAnimation;
     private Image smallPillImage;
     private Image largePillImage; 
-    private Image greenGhost;
+    private Image greenGhostImage;
 
     /**
      * Create a new view of a maze, and a square size
@@ -56,7 +56,7 @@ public class View {
             "file:src/main/resources/com/example/smallPill.png", squareSize,squareSize, false, false); 
         this.largePillImage = new Image(
             "file:src/main/resources/com/example/largePill.png", squareSize, squareSize, false, false); 
-        this.greenGhost = new Image(
+        this.greenGhostImage = new Image(
             "file:src/main/resources/com/example/GreenGhost.png", squareSize, squareSize, false, false);
     }
 
@@ -89,7 +89,10 @@ public class View {
 
         for (Pill pill : this.game.getLargePillsArray()) {
             this.addImageToSurface(largePillImage, pill.getX(), pill.getY(), 0);
-        }
+        } 
+
+        // Add a singular green Ghost to the surface
+        this.addImageToSurface(greenGhostImage, this.game.getOneGhost().getX(), this.game.getOneGhost().getY(), 0);
 
     }
 
