@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.Random;
+
 import com.example.model.Game;
 import com.example.model.Ghost;
 import com.example.model.PacMan;
@@ -66,6 +68,7 @@ public class Controller {
         if (this.currentNanoTime
                 - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
+            this.game.getOneGhost().move();
             this.handleCollisions();
 
             this.game.getPacMan().move();
@@ -82,7 +85,7 @@ public class Controller {
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
         Pill[] largePills = this.game.getLargePillsArray(); 
-        Ghost ghosts = this.game.getOneGhost();
+        Ghost ghost = this.game.getOneGhost();  
 
 
         for (Wall wall : walls) {
@@ -106,11 +109,37 @@ public class Controller {
         }  
 
         for (Wall wall : walls){ 
-            if (wall.distanceTo(ghosts)< 1) { 
-                ghosts.stop();
+            if (wall.distanceTo(ghost)< 1) { 
+                ghost.stop();
+                DummyPath(ghost); 
+                ghost.move();
             }
         }
 
 
-    }
-}
+    }  
+
+    public void DummyPath(Ghost ghost){ 
+        ghost = this.game.getOneGhost();
+        Random rd = new Random(); 
+        char[] directions = {'O', 'V','N','H'};
+        char newPath = directions[rd.nextInt(4)];
+
+        if (newPath == 'O'){ 
+            ghost.up();
+        } 
+        if (newPath == 'V'){ 
+            ghost.left();
+        } 
+        if (newPath == 'N'){ 
+            ghost.down(); 
+        } 
+        if (newPath == 'H'){ 
+            ghost.right();
+        }
+
+    } 
+
+        
+
+} 

@@ -112,7 +112,7 @@ public class View {
 
     public AnimatedImage getPacmanAnimation() {
         return this.pacmanAnimation;
-    }
+    } 
 
     /**
      * @return The surface of the view
