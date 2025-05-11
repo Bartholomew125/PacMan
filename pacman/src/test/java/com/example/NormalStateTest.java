@@ -6,6 +6,7 @@ import com.example.model.NormalState;
 
 public class NormalStateTest {
     
+    /**Test whether constraints for object NormalState is set with expected values. */
     @Test
     void testNormalStateConstructor(){
         NormalState normalState = new NormalState();
