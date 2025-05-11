@@ -17,7 +17,6 @@ public class SmallPill extends Pill{
         smallp.getSize(); 
         smallp.getValue(); 
         return smallp;
-
     }  
 
 

@@ -15,4 +15,21 @@ public abstract class State {
         this.ghostIsEdible = ghostIsEdible;
         this.pacmanIsEdible = pacmanIsEdible;
     }
+
+    public boolean getGhostIsAfraid() {
+        return this.ghostIsAfraid;
+    }
+
+    public double getGhostMovementMultiplier(){
+        return this.ghostMovementMultiplier;
+    }
+    
+    public boolean getGhostIsEdible(){
+        return this.ghostIsEdible;
+    }
+
+    public boolean getPacmanIsEdible(){
+        return this.pacmanIsEdible;
+    }
+
 }

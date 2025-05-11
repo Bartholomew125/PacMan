@@ -110,13 +110,11 @@ public class Game {
 
     public void setState(State state) {
         pacman.isEdible = state.pacmanIsEdible;
-        
-        for (int i = 0; i < ghosts.length; i++){
+
+        for (int i = 0; i < ghosts.length; i++) {
             this.ghosts[i].setIsEdible(state.ghostIsEdible);
             this.ghosts[i].setIsAfraid(state.ghostIsAfraid);
             this.ghosts[i].setMovementMultiplier(state.ghostMovementMultiplier);
-            }
         }
     }
-
 }

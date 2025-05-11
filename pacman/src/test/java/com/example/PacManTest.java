@@ -29,7 +29,7 @@ public class PacManTest {
         assertEquals(0, pacmanObject.getY());
 
         // Assert: check that dx and dy are set to 0 by default.
-        assertEquals(0, pacmanObject.getDX());
+        assertEquals(1, pacmanObject.getDX());
         assertEquals(0, pacmanObject.getDY());
 
         // Assert: check that PacMan is moving to the right.

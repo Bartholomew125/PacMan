@@ -62,8 +62,7 @@ public class Controller {
     public void update(long nanoTime) {
         this.currentNanoTime = nanoTime;
 
-        if (this.currentNanoTime
-                - this.previousNanoTime >= this.nanosecondsPerFrame) {
+        if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
             this.handleCollisions();
 
@@ -81,7 +80,6 @@ public class Controller {
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
         Pill[] largePills = this.game.getLargePillsArray();
-
 
         for (Wall wall : walls) {
             if (wall.distanceTo(pacman) < 1) {
