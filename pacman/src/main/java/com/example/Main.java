@@ -2,7 +2,7 @@ package com.example;
 
 import com.example.controller.Controller;
 import com.example.model.Game;
-import com.example.view.View;
+import com.example.view.Viewer;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -23,7 +23,7 @@ public class Main extends Application {
 
         // Create the Game, Viewer and Controller
         Game game = new Game();
-        View viewer = new View(game, 20);
+        Viewer viewer = new Viewer(1000, 1000, game);
         Controller controller = new Controller(game, viewer, 60);
 
         // Attach the viewers surface to the root, so it is displayed

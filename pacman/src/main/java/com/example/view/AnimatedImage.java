@@ -6,13 +6,13 @@ public class AnimatedImage {
     
     private Image[] frames;
     private double duration;
-    private int squareSize;
+    private int size;
     private int rotation;
 
 
-    public AnimatedImage(double nanoTimePerFrame, int squareSize) {
+    public AnimatedImage(double nanoTimePerFrame, int size) {
         this.duration = nanoTimePerFrame;
-        this.squareSize = squareSize;
+        this.size = size;
         this.rotation = 0;
     }
 
@@ -31,7 +31,7 @@ public class AnimatedImage {
         this.frames = new Image[files];
         for (int i = 0; i < files; i++) {
             this.frames[i] = new Image("file:src/main/resources/com/example/"+folder+"/"+fileName+i+".png", 
-                squareSize, squareSize, false, false);
+                size, size, false, false);
         }
     }
 

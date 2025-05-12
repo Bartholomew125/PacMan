@@ -7,7 +7,7 @@ import com.example.model.Ghost;
 import com.example.model.PacMan;
 import com.example.model.Pill;
 import com.example.model.Wall;
-import com.example.view.View;
+import com.example.view.Viewer;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,13 +21,13 @@ import javafx.util.Duration;
  */
 public class Controller {
 
-    private View view;
+    private Viewer view;
     private Game game;
     private long previousNanoTime;
     private long currentNanoTime;
     private final double nanosecondsPerFrame;
 
-    public Controller(Game game, View view, int fps) {
+    public Controller(Game game, Viewer view, int fps) {
         this.game = game;
         this.view = view;
         this.previousNanoTime = System.nanoTime();
