@@ -10,6 +10,7 @@ public class Game {
     private ArrayList<Pill> largePills;
     private Ghost[] ghosts;
     private int score;
+    private int lives;
 
     public Game() {
         // Create maze
@@ -45,6 +46,7 @@ public class Game {
         }
 
         this.score = 0;
+        this.lives = 3;
     }
 
     /**
@@ -120,6 +122,10 @@ public class Game {
 
     public int getScore() {
         return this.score;
+    }
+
+    public int getLives() {
+        return this.lives;
     }
 
     public void setState(State state) {
