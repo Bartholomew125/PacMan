@@ -14,6 +14,7 @@ public class GameView extends AbstractView{
     private MazeView mazeView;
     private PillView pillView;
     private PacmanView pacmanView;
+    private GhostView ghostView;
 
     GraphicsContext gc;
 
@@ -29,10 +30,12 @@ public class GameView extends AbstractView{
         this.mazeView = new MazeView(width, height, positionScaler, game.getMaze());
         this.pillView = new PillView(width, height, positionScaler, game.getSmallPills(), game.getLargePills());
         this.pacmanView = new PacmanView(width, height, positionScaler, game.getPacMan());
+        this.ghostView = new GhostView(width, height, positionScaler, game.getOneGhost());
 
         this.addView(this.mazeView);
         this.addView(this.pillView);
         this.addView(this.pacmanView);
+        this.addView(this.ghostView);
 
     }
 
@@ -45,6 +48,7 @@ public class GameView extends AbstractView{
         this.mazeView.render(time);
         this.pillView.render(time);
         this.pacmanView.render(time);
+        this.ghostView.render(time);
     }
 
     public AnimatedImage getPacmanAnimation() {
