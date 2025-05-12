@@ -40,7 +40,7 @@ public class Game {
         Pos2D[] ghostPositions = this.maze.locateGhosts();
         this.ghosts = new Ghost[ghostPositions.length];
         for (int i = 0; i < ghostPositions.length; i++) {
-            this.ghosts[i] = new AGhost(ghostPositions[i].getX(),
+            this.ghosts[i] = new BGhost(ghostPositions[i].getX(),
                     ghostPositions[i].getY());
         }
 
@@ -106,7 +106,17 @@ public class Game {
 
     public int getScore() {
         return this.score;
-    }
+    } 
+
+    public Ghost[] getGhosts(){ 
+        return this.ghosts;
+    } 
+
+    public Ghost getOneGhost(){ 
+        return this.ghosts[0];
+    } 
+
+
 
     public void setState(State state) {
         pacman.isEdible = state.pacmanIsEdible;

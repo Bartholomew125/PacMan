@@ -1,13 +1,19 @@
 package com.example.controller;
 
+import java.util.Random;
+
 import com.example.model.Game;
+import com.example.model.Ghost;
 import com.example.model.PacMan;
 import com.example.model.Pill;
 import com.example.model.Wall;
 import com.example.view.View;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 
 /**
  * The controller class which is responsible for controlling the pacman and
@@ -64,6 +70,7 @@ public class Controller {
 
         if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
+            this.game.getOneGhost().move(); 
             this.handleCollisions();
 
             this.game.getPacMan().move();
@@ -79,7 +86,8 @@ public class Controller {
         PacMan pacman = this.game.getPacMan();
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
-        Pill[] largePills = this.game.getLargePillsArray();
+        Pill[] largePills = this.game.getLargePillsArray(); 
+        Ghost ghost = this.game.getOneGhost();  
 
         for (Wall wall : walls) {
             if (wall.distanceTo(pacman) < 1) {
@@ -99,7 +107,66 @@ public class Controller {
                 this.game.pacmanEatLargePill(pill);
                 System.out.println(this.game.getScore());
             }
+        }  
+
+        for (Wall wall : walls){ 
+            if (wall.distanceTo(ghost)< 0.8) { 
+                ghost.stop();
+                ghost.move(); 
+                MoreRandomPath(ghost);
+            }
         }
 
+
+    }  
+
+    public void DummyPath(Ghost ghost){ 
+        ghost = this.game.getOneGhost();
+        Random rd = new Random(); 
+        char[] directions = {'O', 'V','N','H'};
+        char newPath = directions[rd.nextInt(4)];
+
+        if (newPath == 'O'){ 
+            ghost.up();
+        } 
+        if (newPath == 'V'){ 
+            ghost.left();
+        } 
+        if (newPath == 'N'){ 
+            ghost.down(); 
+        } 
+        if (newPath == 'H'){ 
+            ghost.right();
+        }
+
+    } 
+
+    public void MoreRandomPath(Ghost ghost){ 
+        ghost = this.game.getOneGhost();
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> Choice()));   
+        timeline.setCycleCount(-1); 
+        timeline.setDelay(Duration.millis(1));
+        timeline.playFromStart();
+
+    } 
+
+    public void Choice(){ 
+        Ghost ghost = this.game.getOneGhost();
+        Random rd = new Random(); 
+        char[] directions = {'O', 'V','N','H'};
+        char newPath = directions[rd.nextInt(4)]; 
+        if (newPath == 'O'){ 
+            ghost.up();
+        } 
+        if (newPath== 'V'){ 
+            ghost.left(); 
+        } 
+        if (newPath == 'N'){ 
+            ghost.down(); 
+        } 
+        if (newPath== 'H'){ 
+            ghost.right();
+        }  
+        
     }
 }

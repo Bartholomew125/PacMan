@@ -1,10 +1,9 @@
 package com.example;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.example.model.Moveable;
-
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.DisplayName;
 
 // Concrete subclass for testing purposes
 class TestMoveable extends Moveable {
