@@ -23,7 +23,7 @@ public class Main extends Application {
 
         // Create the Game, Viewer and Controller
         Game game = new Game();
-        Viewer viewer = new Viewer(1000, 1000, game);
+        Viewer viewer = new Viewer(800, 800, game);
         Controller controller = new Controller(game, viewer, 60);
 
         // Attach the viewers surface to the root, so it is displayed

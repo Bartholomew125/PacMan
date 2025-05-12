@@ -102,7 +102,7 @@ public class Controller {
             for (Ghost g : this.game.getGhosts()) {
                 if (wall.distanceTo(g) < 1) {
                     g.stop();
-                    DummyPath(g);
+                    SmartPath(g);
                     g.move();
                 }
             }
@@ -146,8 +146,7 @@ public class Controller {
     public void MoreRandomPath(Ghost ghost){ 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> Choice(ghost)));   
         timeline.setCycleCount(-1); 
-        timeline.setDelay(Duration.millis(1));
-        timeline.playFromStart();
+        timeline.play();
 
     } 
 
@@ -168,5 +167,34 @@ public class Controller {
             g.right();
         }  
         
+    }  
+
+    public void SmartPath(Ghost g){ 
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3),ae -> Rational(g)));
+        timeline.setCycleCount(-1); 
+        timeline.play();
+
+
+        } 
+
+    public void Rational(Ghost g){ 
+        PacMan target = this.game.getPacMan(); 
+
+        if (g.getX()<target.getX()){ 
+            g.right();
+        } 
+        if (g.getDX()>target.getX()){ 
+            g.left();
+        }/*  
+        if (g.getDY()<target.getY()){ 
+            g.up();
+        } 
+        if (g.getDY()<target.getY()){ 
+            g.down();
+        }*/
+
     }
+
+    
+
 }
