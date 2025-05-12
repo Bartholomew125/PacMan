@@ -145,7 +145,7 @@ public class Controller {
         ghost = this.game.getOneGhost();
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> Choice()));   
         timeline.setCycleCount(-1); 
-        timeline.setDelay(Duration.seconds(3));
+        timeline.setDelay(Duration.millis(1));
         timeline.playFromStart();
 
     } 
