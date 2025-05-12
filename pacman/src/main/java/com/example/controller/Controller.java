@@ -70,9 +70,13 @@ public class Controller {
 
         if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
-            this.game.getOneGhost().move(); 
+
             this.handleCollisions();
 
+            // Move stuff
+            for (Ghost g : game.getGhosts()) {
+                g.move();
+            }
             this.game.getPacMan().move();
             this.view.render(nanoTime);
         }
@@ -87,11 +91,20 @@ public class Controller {
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
         Pill[] largePills = this.game.getLargePillsArray(); 
-        Ghost ghost = this.game.getOneGhost();  
 
+        // Collision with walls
         for (Wall wall : walls) {
+            // Pacman
             if (wall.distanceTo(pacman) < 1) {
                 pacman.stop();
+            }
+            // Ghosts
+            for (Ghost g : this.game.getGhosts()) {
+                if (wall.distanceTo(g) < 1) {
+                    g.stop();
+                    DummyPath(g);
+                    g.move();
+                }
             }
         }
 
@@ -108,20 +121,9 @@ public class Controller {
                 System.out.println(this.game.getScore());
             }
         }  
-
-        for (Wall wall : walls){ 
-            if (wall.distanceTo(ghost)< 0.8) { 
-                ghost.stop();
-                ghost.move(); 
-                MoreRandomPath(ghost);
-            }
-        }
-
-
     }  
 
     public void DummyPath(Ghost ghost){ 
-        ghost = this.game.getOneGhost();
         Random rd = new Random(); 
         char[] directions = {'O', 'V','N','H'};
         char newPath = directions[rd.nextInt(4)];
@@ -142,30 +144,28 @@ public class Controller {
     } 
 
     public void MoreRandomPath(Ghost ghost){ 
-        ghost = this.game.getOneGhost();
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> Choice()));   
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> Choice(ghost)));   
         timeline.setCycleCount(-1); 
         timeline.setDelay(Duration.millis(1));
         timeline.playFromStart();
 
     } 
 
-    public void Choice(){ 
-        Ghost ghost = this.game.getOneGhost();
+    public void Choice(Ghost g){ 
         Random rd = new Random(); 
         char[] directions = {'O', 'V','N','H'};
         char newPath = directions[rd.nextInt(4)]; 
         if (newPath == 'O'){ 
-            ghost.up();
+            g.up();
         } 
         if (newPath== 'V'){ 
-            ghost.left(); 
+            g.left(); 
         } 
         if (newPath == 'N'){ 
-            ghost.down(); 
+            g.down(); 
         } 
         if (newPath== 'H'){ 
-            ghost.right();
+            g.right();
         }  
         
     }

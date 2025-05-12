@@ -6,12 +6,12 @@ import javafx.scene.image.Image;
 
 public class GhostView extends AbstractView {
     
-    private Ghost ghost;
+    private Ghost[] ghosts;
     private Image ghostImage;
 
-    public GhostView(int width, int height, double positionScaler, Ghost ghost) {
+    public GhostView(int width, int height, double positionScaler, Ghost[] ghosts) {
         super(width, height, positionScaler);
-        this.ghost = ghost;
+        this.ghosts = ghosts;
 
         this.ghostImage = new Image("file:src/main/resources/com/example/GreenGhost.png", this.getPositionScaler(), this.getPositionScaler(), false, false);
     }
@@ -20,6 +20,8 @@ public class GhostView extends AbstractView {
     public void render(double nanoTime) {
         this.clear();
 
-        this.addImageToSurface(this.ghostImage, this.ghost.getX(), this.ghost.getY(), 0);
+        for (Ghost g : this.ghosts) {
+            this.addImageToSurface(this.ghostImage, g.getX(), g.getY(), 0);
+        }
     }
 }
