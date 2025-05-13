@@ -52,7 +52,8 @@ public class Pos2D {
      * @return
      */
     public double distanceTo(Moveable moveable) {
-        return Math.sqrt(Math.pow(moveable.getX() - this.x, 2) + Math.pow(moveable.getY() - this.y, 2));
+        // Takes into account the velocity of the moveable
+        return Math.sqrt(Math.pow((moveable.getX()+moveable.getDX()/100) - this.x, 2) + Math.pow((moveable.getY()+moveable.getDY()/100) - this.y, 2));
     }
 
     /**
