@@ -11,7 +11,6 @@ import com.example.view.Viewer;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
@@ -20,6 +19,8 @@ import javafx.util.Duration;
  * making him move in the right way.
  */
 public class Controller {
+
+    private MovementController movementController;
 
     private Viewer viewer;
     private Game game;
@@ -34,6 +35,8 @@ public class Controller {
 
         // The framerate of the game
         this.nanosecondsPerFrame = Math.pow(10, 9) / fps;
+
+        this.movementController = new MovementController(this.game.getPacMan());
     }
 
     /**
@@ -42,24 +45,7 @@ public class Controller {
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
-        KeyCode key = event.getCode();
-        PacMan pacman = this.game.getPacMan();
-        if (key == KeyCode.LEFT) {
-            pacman.left();
-            this.viewer.getPacmanAnimation().setRotation(180);
-        }
-        if (key == KeyCode.RIGHT) {
-            pacman.right();
-            this.viewer.getPacmanAnimation().setRotation(0);
-        }
-        if (key == KeyCode.UP) {
-            pacman.up();
-            this.viewer.getPacmanAnimation().setRotation(-90);
-        }
-        if (key == KeyCode.DOWN) {
-            pacman.down();
-            this.viewer.getPacmanAnimation().setRotation(90);
-        }
+        this.movementController.handleKeyPress(event);
     }
 
     /**
@@ -70,6 +56,8 @@ public class Controller {
 
         if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
+
+            this.movementController.update(nanoTime);
 
             this.handleCollisions();
 
