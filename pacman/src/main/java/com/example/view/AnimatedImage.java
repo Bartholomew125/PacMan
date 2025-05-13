@@ -39,8 +39,8 @@ public class AnimatedImage {
      * @param time
      * @return The frame for a given time
      */
-    public Image getFrame(double time) {
-        int index = (int) ((time % (this.frames.length * this.duration)) / this.duration);
+    public Image getFrame(double nanoTime) {
+        int index = (int) ((nanoTime % (this.frames.length * this.duration)) / this.duration);
         return this.frames[index];
     }
 

@@ -21,15 +21,15 @@ import javafx.util.Duration;
  */
 public class Controller {
 
-    private Viewer view;
+    private Viewer viewer;
     private Game game;
     private long previousNanoTime;
     private long currentNanoTime;
     private final double nanosecondsPerFrame;
 
-    public Controller(Game game, Viewer view, int fps) {
+    public Controller(Game game, Viewer viewer, int fps) {
         this.game = game;
-        this.view = view;
+        this.viewer = viewer;
         this.previousNanoTime = System.nanoTime();
 
         // The framerate of the game
@@ -46,19 +46,19 @@ public class Controller {
         PacMan pacman = this.game.getPacMan();
         if (key == KeyCode.LEFT) {
             pacman.left();
-            this.view.getPacmanAnimation().setRotation(180);
+            this.viewer.getPacmanAnimation().setRotation(180);
         }
         if (key == KeyCode.RIGHT) {
             pacman.right();
-            this.view.getPacmanAnimation().setRotation(0);
+            this.viewer.getPacmanAnimation().setRotation(0);
         }
         if (key == KeyCode.UP) {
             pacman.up();
-            this.view.getPacmanAnimation().setRotation(-90);
+            this.viewer.getPacmanAnimation().setRotation(-90);
         }
         if (key == KeyCode.DOWN) {
             pacman.down();
-            this.view.getPacmanAnimation().setRotation(90);
+            this.viewer.getPacmanAnimation().setRotation(90);
         }
     }
 
@@ -78,7 +78,7 @@ public class Controller {
                 g.move();
             }
             this.game.getPacMan().move();
-            this.view.render(nanoTime);
+            this.viewer.render(nanoTime);
         }
     }
 
@@ -102,7 +102,7 @@ public class Controller {
             for (Ghost g : this.game.getGhosts()) {
                 if (wall.distanceTo(g) < 1) {
                     g.stop();
-                    DummyPath(g);
+                    dummyPath(g);
                     g.move();
                 }
             }
@@ -123,7 +123,7 @@ public class Controller {
         }  
     }  
 
-    public void DummyPath(Ghost ghost){ 
+    public void dummyPath(Ghost ghost){ 
         Random rd = new Random(); 
         char[] directions = {'O', 'V','N','H'};
         char newPath = directions[rd.nextInt(4)];
@@ -143,29 +143,29 @@ public class Controller {
 
     } 
 
-    public void MoreRandomPath(Ghost ghost){ 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> Choice(ghost)));   
+    public void moreRandomPath(Ghost ghost){ 
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> choice(ghost)));   
         timeline.setCycleCount(-1); 
         timeline.setDelay(Duration.millis(1));
         timeline.playFromStart();
 
     } 
 
-    public void Choice(Ghost g){ 
+    public void choice(Ghost ghost){ 
         Random rd = new Random(); 
         char[] directions = {'O', 'V','N','H'};
         char newPath = directions[rd.nextInt(4)]; 
         if (newPath == 'O'){ 
-            g.up();
+            ghost.up();
         } 
         if (newPath== 'V'){ 
-            g.left(); 
+            ghost.left(); 
         } 
         if (newPath == 'N'){ 
-            g.down(); 
+            ghost.down(); 
         } 
         if (newPath== 'H'){ 
-            g.right();
+            ghost.right();
         }  
         
     }
