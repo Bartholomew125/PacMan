@@ -11,6 +11,7 @@ public abstract class Moveable {
     protected float dy;
     protected double movementMultiplier;
     protected boolean isEdible;
+    protected int rotation;
 
     public Moveable(float x, float y, float dx, float dy, double movementMultiplier) {
         this.x = x;
@@ -18,6 +19,7 @@ public abstract class Moveable {
         this.dx = dx;
         this.dy = dy;
         this.movementMultiplier = movementMultiplier;
+        this.rotation = 0;
     }
 
     /**
@@ -34,6 +36,7 @@ public abstract class Moveable {
     public void left() {
         this.dx = -1;
         this.dy = 0;
+        this.rotation = 180;
     }
 
     /**
@@ -42,6 +45,7 @@ public abstract class Moveable {
     public void right() {
         this.dx = 1;
         this.dy = 0;
+        this.rotation = 0;
     }
 
     /**
@@ -50,6 +54,7 @@ public abstract class Moveable {
     public void down() {
         this.dx = 0;
         this.dy = 1;
+        this.rotation = 90;
     }
 
     /**
@@ -58,6 +63,7 @@ public abstract class Moveable {
     public void up() {
         this.dx = 0;
         this.dy = -1;
+        this.rotation = -90;
     }
 
     /**
@@ -125,5 +131,9 @@ public abstract class Moveable {
     
     public void setIsEdible(boolean isEdible){
         this.isEdible = isEdible;
+    }
+
+    public int getRotation() {
+        return this.rotation;
     }
 }
