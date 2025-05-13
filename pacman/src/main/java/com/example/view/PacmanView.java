@@ -20,7 +20,7 @@ public class PacmanView extends AbstractView{
     public void render(double nanoTime) {
         this.clear();
         // Add pacman to the surface
-        this.addImageToSurface(pacmanAnimationImage.getFrame(nanoTime), this.pacman.getX(), this.pacman.getY(), this.pacmanAnimationImage.getRotation()); 
+        this.addImageToSurface(pacmanAnimationImage.getFrame(nanoTime), this.pacman.getX(), this.pacman.getY(), this.pacman.getRotation()); 
     }
 
     public AnimatedImage getAnimation() {
