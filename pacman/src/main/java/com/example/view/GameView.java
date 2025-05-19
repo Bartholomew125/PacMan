@@ -2,8 +2,6 @@ package com.example.view;
 
 import com.example.model.Game;
 
-import javafx.scene.canvas.GraphicsContext;
-
 /**
  * The view class in the MVC model. It is responsible for taking the maze
  * model, and converting everything in it to a format that can be displayed in
@@ -15,8 +13,6 @@ public class GameView extends AbstractView{
     private PillView pillView;
     private PacmanView pacmanView;
     private GhostView ghostView;
-
-    GraphicsContext gc;
 
     /**
      * Create a new view of a maze, and a square size
@@ -42,13 +38,14 @@ public class GameView extends AbstractView{
     /**
      * Render everything to the surface
      */
-    public void render(double time) {
+    @Override
+    public void render(double nanoTime) {
 
         // Render other views
-        this.mazeView.render(time);
-        this.pillView.render(time);
-        this.pacmanView.render(time);
-        this.ghostView.render(time);
+        this.mazeView.render(nanoTime);
+        this.pillView.render(nanoTime);
+        this.pacmanView.render(nanoTime);
+        this.ghostView.render(nanoTime);
     }
 
     public AnimatedImage getPacmanAnimation() {

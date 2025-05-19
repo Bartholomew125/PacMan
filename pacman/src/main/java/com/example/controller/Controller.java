@@ -11,7 +11,6 @@ import com.example.view.Viewer;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
@@ -21,19 +20,23 @@ import javafx.util.Duration;
  */
 public class Controller {
 
-    private Viewer view;
+    private MovementController movementController;
+
+    private Viewer viewer;
     private Game game;
     private long previousNanoTime;
     private long currentNanoTime;
     private final double nanosecondsPerFrame;
 
-    public Controller(Game game, Viewer view, int fps) {
+    public Controller(Game game, Viewer viewer, int fps) {
         this.game = game;
-        this.view = view;
+        this.viewer = viewer;
         this.previousNanoTime = System.nanoTime();
 
         // The framerate of the game
         this.nanosecondsPerFrame = Math.pow(10, 9) / fps;
+
+        this.movementController = new MovementController(this.game.getPacMan());
     }
 
     /**
@@ -42,24 +45,7 @@ public class Controller {
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
-        KeyCode key = event.getCode();
-        PacMan pacman = this.game.getPacMan();
-        if (key == KeyCode.LEFT) {
-            pacman.left();
-            this.view.getPacmanAnimation().setRotation(180);
-        }
-        if (key == KeyCode.RIGHT) {
-            pacman.right();
-            this.view.getPacmanAnimation().setRotation(0);
-        }
-        if (key == KeyCode.UP) {
-            pacman.up();
-            this.view.getPacmanAnimation().setRotation(-90);
-        }
-        if (key == KeyCode.DOWN) {
-            pacman.down();
-            this.view.getPacmanAnimation().setRotation(90);
-        }
+        this.movementController.handleKeyPress(event);
     }
 
     /**
@@ -71,6 +57,8 @@ public class Controller {
         if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
 
+            this.movementController.update(nanoTime);
+
             this.handleCollisions();
 
             // Move stuff
@@ -78,7 +66,7 @@ public class Controller {
                 g.move();
             }
             this.game.getPacMan().move();
-            this.view.render(nanoTime);
+            this.viewer.render(nanoTime);
         }
     }
 
@@ -102,7 +90,7 @@ public class Controller {
             for (Ghost g : this.game.getGhosts()) {
                 if (wall.distanceTo(g) < 1) {
                     g.stop();
-                    SmartPath(g);
+                    dummyPath(g);
                     g.move();
                 }
             }
@@ -123,7 +111,7 @@ public class Controller {
         }  
     }  
 
-    public void DummyPath(Ghost ghost){ 
+    public void dummyPath(Ghost ghost){ 
         Random rd = new Random(); 
         char[] directions = {'O', 'V','N','H'};
         char newPath = directions[rd.nextInt(4)];
@@ -143,58 +131,30 @@ public class Controller {
 
     } 
 
-    public void MoreRandomPath(Ghost ghost){ 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> Choice(ghost)));   
+    public void moreRandomPath(Ghost ghost){ 
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> choice(ghost)));   
         timeline.setCycleCount(-1); 
-        timeline.play();
+        timeline.setDelay(Duration.millis(1));
+        timeline.playFromStart();
 
     } 
 
-    public void Choice(Ghost g){ 
+    public void choice(Ghost ghost){ 
         Random rd = new Random(); 
         char[] directions = {'O', 'V','N','H'};
         char newPath = directions[rd.nextInt(4)]; 
         if (newPath == 'O'){ 
-            g.up();
+            ghost.up();
         } 
         if (newPath== 'V'){ 
-            g.left(); 
+            ghost.left(); 
         } 
         if (newPath == 'N'){ 
-            g.down(); 
+            ghost.down(); 
         } 
         if (newPath== 'H'){ 
-            g.right();
+            ghost.right();
         }  
         
-    }  
-
-    public void SmartPath(Ghost g){ 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3),ae -> Rational(g)));
-        timeline.setCycleCount(-1); 
-        timeline.play();
-
-
-        } 
-
-    public void Rational(Ghost g){ 
-        PacMan target = this.game.getPacMan(); 
-
-        if (g.getX()<target.getX()){ 
-            g.right();
-        } 
-        if (g.getDX()>target.getX()){ 
-            g.left();
-        }/*  
-        if (g.getDY()<target.getY()){ 
-            g.up();
-        } 
-        if (g.getDY()<target.getY()){ 
-            g.down();
-        }*/
-
     }
-
-    
-
 }

@@ -22,12 +22,12 @@ public class SmallPillTest {
         SmallPill smallPillObject = new SmallPill(1, 2);
         
         // Make sure that positon is initially 0.
-        assertEquals(0, smallPillObject.newSmallPill().getX());
-        assertEquals(0, smallPillObject.newSmallPill().getY());
+        assertEquals(1, smallPillObject.getX());
+        assertEquals(2, smallPillObject.getY());
 
         // Check whether constraint for value and size of smallPill holds for the newSmallPillMethod.
-        assertEquals(10, smallPillObject.newSmallPill().getValue());
-        assertEquals(10, smallPillObject.newSmallPill().getSize());
+        assertEquals(10, smallPillObject.getValue());
+        assertEquals(10, smallPillObject.getSize());
     }
 
     

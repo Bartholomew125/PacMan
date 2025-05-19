@@ -7,8 +7,6 @@ import javafx.scene.paint.Color;
  */
 public abstract class Ghost extends Moveable {
     protected Color color;
-    protected float x;
-    protected float y;
     protected boolean isAfraid;
 
     /**

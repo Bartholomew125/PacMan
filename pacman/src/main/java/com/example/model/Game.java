@@ -1,13 +1,14 @@
 package com.example.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
     private Maze maze;
     private PacMan pacman;
-    private ArrayList<Pill> smallPills;
-    private ArrayList<Pill> largePills;
+    private List<Pill> smallPills;
+    private List<Pill> largePills;
     private Ghost[] ghosts;
     private int score;
     private int lives;
@@ -95,14 +96,14 @@ public class Game {
     /**
      * @return A pointer to the array of small pills int the game.
      */
-    public ArrayList<Pill> getSmallPills() {
+    public List<Pill> getSmallPills() {
         return this.smallPills;
     }
 
     /**
      * @return A pointer to the array of large pills int the game.
      */
-    public ArrayList<Pill> getLargePills() {
+    public List<Pill> getLargePills() {
         return this.largePills;
     }
 
@@ -127,12 +128,6 @@ public class Game {
     public Ghost[] getGhosts(){ 
         return this.ghosts;
     } 
-
-    public Ghost getOneGhost(){ 
-        return this.ghosts[0];
-    } 
-
-
 
     public int getLives() {
         return this.lives;
