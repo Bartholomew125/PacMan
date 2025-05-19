@@ -20,7 +20,7 @@ import javafx.util.Duration;
  */
 public class Controller {
 
-    private MovementController movementController;
+    private PacmanController pacmanController;
 
     private Viewer viewer;
     private Game game;
@@ -36,7 +36,7 @@ public class Controller {
         // The framerate of the game
         this.nanosecondsPerFrame = Math.pow(10, 9) / fps;
 
-        this.movementController = new MovementController(this.game.getPacMan());
+        this.pacmanController = new PacmanController(this.game.getPacMan(), this.game.getMaze());
     }
 
     /**
@@ -45,7 +45,7 @@ public class Controller {
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
-        this.movementController.handleKeyPress(event);
+        this.pacmanController.handleKeyPress(event);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Controller {
         if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
 
-            this.movementController.update(nanoTime);
+            this.pacmanController.update(nanoTime);
 
             this.handleCollisions();
 
