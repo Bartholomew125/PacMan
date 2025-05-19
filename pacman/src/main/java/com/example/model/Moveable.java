@@ -1,5 +1,10 @@
 package com.example.model;
 
+import com.example.Direction;
+import com.example.DirectionAdapter;
+
+import javafx.util.Pair;
+
 /**
  * The movable class represents anything that needs to be moved.
  */
@@ -64,6 +69,27 @@ public abstract class Moveable {
         this.dx = 0;
         this.dy = -1;
         this.rotation = -90;
+    }
+
+    /**
+     * Sets the direction of the Moveable.
+     * 
+     * @param dir
+     */
+    public void setDirection(Direction dir) {
+        Pair<Float, Float> direction = DirectionAdapter.adapt(dir);
+        if (direction != null) {
+            this.dx = direction.getKey();
+            this.dy = direction.getValue();
+            this.rotation = DirectionAdapter.adaptDegrees(dir);
+        }
+    }
+
+    /**
+     * @return The direction of the Moveable.
+     */
+    public Direction getDirection() {
+        return DirectionAdapter.adapt(this.dx, this.dy);
     }
 
     /**
