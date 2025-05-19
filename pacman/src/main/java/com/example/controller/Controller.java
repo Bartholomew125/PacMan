@@ -1,16 +1,23 @@
 package com.example.controller;
 
+import java.lang.foreign.AddressLayout;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 import com.example.model.Game;
 import com.example.model.Ghost;
+import com.example.model.Maze;
+import com.example.model.Moveable;
 import com.example.model.PacMan;
 import com.example.model.Pill;
+import com.example.model.Pos2D;
 import com.example.model.Wall;
 import com.example.view.Viewer;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.css.Size;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
@@ -156,5 +163,32 @@ public class Controller {
             ghost.right();
         }  
         
+    } 
+
+    public ArrayList<Pos2D> path(Pos2D current,  ArrayList<Pos2D> laststep){ 
+        ArrayList<Pos2D> totalpath = new ArrayList<Pos2D>(); 
+        for (Pos2D i : laststep) {
+            current = laststep.get(laststep.size()-1);
+            totalpath.add(current);
+        } 
+        return totalpath;
+
+    } 
+
+    public void logic(Ghost g, PacMan goal){ 
+        goal = this.game.getPacMan();
+        ArrayList<Pos2D> camefrom = new ArrayList<Pos2D>();
+        Pos2D current = new Pos2D (0, 0); 
+        PriorityQueue<Pos2D> q = new PriorityQueue<>(); 
+        q.add(current); 
+
+        while (!q.isEmpty()){ 
+
+        }
+
+
+
+
+
     }
 }
