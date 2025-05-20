@@ -1,7 +1,6 @@
 package com.example.controller;
 
-import com.example.Direction;
-import com.example.DirectionAdapter;
+import com.example.model.Direction;
 import com.example.model.Maze;
 import com.example.model.PacMan;
 
@@ -37,7 +36,7 @@ public class PacmanController {
         }
         // Check if there is a passage in the direction pressed
         else if (isPassage(dir)){
-            this.waitingDirection = dir;
+            this.setWaitingDirection(dir);
         }
         // Any other case
         else {
@@ -83,7 +82,7 @@ public class PacmanController {
      * 
      * @param direction
      */
-    public void setWaitingDirection(Direction direction) {
+    private void setWaitingDirection(Direction direction) {
         this.waitingDirection = direction;
     }
 
