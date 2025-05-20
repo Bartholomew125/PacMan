@@ -122,6 +122,13 @@ public class Maze {
         return positions.toArray(new Pos2D[positions.size()]);
     }
 
+    public boolean isWallAt(int x, int y) {
+        if (x < 0 || x > this.getWidth() || y < 0 || y > this.getHeight()) {
+            return false;
+        }
+        return this.getTextMaze()[y][x].equals("#");
+    }
+
     /**
      * @return The maze file
      */
