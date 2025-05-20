@@ -3,6 +3,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titling}
+\usepackage[danish]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{amssymb}
@@ -17,6 +21,8 @@
 \usepackage{psfrag}
 \usepackage{pgfplots}
 \usepackage{bm}
+\usepackage{hyperref}
+\usepackage{minted}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Other Settings
@@ -24,6 +30,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% Page Setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \geometry{a4paper}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Styles %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usemintedstyle{borland}
 %%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{ocre}{RGB}{243,102,25}
 \definecolor{mygray}{RGB}{243,243,244}
@@ -31,6 +40,11 @@
 \definecolor{shallowGreen}{RGB}{235,255,255}
 \definecolor{deepBlue}{RGB}{61,124,222}
 \definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Define codecomment command %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\code}[1]{\small\mintinline[xleftmargin=2em, xrightmargin=2em, breaklines]{sql}{#1}}
+\newcommand{\snippet}[3]{\inputminted[firstline=#1,lastline=#2,linenos, xleftmargin=1.5em, breaklines]{java}{#3}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,25 +73,46 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+\pagenumbering{gobble}
+\begin{titlepage}
     \maketitle
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.8\textwidth]{figures/frontpage-image.png}
+        \end{center}
+    \end{figure}
+\end{titlepage}
+    \clearpage
     \newpage
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
+
+    % Only footer, no header
+    \pagestyle{fancy}
+    % \fancyhf{} 
+    \fancyfoot[C]{\textbf{\thepage}\ of \pageref{LastPage}}
+    % \renewcommand{\headrulewidth}{0pt}  
+
     \tableofcontents
     \newpage
+\section{Projektbeskrivelse}\label{sec:Beskrivelse} % (fold)
 
-\section{Beskrivelse}\label{sec:Beskrivelse} % (fold)
+Til fordel for at sikre en så tro kopi til orignalen som overhovedet muligt, er dette projekts hovedformål, at udvilke spilfunktionalitet mht. kravsspecifikationen. Målet herefter, er at udvide både spillets funktionalitet samt dets brugervenlighed.
 
-\begin{itemize}
-  \item Antag, at læseren af jeres rapport har læst kravsspecifikationen fra
-  projektbeskrivelsen i slutningen af dette dokument, og undlad at gentage
-  unødvendige detaljer derfra.
-  \item Formålet med denne sektion er at dokumentere eventuelle afvigelser fra
-  kravsspecifikationen.
-  \item Har I, for eksempel, gjort jer forsimplende antagelser ift.
-  specifikationen? Eller tolket eventuelle tvetydigheder i specifikationen?
-  Tilføjet nye krav? Beskriv hvilke og hvordan I evt. har tolket
-  specifikationen.
-  \item Hold det kort, især hvis I har få afvigelser.
-\end{itemize}
+Eventuelle afvigelser fra kravsspecifikationen ses dokumenteret/diskuteret i det følgende.
+% \begin{itemize}
+%   \item Antag, at læseren af jeres rapport har læst kravsspecifikationen fra
+%   projektbeskrivelsen i slutningen af dette dokument, og undlad at gentage
+%   unødvendige detaljer derfra.
+%   \item Formålet med denne sektion er at dokumentere eventuelle afvigelser fra
+%   kravsspecifikationen.
+%   \item Har I, for eksempel, gjort jer forsimplende antagelser ift.
+%   specifikationen? Eller tolket eventuelle tvetydigheder i specifikationen?
+%   Tilføjet nye krav? Beskriv hvilke og hvordan I evt. har tolket
+%   specifikationen.
+%   \item Hold det kort, især hvis I har få afvigelser.
+% \end{itemize}
+\newpage
 \section{design}\label{sec:design} % (fold)
 % section Beskrivelse (end)
 
