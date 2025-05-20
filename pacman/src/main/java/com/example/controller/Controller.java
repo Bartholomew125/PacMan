@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.lang.foreign.AddressLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -19,7 +20,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.css.Size;
 import javafx.scene.input.KeyEvent;
-import javafx.util.Duration;
+import javafx.util.Duration; 
+import java.util.Map;
 
 /**
  * The controller class which is responsible for controlling the pacman and
@@ -175,20 +177,75 @@ public class Controller {
 
     } 
 
-    public void logic(Ghost g, PacMan goal){ 
+    public void logic(Ghost g, PacMan goal, int cost){ 
         goal = this.game.getPacMan();
+        Pos2D realgoal = new Pos2D(Math.round(goal.getX()), Math.round(goal.getY()));
+        Maze maze = this.game.getMaze();
         ArrayList<Pos2D> camefrom = new ArrayList<Pos2D>();
-        Pos2D current = new Pos2D (0, 0); 
+
+        ArrayList<Integer> goalScore = new ArrayList<Integer>(); 
+        goalScore.add(0);
+        cost = 0; 
+
+        ArrayList<Integer> fullScore = new ArrayList<Integer>(); 
+        fullScore.add(cost);
+
+        Pos2D curr = new Pos2D (Math.round(g.getX()),Math.round(g.getY())); 
         PriorityQueue<Pos2D> q = new PriorityQueue<>(); 
-        q.add(current); 
+        q.add(curr); 
+        
+        Map<Pos2D, Integer> explored = new HashMap<>();
+        explored.put(curr, 0);
 
         while (!q.isEmpty()){ 
+            curr = q.poll();
+            if (curr == realgoal){ 
+                path(curr, camefrom);
+            } 
+            q.remove(curr); 
+        }      
 
+        Pos2D calcNeighbours = new Pos2D(curr.getX(),curr.getY()); 
+        getAvailableNeigbours(calcNeighbours);
+        Map<Pos2D, Pos2D> neighbours = new HashMap<>(); 
+        neighbours.put(calcNeighbours, calcNeighbours);
+
+        for (Map.Entry<Pos2D, Pos2D> entry : neighbours.entrySet()) {
+            int newCost = explored.get(new Pos2D(curr.getX(), curr.getY()));
+            Pos2D nextPos = entry.getValue(); 
+            if (nextPos != null && maze.IsWallAt() != true && explored.containsKey(nextPos)){ 
+                explored.put(nextPos, newCost);
+            } 
+
+            double prio = newCost + distanceToGoal(goal); 
+
+            Pos2D neighbourPos = new Pos2D(entry.getKey().getX(), entry.getKey().getY()); 
+            
+            q.add(neighbourPos); 
+            camefrom.add(neighbourPos);
+            
         }
 
+    
 
+    } 
+    
+    public ArrayList<Pos2D> getAvailableNeigbours(Pos2D pos){  
+        ArrayList<Pos2D> neighbourlist = new ArrayList<Pos2D>();
+        Maze maze = this.game.getMaze(); 
+        for (Pos2D elem : neighbourlist) { 
+            if (elem != null && maze.isWallAt(elem.getX(),elem.getY()) != true){ 
+                neighbourlist.add(elem);
+            }
+        }  
+        return neighbourlist;
+    } 
 
-
-
+    public double distanceToGoal(PacMan pacman){
+        Ghost[] g = this.game.getGhosts();
+        int x = Math.round(g[g.length].getX()); 
+        int y = Math.round(g[g.length].getY());
+        return Math.sqrt(Math.pow(pacman.getX() - x, 2) + Math.pow(pacman.getY() - y, 2));
     }
+
 }
