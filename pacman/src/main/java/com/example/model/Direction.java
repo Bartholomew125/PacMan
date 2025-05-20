@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 /**
  * The Direction enum represents the four possible directions.
