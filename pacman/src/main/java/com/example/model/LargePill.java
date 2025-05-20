@@ -1,7 +1,7 @@
 package com.example.model;
 
 /**
- * The implementation of the Large Pill which makes pacman able to eat ghosts.
+ * The implementation of the Large Pill which makes pacMan able to eat ghosts.
  */
 public class LargePill extends Pill {
 

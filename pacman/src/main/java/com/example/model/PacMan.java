@@ -1,7 +1,7 @@
 package com.example.model;
 
 /**
- * The PacMan class which represents the pacman
+ * The PacMan class which represents the pacMan
  */
 public class PacMan extends Moveable{
     

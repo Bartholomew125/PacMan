@@ -6,7 +6,7 @@ import java.util.List;
 public class Game {
 
     private Maze maze;
-    private PacMan pacman;
+    private PacMan pacMan;
     private List<Pill> smallPills;
     private List<Pill> largePills;
     private Ghost[] ghosts;
@@ -17,10 +17,10 @@ public class Game {
         // Create maze
         this.maze = new Maze();
 
-        // Create pacman
-        Pos2D pos = this.maze.locatePacman();
-        this.pacman = new PacMan(pos.getX(), pos.getY());
-        this.pacman.setMovementMultiplier(0.1);
+        // Create pacMan
+        Pos2D pos = this.maze.locatePacMan();
+        this.pacMan = new PacMan(pos.getX(), pos.getY());
+        this.pacMan.setMovementMultiplier(0.1);
 
         // Create small pills
         Pos2D[] smallPillPositions = this.maze.locateSmallPills();
@@ -51,21 +51,21 @@ public class Game {
     }
 
     /**
-     * Make pacman eat a pill.
+     * Make pacMan eat a pill.
      * 
      * @param pill
      */
-    public void pacmanEatSmallPill(Pill pill) {
+    public void pacManEatSmallPill(Pill pill) {
         this.increaseScore(pill.getValue());
         this.smallPills.remove(pill);
     }
 
     /**
-     * Make pacman eat a large pill.
+     * Make pacMan eat a large pill.
      * 
      * @param pill
      */
-    public void pacmanEatLargePill(Pill pill) {
+    public void pacManEatLargePill(Pill pill) {
         this.increaseScore(pill.getValue());
         this.largePills.remove(pill);
     }
@@ -87,10 +87,10 @@ public class Game {
     }
 
     /**
-     * @return The pacman of the game
+     * @return The pacMan of the game
      */
     public PacMan getPacMan() {
-        return this.pacman;
+        return this.pacMan;
     }
 
     /**
@@ -134,7 +134,7 @@ public class Game {
     }
 
     public void setState(State state) {
-        pacman.isEdible = state.pacmanIsEdible;
+        pacMan.isEdible = state.pacManIsEdible;
 
         for (int i = 0; i < ghosts.length; i++) {
             this.ghosts[i].setIsEdible(state.ghostIsEdible);

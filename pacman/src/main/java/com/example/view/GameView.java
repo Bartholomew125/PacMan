@@ -11,7 +11,7 @@ public class GameView extends AbstractView{
 
     private MazeView mazeView;
     private PillView pillView;
-    private PacmanView pacmanView;
+    private PacManView pacManView;
     private GhostView ghostView;
 
     /**
@@ -25,12 +25,12 @@ public class GameView extends AbstractView{
 
         this.mazeView = new MazeView(width, height, positionScaler, game.getMaze());
         this.pillView = new PillView(width, height, positionScaler, game.getSmallPills(), game.getLargePills());
-        this.pacmanView = new PacmanView(width, height, positionScaler, game.getPacMan());
+        this.pacManView = new PacManView(width, height, positionScaler, game.getPacMan());
         this.ghostView = new GhostView(width, height, positionScaler, game.getGhosts());
 
         this.addView(this.mazeView);
         this.addView(this.pillView);
-        this.addView(this.pacmanView);
+        this.addView(this.pacManView);
         this.addView(this.ghostView);
 
     }
@@ -44,11 +44,11 @@ public class GameView extends AbstractView{
         // Render other views
         this.mazeView.render(nanoTime);
         this.pillView.render(nanoTime);
-        this.pacmanView.render(nanoTime);
+        this.pacManView.render(nanoTime);
         this.ghostView.render(nanoTime);
     }
 
-    public AnimatedImage getPacmanAnimation() {
-        return this.pacmanView.getAnimation();
+    public AnimatedImage getPacManAnimation() {
+        return this.pacManView.getAnimation();
     }
 }

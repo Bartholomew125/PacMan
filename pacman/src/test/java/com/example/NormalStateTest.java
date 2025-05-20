@@ -14,6 +14,6 @@ public class NormalStateTest {
         assertEquals(false, normalState.getGhostIsAfraid());
         assertEquals(2.0, normalState.getGhostMovementMultiplier());
         assertEquals(false, normalState.getGhostIsEdible());
-        assertEquals(true, normalState.getPacmanIsEdible());
+        assertEquals(true, normalState.getPacManIsEdible());
     }
 }

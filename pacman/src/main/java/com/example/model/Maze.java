@@ -57,20 +57,20 @@ public class Maze {
     }
 
     /**
-     * Locates the first pacman in the maze
+     * Locates the first pacMan in the maze
      * 
-     * @return Position of pacman
+     * @return Position of pacMan
      */
-    public Pos2D locatePacman() {
-        Pos2D[] pacmanPositions = this.locateCharacter("p");
-        // Check if there is exactly one pacman, and return an invalid positions
+    public Pos2D locatePacMan() {
+        Pos2D[] pacManPositions = this.locateCharacter("p");
+        // Check if there is exactly one pacMan, and return an invalid positions
         // if there isint
-        if (pacmanPositions.length != 1) {
+        if (pacManPositions.length != 1) {
             System.out.println("There isint exactly one p in the maze");
             return new Pos2D(-1, -1);
         }
         else {
-            return pacmanPositions[0];
+            return pacManPositions[0];
         } 
     } 
 

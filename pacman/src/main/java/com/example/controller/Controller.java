@@ -15,12 +15,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
 /**
- * The controller class which is responsible for controlling the pacman and
+ * The controller class which is responsible for controlling the pacMan and
  * making him move in the right way.
  */
 public class Controller {
 
-    private PacmanController pacmanController;
+    private PacManController pacManController;
 
     private Viewer viewer;
     private Game game;
@@ -36,7 +36,7 @@ public class Controller {
         // The framerate of the game
         this.nanosecondsPerFrame = Math.pow(10, 9) / fps;
 
-        this.pacmanController = new PacmanController(this.game.getPacMan(), this.game.getMaze());
+        this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
     }
 
     /**
@@ -45,7 +45,7 @@ public class Controller {
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
-        this.pacmanController.handleKeyPress(event);
+        this.pacManController.handleKeyPress(event);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Controller {
         if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
             this.previousNanoTime = currentNanoTime;
 
-            this.pacmanController.update(nanoTime);
+            this.pacManController.update(nanoTime);
 
             this.handleCollisions();
 
@@ -75,16 +75,16 @@ public class Controller {
      */
     private void handleCollisions() {
 
-        PacMan pacman = this.game.getPacMan();
+        PacMan pacMan = this.game.getPacMan();
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
         Pill[] largePills = this.game.getLargePillsArray(); 
 
         // Collision with walls
         for (Wall wall : walls) {
-            // Pacman
-            if (wall.distanceTo(pacman) < 1) {
-                pacman.stop();
+            // PacMan
+            if (wall.distanceTo(pacMan) < 1) {
+                pacMan.stop();
             }
             // Ghosts
             for (Ghost g : this.game.getGhosts()) {
@@ -97,15 +97,15 @@ public class Controller {
         }
 
         for (Pill pill : smallPills) {
-            if (pill.distanceTo(pacman) < 0.5) {
-                this.game.pacmanEatSmallPill(pill);
+            if (pill.distanceTo(pacMan) < 0.5) {
+                this.game.pacManEatSmallPill(pill);
                 System.out.println(this.game.getScore());
             }
         }
 
         for (Pill pill : largePills) {
-            if (pill.distanceTo(pacman) < 0.8) {
-                this.game.pacmanEatLargePill(pill);
+            if (pill.distanceTo(pacMan) < 0.8) {
+                this.game.pacManEatLargePill(pill);
                 System.out.println(this.game.getScore());
             }
         }  
