@@ -1,4 +1,6 @@
-package com.example;
+package com.example.controller;
+
+import com.example.model.Direction;
 
 import javafx.scene.input.KeyCode;
 import javafx.util.Pair;
