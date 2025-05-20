@@ -1,7 +1,6 @@
 package com.example.model;
 
-import com.example.Direction;
-import com.example.DirectionAdapter;
+import com.example.controller.DirectionAdapter;
 
 import javafx.util.Pair;
 
