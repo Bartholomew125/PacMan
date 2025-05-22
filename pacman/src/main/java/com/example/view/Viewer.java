@@ -47,7 +47,7 @@ public class Viewer extends AbstractView{
         this.headerView.render(nanoTime);
     }
 
-    public AnimatedImage getPacmanAnimation() {
-        return this.gameView.getPacmanAnimation();
+    public AnimatedImage getPacManAnimation() {
+        return this.gameView.getPacManAnimation();
     }
 }

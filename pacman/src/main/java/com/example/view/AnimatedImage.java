@@ -21,7 +21,7 @@ public class AnimatedImage {
      * <p>
      * Example use: 
      * <pre> 
-     * AnimTim.setFrames("pacmanImages", "pacman", "10"); 
+     * AnimTim.setFrames("pacManImages", "pacMan", "10"); 
      * </pre>
      * @param folder
      * @param fileName

@@ -7,13 +7,13 @@ public abstract class State {
     protected boolean ghostIsAfraid;
     protected double ghostMovementMultiplier;
     protected boolean ghostIsEdible;
-    protected boolean pacmanIsEdible;
+    protected boolean pacManIsEdible;
 
-    public State(boolean ghostIsAfraid, double ghostMovementMultiplier, boolean ghostIsEdible, boolean pacmanIsEdible) {
+    public State(boolean ghostIsAfraid, double ghostMovementMultiplier, boolean ghostIsEdible, boolean pacManIsEdible) {
         this.ghostIsAfraid = ghostIsAfraid;
         this.ghostMovementMultiplier = ghostMovementMultiplier;
         this.ghostIsEdible = ghostIsEdible;
-        this.pacmanIsEdible = pacmanIsEdible;
+        this.pacManIsEdible = pacManIsEdible;
     }
 
     public boolean getGhostIsAfraid() {
@@ -28,8 +28,8 @@ public abstract class State {
         return this.ghostIsEdible;
     }
 
-    public boolean getPacmanIsEdible(){
-        return this.pacmanIsEdible;
+    public boolean getPacManIsEdible(){
+        return this.pacManIsEdible;
     }
 
 }

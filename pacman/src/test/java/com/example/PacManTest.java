@@ -22,17 +22,17 @@ public class PacManTest {
     @DisplayName("Test whether the PacMan-constructor creates a new PacMan-object moving to the right.")
     void testPacManConstructor() {
         // Arrange: create a new PacMan with known x and y.
-        PacMan pacmanObject = new PacMan(1, 0);
+        PacMan pacManObject = new PacMan(1, 0);
 
         // Assert: check that x and y are set correctly.
-        assertEquals(1, pacmanObject.getX());
-        assertEquals(0, pacmanObject.getY());
+        assertEquals(1, pacManObject.getX());
+        assertEquals(0, pacManObject.getY());
 
         // Assert: check that dx and dy are set to 0 by default.
-        assertEquals(1, pacmanObject.getDX());
-        assertEquals(0, pacmanObject.getDY());
+        assertEquals(1, pacManObject.getDX());
+        assertEquals(0, pacManObject.getDY());
 
         // Assert: check that PacMan is moving to the right.
-        assertEquals(1, pacmanObject.getMovementMultiplier());
+        assertEquals(1, pacManObject.getMovementMultiplier());
     }
 }
