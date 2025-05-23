@@ -20,7 +20,6 @@ public class Game {
         // Create pacMan
         Pos2D pos = this.maze.locatePacMan();
         this.pacMan = new PacMan(pos.getX(), pos.getY());
-        this.pacMan.setMovementMultiplier(0.1);
 
         // Create small pills
         Pos2D[] smallPillPositions = this.maze.locateSmallPills();
