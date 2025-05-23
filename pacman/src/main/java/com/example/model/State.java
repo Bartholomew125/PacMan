@@ -4,16 +4,18 @@ package com.example.model;
  * State
  */
 public abstract class State {
-    protected boolean ghostIsAfraid;
-    protected double ghostMovementMultiplier;
-    protected boolean ghostIsEdible;
-    protected boolean pacManIsEdible;
+    private boolean ghostIsAfraid;
+    private double ghostMovementMultiplier;
+    private boolean ghostIsEdible;
+    private boolean pacManIsEdible;
+    private double pacManMovementmultiplier;
 
-    public State(boolean ghostIsAfraid, double ghostMovementMultiplier, boolean ghostIsEdible, boolean pacManIsEdible) {
+    public State(boolean ghostIsAfraid, double ghostMovementMultiplier, boolean ghostIsEdible, boolean pacManIsEdible, double pacManMovementmultiplier) {
         this.ghostIsAfraid = ghostIsAfraid;
         this.ghostMovementMultiplier = ghostMovementMultiplier;
         this.ghostIsEdible = ghostIsEdible;
         this.pacManIsEdible = pacManIsEdible;
+        this.pacManMovementmultiplier = pacManMovementmultiplier;
     }
 
     public boolean getGhostIsAfraid() {
@@ -30,6 +32,10 @@ public abstract class State {
 
     public boolean getPacManIsEdible(){
         return this.pacManIsEdible;
+    }
+
+    public double getPacManMovementmultiplier(){
+        return this.pacManMovementmultiplier;
     }
 
 }
