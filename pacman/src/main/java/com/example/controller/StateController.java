@@ -41,4 +41,8 @@ public class StateController implements Controller{
         }
     }
 
+    public State getState() {
+        return this.currentState;
+    }
+
 }

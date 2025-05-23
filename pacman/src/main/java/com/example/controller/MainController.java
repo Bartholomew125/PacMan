@@ -1,9 +1,11 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import com.example.model.Game;
 import com.example.model.Ghost;
+import com.example.model.NormalState;
 import com.example.model.PacMan;
 import com.example.model.Pill;
 import com.example.model.PowerState;
@@ -67,7 +69,8 @@ public class MainController implements Controller{
         PacMan pacMan = this.game.getPacMan();
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
-        Pill[] largePills = this.game.getLargePillsArray(); 
+        Pill[] largePills = this.game.getLargePillsArray();
+        ArrayList<Ghost> ghosts = this.game.getGhosts(); 
 
         // Collision with walls
         for (Wall wall : walls) {
@@ -88,7 +91,6 @@ public class MainController implements Controller{
         for (Pill pill : smallPills) {
             if (pill.distanceTo(pacMan) < 0.5) {
                 this.game.pacManEatSmallPill(pill);
-                System.out.println(this.game.getScore());
             }
         }
 
@@ -96,9 +98,20 @@ public class MainController implements Controller{
             if (pill.distanceTo(pacMan) < 0.8) {
                 this.game.pacManEatLargePill(pill);
                 this.stateController.setState(new PowerState());
-                System.out.println(this.game.getScore());
             }
-        }  
+        }
+        
+        // Handle collision between pacman and ghosts
+        for (Ghost ghost : ghosts) {
+            if (ghost.distanceToMoveable(pacMan) < 0.5){
+                if (stateController.getState() instanceof PowerState){
+                    this.game.pacManEatGhost(ghost);
+                }
+                else if (stateController.getState() instanceof NormalState){
+                    this.game.ghostEatsPacman();
+                }
+            }
+        }
     }  
 
     public void dummyPath(Ghost ghost){ 
