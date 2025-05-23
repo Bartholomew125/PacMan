@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.State;
 import com.example.model.PowerState;
+import com.example.model.DeadState;
 import com.example.model.Game;
 import com.example.model.NormalState;
 
@@ -34,6 +35,10 @@ public class StateController implements Controller{
             game.setState(state);
         }
         else if (state instanceof NormalState) {
+            this.currentState = state;
+            game.setState(state);
+        }
+        else if (state instanceof DeadState) {
             this.currentState = state;
             game.setState(state);
         }
