@@ -181,6 +181,7 @@ public class Game {
         Pos2D pos = this.maze.locatePacMan();
         this.pacMan.setX(pos.getX());
         this.pacMan.setY(pos.getY());
+        this.pacMan.right();
 
         // Reset ghosts
         Pos2D[] ghostPositions = this.maze.locateGhosts();
