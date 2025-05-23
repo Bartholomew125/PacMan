@@ -23,7 +23,7 @@ public class StateController implements Controller{
         System.out.println(nanoTime - this.powerStateStartTime);
 
         if (this.currentState instanceof PowerState) {
-            if (nanoTime - this.powerStateStartTime >= 1500000000L){
+            if (nanoTime - this.powerStateStartTime >= 15000000000L){
                 this.setState(new NormalState());
             }
         }
