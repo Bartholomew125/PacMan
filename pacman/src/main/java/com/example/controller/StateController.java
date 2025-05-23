@@ -41,6 +41,7 @@ public class StateController implements Controller{
         else if (state instanceof DeadState) {
             this.currentState = state;
             game.setState(state);
+            game.resetPositions();
         }
     }
 

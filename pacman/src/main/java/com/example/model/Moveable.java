@@ -99,10 +99,26 @@ public abstract class Moveable {
     }
 
     /**
+     * Sets the x-value of the Moveable
+     * @param x
+     */
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    /**
      * @return Moveables y-value.
      */
     public float getY() {
         return this.y;
+    }
+
+    /**
+     * Set the y-value of the Movable
+     * @param y
+     */
+    public void setY(float y) {
+        this.y = y;
     }
 
     /**
