@@ -25,8 +25,8 @@ public class GameView extends AbstractView{
 
         this.mazeView = new MazeView(width, height, positionScaler, game.getMaze());
         this.pillView = new PillView(width, height, positionScaler, game.getSmallPills(), game.getLargePills());
-        this.pacManView = new PacManView(width, height, positionScaler, game.getPacMan());
         this.ghostView = new GhostView(width, height, positionScaler, game.getGhosts());
+        this.pacManView = new PacManView(width, height, positionScaler, game.getPacMan());
 
         this.addView(this.mazeView);
         this.addView(this.pillView);
