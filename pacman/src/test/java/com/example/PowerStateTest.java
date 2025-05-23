@@ -1,7 +1,9 @@
 package com.example;
 import org.junit.jupiter.api.Test;
+
+import com.example.model.states.PowerState;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.example.model.PowerState;
 
 public class PowerStateTest {
 

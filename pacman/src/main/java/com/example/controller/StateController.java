@@ -1,10 +1,10 @@
 package com.example.controller;
 
-import com.example.model.State;
-import com.example.model.PowerState;
-import com.example.model.DeadState;
+import com.example.model.states.DeadState;
+import com.example.model.states.NormalState;
+import com.example.model.states.PowerState;
+import com.example.model.states.State;
 import com.example.model.Game;
-import com.example.model.NormalState;
 
 /**
  * StateController

@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.model.states;
 
 public class DeadState extends State{
 
