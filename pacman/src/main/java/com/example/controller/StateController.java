@@ -11,8 +11,10 @@ import com.example.model.Game;
  */
 public class StateController implements Controller{
     private long powerStateStartTime;
+    private long deadStateStartTime;
     private Game game;
     private State currentState; 
+    private final long nanosecPerSec = 1000000000L;
     
     public StateController(Game game){
         this.powerStateStartTime = 0;
@@ -22,7 +24,13 @@ public class StateController implements Controller{
 
     public void update(long nanoTime){
         if (this.currentState instanceof PowerState) {
-            if (nanoTime - this.powerStateStartTime >= 15000000000L){
+            if (nanoTime - this.powerStateStartTime >= 15*this.nanosecPerSec){
+                this.setState(new NormalState());
+            }
+        }
+        else if (this.currentState instanceof DeadState) {
+            if (nanoTime - this.deadStateStartTime >= 3*this.nanosecPerSec) {
+                this.game.resetPositions();
                 this.setState(new NormalState());
             }
         }
@@ -35,13 +43,11 @@ public class StateController implements Controller{
             game.setState(state);
         }
         else if (state instanceof NormalState) {
-            this.currentState = state;
             game.setState(state);
         }
         else if (state instanceof DeadState) {
-            this.currentState = state;
+            this.deadStateStartTime = System.nanoTime();
             game.setState(state);
-            game.resetPositions();
         }
     }
 
