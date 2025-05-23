@@ -12,8 +12,8 @@ public class PacManView extends AbstractView{
 
         this.pacMan = pacMan;
         // Load animated images
-        this.pacManAnimationImage = new AnimatedImage(300000000, (int) this.getPositionScaler());
-        this.pacManAnimationImage.loadFramesFromDirectory("pacManFrames", "frame", 2);
+        this.pacManAnimationImage = new AnimatedImage(100000000, (int) this.getPositionScaler());
+        this.pacManAnimationImage.loadFramesFromDirectory("pacManFrames", "frame", 4);
     }
 
     @Override
