@@ -17,14 +17,14 @@ public class MazeView extends AbstractView{
 
         // Load images
         this.wallImage = new Image("file:src/main/resources/com/example/wall.png", this.getPositionScaler(), this.getPositionScaler(), false, false);
-    }
-
-    @Override
-    public void render(double nanoTime) {
-        this.clear();
+    
         // Add the walls to the surface
         for (Wall wall : this.maze.getWalls()) {
             this.addImageToSurface(wallImage, wall.getX(), wall.getY(), 0);
         }
+    }
+
+    @Override
+    public void render(double nanoTime) {
     }
 }
