@@ -157,6 +157,20 @@ public class Game {
             this.ghosts.get(i).setMovementMultiplier(state.getGhostMovementMultiplier());
         }
     }
+
+    public void resetPositions() {
+        // Reset pacman
+        Pos2D pos = this.maze.locatePacMan();
+        this.pacMan.setX(pos.getX());
+        this.pacMan.setY(pos.getY());
+
+        // Reset ghosts
+        Pos2D[] ghostPositions = this.maze.locateGhosts();
+        for (int i = 0; i < this.ghosts.size(); i++) {
+            this.ghosts.get(i).setX(ghostPositions[i].getX());
+            this.ghosts.get(i).setY(ghostPositions[i].getY());
+        }
+    }
     
 }
 
