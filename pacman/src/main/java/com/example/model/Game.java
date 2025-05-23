@@ -71,12 +71,18 @@ public class Game {
         this.largePills.remove(pill);
     }
 
-
+    /**
+     * Make pacMan eat ghost.
+     * @param ghost
+     */
     public void pacManEatGhost(Ghost ghost) {
         this.increaseScore(20);
         this.ghosts.remove(ghost);
     }
     
+    /**
+     * Decrease score when pacman collides with ghost in NormalState.
+     */
     public void ghostEatsPacman(){
         this.decreaseLives();
     }
@@ -139,14 +145,26 @@ public class Game {
         return this.ghosts;
     } 
 
+    
+    /**
+     * Get the lives.
+     * @return lives 
+     */
     public int getLives() {
         return this.lives;
     }
 
+    /**
+     * Decrease lives.
+     */
     public void decreaseLives(){
         this.lives--;
     }
 
+    /**
+     * Set state for ghosts.
+     * @param state
+     */
     public void setState(State state) {
         pacMan.setIsEdible(state.getPacManIsEdible());
         pacMan.setMovementMultiplier(state.getPacManMovementmultiplier());
