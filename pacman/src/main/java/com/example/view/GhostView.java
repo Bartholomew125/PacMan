@@ -1,15 +1,18 @@
 package com.example.view;
 
+
+import java.util.ArrayList;
+
 import com.example.model.Ghost;
 
 import javafx.scene.image.Image;
 
 public class GhostView extends AbstractView {
     
-    private Ghost[] ghosts;
+    private ArrayList<Ghost> ghosts;
     private Image ghostImage;
 
-    public GhostView(int width, int height, double positionScaler, Ghost[] ghosts) {
+    public GhostView(int width, int height, double positionScaler, ArrayList<Ghost> ghosts) {
         super(width, height, positionScaler);
         this.ghosts = ghosts;
 
