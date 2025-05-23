@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.controller.Controller;
+import com.example.controller.MainController;
 import com.example.model.Game;
 import com.example.view.Viewer;
 
@@ -24,7 +24,7 @@ public class Main extends Application {
         // Create the Game, Viewer and Controller
         Game game = new Game();
         Viewer viewer = new Viewer(1000, 1000, game);
-        Controller controller = new Controller(game, viewer, 60);
+        MainController controller = new MainController(game, viewer, 60);
 
         // Attach the viewers surface to the root, so it is displayed
         root.getChildren().add(viewer.getSurface());

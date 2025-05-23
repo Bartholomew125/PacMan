@@ -8,19 +8,37 @@ import com.example.model.NormalState;
 /**
  * StateController
  */
-public class StateController {
+public class StateController implements Controller{
     private long powerStateStartTime;
     private Game game;
+    private State currentState; 
+    
+    public StateController(Game game){
+        this.powerStateStartTime = 0;
+        this.game = game;
+        this.currentState = new NormalState();
+    }
 
-    public void checkValidPowerstate(State state) {
+    public void update(long nanoTime){
+        System.out.println(nanoTime - this.powerStateStartTime);
+
+        if (this.currentState instanceof PowerState) {
+            if (nanoTime - this.powerStateStartTime >= 1500000000L){
+                this.setState(new NormalState());
+            }
+        }
+    }
+
+    public void setState(State state) {
+        this.currentState = state;
         if (state instanceof PowerState) {
+            this.powerStateStartTime = System.nanoTime();
+            game.setState(state);
+        }
+        else if (state instanceof NormalState) {
+            this.currentState = state;
             game.setState(state);
         }
     }
 
-    public void checkValidNormalstate(State state) {
-        if (state instanceof NormalState) {
-            game.setState(state);
-        }
-    }
 }
