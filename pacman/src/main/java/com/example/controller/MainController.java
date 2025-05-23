@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.example.model.DeadState;
 import com.example.model.Game;
 import com.example.model.Ghost;
 import com.example.model.NormalState;
@@ -109,6 +110,7 @@ public class MainController implements Controller{
                 }
                 else if (stateController.getState() instanceof NormalState){
                     this.game.ghostEatsPacman();
+                    this.stateController.setState(new DeadState());
                 }
             }
         }
