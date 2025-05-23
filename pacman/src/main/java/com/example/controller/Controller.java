@@ -24,17 +24,10 @@ public class Controller {
 
     private Viewer viewer;
     private Game game;
-    private long previousNanoTime;
-    private long currentNanoTime;
-    private final double nanosecondsPerFrame;
 
-    public Controller(Game game, Viewer viewer, int fps) {
+    public Controller(Game game, Viewer viewer) {
         this.game = game;
         this.viewer = viewer;
-        this.previousNanoTime = System.nanoTime();
-
-        // The framerate of the game
-        this.nanosecondsPerFrame = Math.pow(10, 9) / fps;
 
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
     }
@@ -52,22 +45,18 @@ public class Controller {
      * Update everything in the maze
      */
     public void update(long nanoTime) {
-        this.currentNanoTime = nanoTime;
 
-        if (this.currentNanoTime - this.previousNanoTime >= this.nanosecondsPerFrame) {
-            this.previousNanoTime = currentNanoTime;
+        this.pacManController.update(nanoTime);
 
-            this.pacManController.update(nanoTime);
+        this.handleCollisions();
 
-            this.handleCollisions();
-
-            // Move stuff
-            for (Ghost g : game.getGhosts()) {
-                g.move();
-            }
-            this.game.getPacMan().move();
-            this.viewer.render(nanoTime);
+        // Move stuff
+        for (Ghost g : game.getGhosts()) {
+            g.move();
         }
+        this.game.getPacMan().move();
+
+        this.viewer.render(nanoTime);
     }
 
     /**
@@ -99,14 +88,12 @@ public class Controller {
         for (Pill pill : smallPills) {
             if (pill.distanceTo(pacMan) < 0.5) {
                 this.game.pacManEatSmallPill(pill);
-                System.out.println(this.game.getScore());
             }
         }
 
         for (Pill pill : largePills) {
             if (pill.distanceTo(pacMan) < 0.8) {
                 this.game.pacManEatLargePill(pill);
-                System.out.println(this.game.getScore());
             }
         }  
     }  

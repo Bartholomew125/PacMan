@@ -4,7 +4,8 @@ import com.example.controller.Controller;
 import com.example.model.Game;
 import com.example.view.Viewer;
 
-import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class Main extends Application {
         // Create the Game, Viewer and Controller
         Game game = new Game();
         Viewer viewer = new Viewer(1000, 1000, game);
-        Controller controller = new Controller(game, viewer, 60);
+        Controller controller = new Controller(game, viewer);
 
         // Attach the viewers surface to the root, so it is displayed
         root.getChildren().add(viewer.getSurface());
@@ -35,17 +36,15 @@ public class Main extends Application {
         // Send all key press events to the controller to be handled.
         scene.setOnKeyPressed(event -> controller.handleKeyPress(event));
 
-        // The game loop is represented as the handle method in the
-        // AnimationTimer
-        AnimationTimer animationTimer = new AnimationTimer() {
-
-            public void handle(long t1) {
-                // Every frame, enter this if statement, and update stuff
-                controller.update(t1);
-            }
-        };
-
-        animationTimer.start();
+        // The loop of the game
+        Timeline timeline = new Timeline(
+            new KeyFrame(
+            javafx.util.Duration.millis(1000.0 / 60), // 60 FPS
+            event -> controller.update(System.nanoTime())
+            )
+        );
+        timeline.setCycleCount(javafx.animation.Animation.INDEFINITE);
+        timeline.play();
 
         stage.setScene(scene);
         stage.show();
