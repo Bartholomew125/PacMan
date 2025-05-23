@@ -66,7 +66,7 @@ public class Maze {
         // Check if there is exactly one pacMan, and return an invalid positions
         // if there isint
         if (pacManPositions.length != 1) {
-            System.out.println("There isint exactly one p in the maze");
+            System.out.println("There isn't exactly one p in the maze");
             return new Pos2D(-1, -1);
         }
         else {
