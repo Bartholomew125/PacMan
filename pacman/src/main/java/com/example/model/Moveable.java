@@ -161,4 +161,10 @@ public abstract class Moveable {
     public int getRotation() {
         return this.rotation;
     }
+
+    public float distanceToMoveable(Moveable moveable) {
+        float distanceX = this.x - moveable.getX();
+        float distanceY = this.y - moveable.getY();
+        return (float) Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+    }
 }
