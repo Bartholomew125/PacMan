@@ -9,7 +9,7 @@ public class Game {
     private PacMan pacMan;
     private List<Pill> smallPills;
     private List<Pill> largePills;
-    private Ghost[] ghosts;
+    private ArrayList<Ghost> ghosts;
     private int score;
     private int lives;
 
@@ -39,12 +39,12 @@ public class Game {
 
         // Create ghosts
         Pos2D[] ghostPositions = this.maze.locateGhosts();
-        this.ghosts = new Ghost[ghostPositions.length];
+        this.ghosts = new ArrayList<Ghost>();
         for (int i = 0; i < ghostPositions.length; i++) {
-            this.ghosts[i] = new BGhost(ghostPositions[i].getX(),
-                    ghostPositions[i].getY());
+            this.ghosts.add(new BGhost(ghostPositions[i].getX(),
+                    ghostPositions[i].getY()));
         }
-
+        
         this.score = 0;
         this.lives = 3;
     }
@@ -69,6 +69,15 @@ public class Game {
         this.largePills.remove(pill);
     }
 
+
+    public void pacManEatGhost(Ghost ghost) {
+        this.increaseScore(20);
+        this.ghosts.remove(ghost);
+    }
+    
+    public void ghostEatsPacman(){
+        this.decreaseLives();
+    }
     /**
      * Increasee score by some value.
      * 
@@ -124,7 +133,7 @@ public class Game {
         return this.score;
     } 
 
-    public Ghost[] getGhosts(){ 
+    public ArrayList<Ghost> getGhosts(){ 
         return this.ghosts;
     } 
 
@@ -132,13 +141,17 @@ public class Game {
         return this.lives;
     }
 
+    public void decreaseLives(){
+        this.lives--;
+    }
+
     public void setState(State state) {
         pacMan.isEdible = state.pacManIsEdible;
 
-        for (int i = 0; i < ghosts.length; i++) {
-            this.ghosts[i].setIsEdible(state.ghostIsEdible);
-            this.ghosts[i].setIsAfraid(state.ghostIsAfraid);
-            this.ghosts[i].setMovementMultiplier(state.ghostMovementMultiplier);
+        for (int i = 0; i < ghosts.size(); i++) {
+            this.ghosts.get(i).setIsEdible(state.ghostIsEdible);
+            this.ghosts.get(i).setIsAfraid(state.ghostIsAfraid);
+            this.ghosts.get(i).setMovementMultiplier(state.ghostMovementMultiplier);
         }
     }
 }
