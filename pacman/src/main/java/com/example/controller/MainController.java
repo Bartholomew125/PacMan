@@ -103,10 +103,12 @@ public class MainController implements Controller{
         }
         
         // Handle collision between pacman and ghosts
-        for (Ghost ghost : ghosts) {
-            if (ghost.distanceToMoveable(pacMan) < 0.5){
+        int numGhosts = ghosts.size(); // To make sure size of array dosent change when removing ghost
+        for (int i = 0; i < numGhosts; i++) {
+            if (ghosts.get(i).distanceToMoveable(pacMan) < 0.5){
                 if (stateController.getState() instanceof PowerState){
-                    this.game.pacManEatGhost(ghost);
+                    this.game.pacManEatGhost(ghosts.get(i));
+                    numGhosts--;
                 }
                 else if (stateController.getState() instanceof NormalState){
                     this.game.ghostEatsPacman();
