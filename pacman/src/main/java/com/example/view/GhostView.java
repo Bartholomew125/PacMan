@@ -8,12 +8,14 @@ public class GhostView extends AbstractView {
     
     private Ghost[] ghosts;
     private Image ghostImage;
+    private Image ghostAfraidImage;
 
     public GhostView(int width, int height, double positionScaler, Ghost[] ghosts) {
         super(width, height, positionScaler);
         this.ghosts = ghosts;
 
         this.ghostImage = new Image("file:src/main/resources/com/example/GreenGhost.png", this.getPositionScaler(), this.getPositionScaler(), false, false);
+        this.ghostAfraidImage = new Image("file:src/main/resources/com/example/ghostAfraid.png", this.getPositionScaler(), this.getPositionScaler(), false, false);
     }
 
     @Override
@@ -21,7 +23,12 @@ public class GhostView extends AbstractView {
         this.clear();
 
         for (Ghost g : this.ghosts) {
-            this.addImageToSurface(this.ghostImage, g.getX(), g.getY(), 0);
+            if (g.getIsAfraid()) {
+                this.addImageToSurface(ghostAfraidImage, g.getX(), g.getY(), 0);
+            }
+            else {
+                this.addImageToSurface(this.ghostImage, g.getX(), g.getY(), 0);
+            }
         }
     }
 }
