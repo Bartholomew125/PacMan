@@ -9,6 +9,7 @@ import com.example.model.PacMan;
 import com.example.model.Pill;
 import com.example.model.Wall;
 import com.example.model.states.DeadState;
+import com.example.model.states.EndState;
 import com.example.model.states.NormalState;
 import com.example.model.states.PowerState;
 import com.example.view.Viewer;
@@ -112,7 +113,12 @@ public class MainController implements Controller{
                 }
                 else if (stateController.getState() instanceof NormalState){
                     this.game.ghostEatsPacman();
-                    this.stateController.setState(new DeadState());
+                    if (this.game.getLives() > 0) {
+                        this.stateController.setState(new DeadState());
+                    }
+                    else {
+                        this.stateController.setState(new EndState());
+                    }
                 }
             }
         }
