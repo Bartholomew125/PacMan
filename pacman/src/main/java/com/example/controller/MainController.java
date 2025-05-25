@@ -26,6 +26,7 @@ import javafx.util.Duration;
 public class MainController implements Controller{
 
     private PacManController pacManController;
+    private GhostController ghostController;
     private StateController stateController;
     private Viewer viewer;
     private Game game;
@@ -34,6 +35,7 @@ public class MainController implements Controller{
         this.game = game;
         this.viewer = viewer;
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
+        this.ghostController = new GhostController(this.game.getGhosts());
         this.stateController = new StateController(this.game);
     }
 
@@ -43,7 +45,12 @@ public class MainController implements Controller{
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
-        this.pacManController.handleKeyPress(event);
+        if (this.stateController.getState() instanceof EndState) {
+
+        }
+        else {
+            this.pacManController.handleKeyPress(event);
+        }
     }
 
     /**
@@ -51,15 +58,9 @@ public class MainController implements Controller{
      */
     public void update(long nanoTime) {
         this.pacManController.update(nanoTime);
-
-        this.handleCollisions();
+        this.ghostController.update(nanoTime);
         this.stateController.update(nanoTime);
-
-        // Move stuff
-        for (Ghost g : game.getGhosts()) {
-            g.move();
-        }
-        this.game.getPacMan().move();
+        this.handleCollisions();
         this.viewer.render(nanoTime);
     }
 
