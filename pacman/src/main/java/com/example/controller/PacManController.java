@@ -102,6 +102,7 @@ public class PacManController {
                     this.changeDirection();
             }
         }
+        this.pacMan.move();
     }
 
     /**
