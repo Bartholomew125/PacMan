@@ -9,6 +9,8 @@ import javafx.util.Pair;
  */
 public abstract class Moveable {
 
+    protected float startX;
+    protected float startY;
     protected float x;
     protected float y;
     protected float dx;
@@ -18,6 +20,8 @@ public abstract class Moveable {
     protected int rotation;
 
     public Moveable(float x, float y, float dx, float dy, double movementMultiplier) {
+        this.startX = x;
+        this.startY = y;
         this.x = x;
         this.y = y;
         this.dx = dx;
@@ -182,5 +186,10 @@ public abstract class Moveable {
         float distanceX = this.x - moveable.getX();
         float distanceY = this.y - moveable.getY();
         return (float) Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+    }
+
+    public void resetPosition() {
+        this.x = this.startX;
+        this.y = this.startY;
     }
 }
