@@ -27,10 +27,10 @@ public class PillView extends AbstractView{
     public void render(double nanoTime) {
         this.clear();
         for (Pill pill : this.smallPills){ 
-            this.addImageToSurface(smallPillImage, pill.getX(), pill.getY(), 0);
+            this.addImageToSurface(smallPillImage, pill.getX(), pill.getY(), 0, false);
         }
         for (Pill pill : this.largePills) {
-            this.addImageToSurface(largePillImage, pill.getX(), pill.getY(), 0);
+            this.addImageToSurface(largePillImage, pill.getX(), pill.getY(), 0, false);
         }
     }
     

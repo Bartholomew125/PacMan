@@ -33,11 +33,12 @@ public abstract class AbstractView implements View {
      * @param x
      * @param y
      */
-    public void addImageToSurface(Image image, float x, float y, int rotation) {
+    public void addImageToSurface(Image image, float x, float y, int rotation, boolean flipped) {
         ImageView imageView = new ImageView(image);
         imageView.setX(x*positionScaler);
         imageView.setY(y*positionScaler);
         imageView.setRotate(rotation);
+        imageView.setScaleX(flipped ? -1 : 1);
         this.getSurface().getChildren().add(imageView);
     }
 

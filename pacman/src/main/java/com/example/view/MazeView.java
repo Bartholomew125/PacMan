@@ -20,7 +20,7 @@ public class MazeView extends AbstractView{
     
         // Add the walls to the surface
         for (Wall wall : this.maze.getWalls()) {
-            this.addImageToSurface(wallImage, wall.getX(), wall.getY(), 0);
+            this.addImageToSurface(wallImage, wall.getX(), wall.getY(), 0, false);
         }
     }
 
