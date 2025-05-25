@@ -41,12 +41,20 @@ public class Game {
 
         // Create ghosts
         Pos2D[] ghostPositions = this.maze.locateGhosts();
+        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
         this.ghosts = new ArrayList<Ghost>();
         for (int i = 0; i < ghostPositions.length; i++) {
-            this.ghosts.add(new BGhost(ghostPositions[i].getX(),
-                    ghostPositions[i].getY()));
+            try {
+                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
+                .getConstructor(float.class, float.class)
+                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
+                ghosts.add(ghost);               
+            }
+            catch (Exception e) {
+                e.getStackTrace();
+            }
         }
-        
+
         this.score = 0;
         this.lives = 3;
     }
