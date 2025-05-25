@@ -56,7 +56,7 @@ public class Game {
         }
 
         this.score = 0;
-        this.lives = 3;
+        this.lives = 1;
     }
 
     /**
@@ -191,6 +191,42 @@ public class Game {
         for (Ghost g : this.ghosts) {
             g.resetPosition();
         }
+    }
+
+    public void restart() {
+        this.resetPositions();
+        this.ghosts.clear();
+        this.smallPills.clear();
+        this.largePills.clear();
+
+        Pos2D[] smallPillPositions = this.maze.locateSmallPills();
+        for (int i = 0; i < smallPillPositions.length; i++) {
+            this.smallPills.add(new SmallPill(smallPillPositions[i].getX(),
+                    smallPillPositions[i].getY()));
+        }
+
+        Pos2D[] largePillPositions = this.maze.locateLargePills();
+        for (int i = 0; i < largePillPositions.length; i++) {
+            this.largePills.add(new LargePill(largePillPositions[i].getX(),
+                    largePillPositions[i].getY()));
+        }
+
+        Pos2D[] ghostPositions = this.maze.locateGhosts();
+        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
+        for (int i = 0; i < ghostPositions.length; i++) {
+            try {
+                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
+                .getConstructor(float.class, float.class)
+                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
+                ghosts.add(ghost);               
+            }
+            catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+
+        this.score = 0;
+        this.lives = 3;
     }
     
 }

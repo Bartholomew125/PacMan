@@ -17,7 +17,9 @@ public class Viewer extends AbstractView{
     
     public Viewer(int maxWidth, int maxHeight, Game game) {
         super(maxWidth,0,0);
-
+        
+        this.end = false;
+        
         int headerHeight = 100;
         int squareSize = Math.min(maxWidth/game.getMaze().getWidth(), (maxHeight-headerHeight)/game.getMaze().getHeight());
         int width = game.getMaze().getWidth()*squareSize;
@@ -43,14 +45,16 @@ public class Viewer extends AbstractView{
 
     @Override
     public void render(double nanoTime) {
-
-        // Set background to black
-        this.gc.fillRect(0, 0, this.width, this.height);
-
-        this.gameView.render(nanoTime);
-        this.headerView.render(nanoTime);
         if (this.end) {
             this.endView.render(nanoTime);
+        }
+        else {
+            this.endView.clear();
+            // Set background to black
+            this.gc.fillRect(0, 0, this.width, this.height);
+
+            this.gameView.render(nanoTime);
+            this.headerView.render(nanoTime);
         }
     }
 
@@ -60,5 +64,9 @@ public class Viewer extends AbstractView{
 
     public void setEnd(boolean isEnded) {
         this.end = isEnded;
+    }
+
+    public boolean restartButtonClicked() {
+        return this.endView.restartButtonClicked();
     }
 }

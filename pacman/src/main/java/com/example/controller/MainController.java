@@ -37,6 +37,7 @@ public class MainController implements Controller{
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
         this.ghostController = new GhostController(this.game.getGhosts());
         this.stateController = new StateController(this.game);
+
     }
 
     /**
@@ -62,6 +63,17 @@ public class MainController implements Controller{
         this.stateController.update(nanoTime);
         this.handleCollisions();
         this.viewer.render(nanoTime);
+
+        if (viewer.restartButtonClicked()) {
+            System.out.println("BOOO");
+            this.restart();
+        }
+    }
+
+    public void restart() {
+        this.game.restart();
+        this.stateController.setState(new NormalState());
+        this.viewer.setEnd(false);
     }
 
     /**
