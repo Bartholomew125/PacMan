@@ -48,7 +48,7 @@ public class MainController implements Controller{
         if (this.stateController.getState() instanceof EndState) {
 
         }
-        else {
+        else if (!(this.stateController.getState() instanceof DeadState)){
             this.pacManController.handleKeyPress(event);
         }
     }
@@ -119,6 +119,7 @@ public class MainController implements Controller{
                     }
                     else {
                         this.stateController.setState(new EndState());
+                        this.viewer.setEnd(true);
                     }
                 }
             }
