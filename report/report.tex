@@ -23,6 +23,7 @@
 \usepackage{bm}
 \usepackage{hyperref}
 \usepackage{minted}
+\usepackage{svg}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Other Settings
@@ -43,8 +44,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Define codecomment command %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\code}[1]{\small\mintinline[xleftmargin=2em, xrightmargin=2em, breaklines]{sql}{#1}}
-\newcommand{\snippet}[3]{\inputminted[firstline=#1,lastline=#2,linenos, xleftmargin=1.5em, breaklines]{java}{#3}}
+\newcommand{\code}[1]{\small\mintinline[xleftmargin=2em, xrightmargin=2em,
+breaklines]{java}{#1}}
+\newcommand{\snippet}[3]{\inputminted[firstline=#1,lastline=#2,linenos,
+xleftmargin=1.5em, breaklines]{java}{#3}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Define an orangebox command %%%%%%%%%%%%%%%%%%%%%%%%
@@ -117,17 +120,66 @@ Eventuelle afvigelser fra kravsspecifikationen ses dokumenteret/diskuteret i det
 
 \section{design}\label{sec:design} % (fold)
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/UML-diagram.png}
     \end{center}
     \caption{}
-    \label{fig:}
+    \label{UML-diagram}
 \end{figure}
 
+Projekts design følger \textit{MVC} (Model-View-Controller) modellen. Det
+vil sige at vores \textit{Model} repræsenterer hvordan PacMan spillet er bygget
+op med spøgelser, væge, piller osv. Så har vi vores \textit{Controller} som står
+for alt logikken med hvordan ting skal kolliderer og bevæge sig, og hvornår de
+forskellige stadier af spillet sker. Til sidst har vi vores \textit{View} som
+står for at vise spillet, med alle billederne og animationerne, samt score tekst
+og liv osv.
+
+Designet kan ses i vores \textit{UML}-diagram, hvor man kan se vi har opdelt
+koden i de tre dele fra \textit{MVC} modellen, samt en \textit{main} fil til at
+starte spillet, og initialiserer de andre klasser.
+
+\subsection{Model}
+
+I \textit{Model} (se \autoref{UML-diagram-Model}) har vi lavet et abstrakt klasse der
+hedder \code{Moveable}, som er en abstrakt enhed der kan bevæge sig. Dette
+tillader os at \textit{nedarve} fra den når vi skal lave ting der skal bevæge
+sig som \code{Ghost} og \code{PacMan}. Ud over dette er \code{Ghost} også en
+abstrakt klasse, så vi kan udvide de enkelte spøgelser fra den. Udover
+\code{Moveable} klasse, har vi også en abstrakt klass, \code{Pos2D}, til at
+beskrive positioner som ikke skal kunne bevæge sige. Fra denne klasse kan vi så
+nedarve klasser som \code{Pill} og \code{Wall}. På denne måde benytter vi
+\textit{klasseafhængighedsprincippet} til at simplificerer koden, og gøre det
+nemmere at udvide med nye features.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/UML-diagram-model.png}
+    \end{center}
+    \caption{UML-diagram til \textit{Model} delen af projektet.}
+    \label{UML-diagram-Model}
+\end{figure}
+
+\subsection{View}
+
+I \textit{View} (se \autoref{UML-diagram-view}) har vi benyttet en
+\textit{grænseflade} ved navn \code{View} som specificere hvilke metoder et
+\textit{View} skal have. Så har vi lavet en abstrakt klasse \code{AbstractView},
+som implementerer dette interface. Vi nedarver på denne måde fra det abstrakte
+\textit{View} hver gang vi laver et nyt \textit{View} som står for at vise noget
+andet. På denne måde benytter vi princippet om et enkelt ansvar.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/UML-diagram-view.png}
+    \end{center}
+    \caption{UML-diagram til \textit{View} delen af projektet.}
+    \label{UML-diagram-view}
+\end{figure}
 
 \begin{itemize}
-  \item Inkludér et UML-diagram og en beskrivelse af jeres design.
+%  \item Inkludér et UML-diagram og en beskrivelse af jeres design.
   \item Giv en kort beskrivelse af jeres diagram:
   \begin{itemize}
     \item Hvad er de forskellige dele?
