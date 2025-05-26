@@ -1,9 +1,6 @@
 package com.example.controller;
 
-import com.example.model.states.DeadState;
-import com.example.model.states.NormalState;
-import com.example.model.states.PowerState;
-import com.example.model.states.State;
+import com.example.model.states.*;
 import com.example.model.Game;
 
 /**
@@ -47,6 +44,9 @@ public class StateController implements Controller{
         }
         else if (state instanceof DeadState) {
             this.deadStateStartTime = System.nanoTime();
+            game.setState(state);
+        }
+        else if (state instanceof EndState) {
             game.setState(state);
         }
     }

@@ -41,14 +41,22 @@ public class Game {
 
         // Create ghosts
         Pos2D[] ghostPositions = this.maze.locateGhosts();
+        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
         this.ghosts = new ArrayList<Ghost>();
         for (int i = 0; i < ghostPositions.length; i++) {
-            this.ghosts.add(new BGhost(ghostPositions[i].getX(),
-                    ghostPositions[i].getY()));
+            try {
+                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
+                .getConstructor(float.class, float.class)
+                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
+                ghosts.add(ghost);               
+            }
+            catch (Exception e) {
+                e.getStackTrace();
+            }
         }
-        
+
         this.score = 0;
-        this.lives = 3;
+        this.lives = 1;
     }
 
     /**
@@ -178,17 +186,47 @@ public class Game {
 
     public void resetPositions() {
         // Reset pacman
-        Pos2D pos = this.maze.locatePacMan();
-        this.pacMan.setX(pos.getX());
-        this.pacMan.setY(pos.getY());
-        this.pacMan.right();
+        this.pacMan.resetPosition();
 
-        // Reset ghosts
-        Pos2D[] ghostPositions = this.maze.locateGhosts();
-        for (int i = 0; i < this.ghosts.size(); i++) {
-            this.ghosts.get(i).setX(ghostPositions[i].getX());
-            this.ghosts.get(i).setY(ghostPositions[i].getY());
+        for (Ghost g : this.ghosts) {
+            g.resetPosition();
         }
+    }
+
+    public void restart() {
+        this.resetPositions();
+        this.ghosts.clear();
+        this.smallPills.clear();
+        this.largePills.clear();
+
+        Pos2D[] smallPillPositions = this.maze.locateSmallPills();
+        for (int i = 0; i < smallPillPositions.length; i++) {
+            this.smallPills.add(new SmallPill(smallPillPositions[i].getX(),
+                    smallPillPositions[i].getY()));
+        }
+
+        Pos2D[] largePillPositions = this.maze.locateLargePills();
+        for (int i = 0; i < largePillPositions.length; i++) {
+            this.largePills.add(new LargePill(largePillPositions[i].getX(),
+                    largePillPositions[i].getY()));
+        }
+
+        Pos2D[] ghostPositions = this.maze.locateGhosts();
+        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
+        for (int i = 0; i < ghostPositions.length; i++) {
+            try {
+                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
+                .getConstructor(float.class, float.class)
+                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
+                ghosts.add(ghost);               
+            }
+            catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+
+        this.score = 0;
+        this.lives = 3;
     }
     
 }

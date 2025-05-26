@@ -9,6 +9,7 @@ import com.example.model.PacMan;
 import com.example.model.Pill;
 import com.example.model.Wall;
 import com.example.model.states.DeadState;
+import com.example.model.states.EndState;
 import com.example.model.states.NormalState;
 import com.example.model.states.PowerState;
 import com.example.view.Viewer;
@@ -25,6 +26,7 @@ import javafx.util.Duration;
 public class MainController implements Controller{
 
     private PacManController pacManController;
+    private GhostController ghostController;
     private StateController stateController;
     private Viewer viewer;
     private Game game;
@@ -33,7 +35,9 @@ public class MainController implements Controller{
         this.game = game;
         this.viewer = viewer;
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
+        this.ghostController = new GhostController(this.game.getGhosts());
         this.stateController = new StateController(this.game);
+
     }
 
     /**
@@ -42,7 +46,12 @@ public class MainController implements Controller{
      * @param event
      */
     public void handleKeyPress(KeyEvent event) {
-        this.pacManController.handleKeyPress(event);
+        if (this.stateController.getState() instanceof EndState) {
+
+        }
+        else if (!(this.stateController.getState() instanceof DeadState)){
+            this.pacManController.handleKeyPress(event);
+        }
     }
 
     /**
@@ -50,16 +59,21 @@ public class MainController implements Controller{
      */
     public void update(long nanoTime) {
         this.pacManController.update(nanoTime);
-
-        this.handleCollisions();
+        this.ghostController.update(nanoTime);
         this.stateController.update(nanoTime);
-
-        // Move stuff
-        for (Ghost g : game.getGhosts()) {
-            g.move();
-        }
-        this.game.getPacMan().move();
+        this.handleCollisions();
         this.viewer.render(nanoTime);
+
+        if (viewer.restartButtonClicked()) {
+            System.out.println("BOOO");
+            this.restart();
+        }
+    }
+
+    public void restart() {
+        this.game.restart();
+        this.stateController.setState(new NormalState());
+        this.viewer.setEnd(false);
     }
 
     /**
@@ -112,7 +126,13 @@ public class MainController implements Controller{
                 }
                 else if (stateController.getState() instanceof NormalState){
                     this.game.ghostEatsPacman();
-                    this.stateController.setState(new DeadState());
+                    if (this.game.getLives() > 0) {
+                        this.stateController.setState(new DeadState());
+                    }
+                    else {
+                        this.stateController.setState(new EndState());
+                        this.viewer.setEnd(true);
+                    }
                 }
             }
         }
