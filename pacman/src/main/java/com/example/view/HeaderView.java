@@ -30,13 +30,13 @@ public class HeaderView extends AbstractView{
         // Create score text
         this.scoreText = new Text();
         this.scoreText.setFill(Color.WHITE);
-        this.scoreText.setFont(Font.font("Comic Sans", 30));
+        this.scoreText.setFont(Font.font("Emulogic", 15));
         this.addTextToSurface(this.scoreText, 20, this.getHeight()/2, 0);
 
         // Create lives text
         this.livesText = new Text();
         this.livesText.setFill(Color.WHITE);
-        this.livesText.setFont(Font.font("Comic Sans", 30));
+        this.livesText.setFont(Font.font("Emulogic", 15));
         this.addTextToSurface(this.livesText, this.getWidth()-200, this.getHeight()/2, 0);
     }
 

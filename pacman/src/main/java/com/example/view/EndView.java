@@ -23,12 +23,13 @@ public class EndView extends AbstractView{
         // Create score text
         this.scoreText = new Text();
         this.scoreText.setFill(Color.WHITE);
-        this.scoreText.setFont(Font.font("Comic Sans", 100));
-        this.scoreText.setText("Game Over\n  Score: "+this.game.getScore());
+        this.scoreText.setFont(Font.font("Emulogic", 50));
+        this.scoreText.setText("Game Over\n  Score: "+ this.game.getScore());
 
         this.restartButton = new Button("Restart");
-        this.restartButton.setPrefWidth(100);
+        this.restartButton.setPrefWidth(150);
         this.restartButton.setPrefHeight(50);
+        this.restartButton.setFont(Font.font("Emulogic"));
         this.restartButton.setLayoutX(width/2 - this.restartButton.getPrefWidth()/2);
         this.restartButton.setLayoutY(height/1.5);
         
