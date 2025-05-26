@@ -33,6 +33,6 @@ public class PacManTest {
         assertEquals(0, pacManObject.getDY());
 
         // Assert: check that PacMan is moving to the right.
-        assertEquals(1, pacManObject.getMovementMultiplier());
+        assertEquals(0.06, pacManObject.getMovementMultiplier());
     }
 }

@@ -13,7 +13,7 @@ public class PowerStateTest {
     PowerState powerState = new PowerState();
     
     assertEquals(true, powerState.getGhostIsAfraid());
-    assertEquals(1.0, powerState.getGhostMovementMultiplier());
+    assertEquals(0.04, powerState.getGhostMovementMultiplier());
     assertEquals(true, powerState.getGhostIsEdible());
     assertEquals(false, powerState.getPacManIsEdible());
     }
