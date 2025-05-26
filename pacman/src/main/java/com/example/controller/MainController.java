@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.example.model.Game;
 import com.example.model.Ghost;
@@ -14,10 +13,7 @@ import com.example.model.states.NormalState;
 import com.example.model.states.PowerState;
 import com.example.view.Viewer;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.input.KeyEvent;
-import javafx.util.Duration;
 
 /**
  * The controller class which is responsible for controlling the pacMan and
@@ -35,7 +31,7 @@ public class MainController implements Controller{
         this.game = game;
         this.viewer = viewer;
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
-        this.ghostController = new GhostController(this.game.getGhosts());
+        this.ghostController = new GhostController(this.game.getGhosts(), game);
         this.stateController = new StateController(this.game);
 
     }
@@ -65,7 +61,6 @@ public class MainController implements Controller{
         this.viewer.render(nanoTime);
 
         if (viewer.restartButtonClicked()) {
-            System.out.println("BOOO");
             this.restart();
         }
     }
@@ -96,9 +91,9 @@ public class MainController implements Controller{
             // Ghosts
             for (Ghost g : this.game.getGhosts()) {
                 if (wall.distanceTo(g) < 1) {
-                    g.stop();
-                    dummyPath(g);
-                    g.move();
+                    //g.stop();
+                    //dummyPath(g);
+                    //g.move();
                 }
             }
         }
@@ -138,50 +133,50 @@ public class MainController implements Controller{
         }
     }  
 
-    public void dummyPath(Ghost ghost){ 
-        Random rd = new Random(); 
-        char[] directions = {'O', 'V','N','H'};
-        char newPath = directions[rd.nextInt(4)];
+    // public void dummyPath(Ghost ghost){ 
+    //     Random rd = new Random(); 
+    //     char[] directions = {'O', 'V','N','H'};
+    //     char newPath = directions[rd.nextInt(4)];
 
-        if (newPath == 'O'){ 
-            ghost.up();
-        } 
-        if (newPath == 'V'){ 
-            ghost.left();
-        } 
-        if (newPath == 'N'){ 
-            ghost.down(); 
-        } 
-        if (newPath == 'H'){ 
-            ghost.right();
-        }
+    //     if (newPath == 'O'){ 
+    //         ghost.up();
+    //     } 
+    //     if (newPath == 'V'){ 
+    //         ghost.left();
+    //     } 
+    //     if (newPath == 'N'){ 
+    //         ghost.down(); 
+    //     } 
+    //     if (newPath == 'H'){ 
+    //         ghost.right();
+    //     }
 
-    } 
+    // } 
 
-    public void moreRandomPath(Ghost ghost){ 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> choice(ghost)));   
-        timeline.setCycleCount(-1); 
-        timeline.setDelay(Duration.millis(1));
-        timeline.playFromStart();
+    // public void moreRandomPath(Ghost ghost){ 
+    //     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> choice(ghost)));   
+    //     timeline.setCycleCount(-1); 
+    //     timeline.setDelay(Duration.millis(1));
+    //     timeline.playFromStart();
 
-    } 
+    // } 
 
-    public void choice(Ghost ghost){ 
-        Random rd = new Random(); 
-        char[] directions = {'O', 'V','N','H'};
-        char newPath = directions[rd.nextInt(4)]; 
-        if (newPath == 'O'){ 
-            ghost.up();
-        } 
-        if (newPath== 'V'){ 
-            ghost.left(); 
-        } 
-        if (newPath == 'N'){ 
-            ghost.down(); 
-        } 
-        if (newPath== 'H'){ 
-            ghost.right();
-        }  
+    // public void choice(Ghost ghost){ 
+    //     Random rd = new Random(); 
+    //     char[] directions = {'O', 'V','N','H'};
+    //     char newPath = directions[rd.nextInt(4)]; 
+    //     if (newPath == 'O'){ 
+    //         ghost.up();
+    //     } 
+    //     if (newPath== 'V'){ 
+    //         ghost.left(); 
+    //     } 
+    //     if (newPath == 'N'){ 
+    //         ghost.down(); 
+    //     } 
+    //     if (newPath== 'H'){ 
+    //         ghost.right();
+    //     }  
         
-    }
+    // }
 }
