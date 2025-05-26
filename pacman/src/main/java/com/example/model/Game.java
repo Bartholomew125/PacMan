@@ -2,6 +2,9 @@ package com.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+
+import com.example.controller.SearchAlgorithm;
 
 public class Game {
 
@@ -11,7 +14,9 @@ public class Game {
     private List<Pill> largePills;
     private Ghost[] ghosts;
     private int score;
-    private int lives;
+    private int lives; 
+    private SearchAlgorithm searchAlgorithm;
+    private Stack<Pos2D> moveStack;
 
     public Game() {
         // Create maze
@@ -127,11 +132,24 @@ public class Game {
 
     public Ghost[] getGhosts(){ 
         return this.ghosts;
-    } 
+    }  
+
+    public Ghost getOneGhost(){ 
+        return this.ghosts[0];
+    }
 
     public int getLives() {
         return this.lives;
+    } 
+
+    public SearchAlgorithm getSearchAlgorithm(){ 
+        return this.searchAlgorithm;
     }
+
+    public Stack<Pos2D> getMoveStack(){ 
+        return this.moveStack;
+    } 
+
 
     public void setState(State state) {
         pacMan.isEdible = state.pacManIsEdible;
