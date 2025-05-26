@@ -89,7 +89,7 @@ public class SearchAlgorithm {
         return new Stack<>();
     } 
 
-    public LinkedList<Pos2D> BFS(Ghost ghost){ 
+    public Stack<Pos2D> BFS(Ghost ghost){ 
         PacMan pacman = this.game.getPacMan();
         Pos2D gPos = new Pos2D((int)(ghost.getX()),(int)(ghost.getY()));
         
@@ -121,14 +121,15 @@ public class SearchAlgorithm {
                 visited.add(currentNode.getPos());
             } 
             if (currentNode.getPos().equals(goal)){ 
-                LinkedList<Pos2D> moveQueue = new LinkedList<>();
+                // Build the path and return immediately
+                Stack<Pos2D> moveStack = new Stack<>();
                 Node pathNode = currentNode;
-                while (pathNode.getParent()!=null){ 
-                    moveQueue.addFirst(pathNode.getPos()); 
+                while (pathNode.getParent() != null) {
+                    moveStack.push(pathNode.getPos());
                     pathNode = pathNode.getParent();
-                } 
-                return moveQueue;
-            } 
+                }
+                return moveStack;
+            }  
             for (Pos2D pos : getNeighbours(currentNode.getPos())){
                 if (!visited.contains(pos)){ 
                     Node newNode = new Node(null, pos);
@@ -141,7 +142,8 @@ public class SearchAlgorithm {
                 }
             }         
         } 
-        return new LinkedList<>();
+        return new Stack<>();
+
     } 
 
     public ArrayList<Pos2D> getNeighbours(Pos2D pos) {

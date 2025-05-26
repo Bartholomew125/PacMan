@@ -58,16 +58,7 @@ public abstract class Ghost extends Moveable {
 
     public void setMoveStack(Stack<Pos2D> moveStack) {
         this.moveStack = moveStack;
-    } 
-
-    public LinkedList<Pos2D> getMoveQueue(){ 
-        return this.moveQueue; 
-    } 
-
-    public void setMoveQueue(LinkedList<Pos2D> moveQueue){ 
-        this.moveQueue = moveQueue;
     }
-
 
     @Override
     public void move() {
