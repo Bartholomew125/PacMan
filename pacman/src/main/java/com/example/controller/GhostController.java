@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.ArrayList;
 import com.example.model.Game;
 import com.example.model.Ghost;
+import com.example.model.GhostGreen;
 
 /**
  * GhostController class for controlling the ghosts ai
@@ -18,11 +19,21 @@ public class GhostController{
 
     public void update(long nanoTime){ 
         for (Ghost ghost : this.ghosts) {
-            if (ghost.getMoveQueue().isEmpty()){ 
-                ghost.setMoveQueue(new SearchAlgorithm(this.game).BFS(ghost)); 
-                ghost.setDX(ghost.getMoveQueue().peek().getX()-ghost.getX());
-                ghost.setDY(ghost.getMoveQueue().peek().getY()-ghost.getY());
-            } 
+            if (ghost instanceof GhostGreen) {
+                if (ghost.getMoveStack().isEmpty()){ 
+                    ghost.setMoveStack(new SearchAlgorithm(this.game).BFS(ghost)); 
+                    ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
+                    ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
+                } 
+            }
+            else {
+                if (ghost.getMoveStack().isEmpty()){ 
+                    ghost.setMoveStack(new SearchAlgorithm(this.game).DFS(ghost)); 
+                    ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
+                    ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
+                } 
+            }
+
             ghost.move();
         } 
     }
