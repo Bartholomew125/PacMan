@@ -140,7 +140,20 @@ Designet kan ses i vores \textit{UML}-diagram, hvor man kan se vi har opdelt
 koden i de tre dele fra \textit{MVC} modellen, samt en \textit{main} fil til at
 starte spillet, og initialiserer de andre klasser.
 
-\subsection{Model}
+Vi har designet alt vores kode med fokus på \textit{indkapslingsprincippet}.
+Alle felter i klasser er private, og har kun \textit{getters} og
+\textit{setters} der hvor det er nødvendigt. Vi har også overholdt \textit{DRY}
+princippet, ved at samle ens opførsel i fælles \textit{superklasser}.
+
+
+\subsection{Model}\label{sub:Model} % (fold)
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/UML-diagram-model.png}
+    \end{center}
+    \caption{UML-diagram til \textit{Model} delen af projektet.}
+    \label{UML-diagram-Model}
+\end{figure}
 
 I \textit{Model} (se \autoref{UML-diagram-Model}) har vi lavet et abstrakt klasse der
 hedder \code{Moveable}, som er en abstrakt enhed der kan bevæge sig. Dette
@@ -152,24 +165,10 @@ beskrive positioner som ikke skal kunne bevæge sige. Fra denne klasse kan vi s�
 nedarve klasser som \code{Pill} og \code{Wall}. På denne måde benytter vi
 \textit{klasseafhængighedsprincippet} til at simplificerer koden, og gøre det
 nemmere at udvide med nye features.
+% subsection Model (end)
 
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=0.95\textwidth]{figures/UML-diagram-model.png}
-    \end{center}
-    \caption{UML-diagram til \textit{Model} delen af projektet.}
-    \label{UML-diagram-Model}
-\end{figure}
 
-\subsection{View}
-
-I \textit{View} (se \autoref{UML-diagram-view}) har vi benyttet en
-\textit{grænseflade} ved navn \code{View} som specificere hvilke metoder et
-\textit{View} skal have. Så har vi lavet en abstrakt klasse \code{AbstractView},
-som implementerer dette interface. Vi nedarver på denne måde fra det abstrakte
-\textit{View} hver gang vi laver et nyt \textit{View} som står for at vise noget
-andet. På denne måde benytter vi princippet om et enkelt ansvar.
-
+\subsection{View}\label{sub:View} % (fold)
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/UML-diagram-view.png}
@@ -178,20 +177,81 @@ andet. På denne måde benytter vi princippet om et enkelt ansvar.
     \label{UML-diagram-view}
 \end{figure}
 
-\begin{itemize}
+I \textit{View} (se \autoref{UML-diagram-view}) har vi benyttet en
+\textit{grænseflade} ved navn \code{View} som specificere hvilke metoder et
+\textit{View} skal have. Så har vi lavet en abstrakt klasse \code{AbstractView},
+som implementerer dette interface. Vi nedarver på denne måde fra det abstrakte
+\textit{View} hver gang vi laver et nyt \textit{View} som står for at vise noget
+andet. Så kan vi lave specifikke views som står for at tegne kun én slags ting,
+f.eks. \code{PacManView}. På denne måde benytter vi princippet om et enkelt
+ansvar.
+% subsection View (end)
+
+\subsection{Controller}\label{sub:Controller} % (fold)
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/UML-diagram-controller.png}
+    \end{center}
+    \caption{UML-diagram til \textit{Controller} delen af projektet.}
+    \label{UML-diagram-controller}
+\end{figure}
+
+Til \textit{Controller} (set \autoref{UML-diagram-controller}) har vi også lavet
+en grænseflade, for at specificerer hvad en "Controller" gør. Så har vi lavet
+controllers til at styre henholdsvis PacMan, spøgelser og de forskellige stadier
+af spillet. Med dette har vi lavet en \code{MainController} som bestemmer
+hvornår alle de andre controllers skal kaldes, og hvornår vores \textit{View}
+bliver kaldt.
+% subsection Controller (end)
+
+\subsection{Ændringer}\label{sub:Ændringer} % (fold)
+I løbet af projektet har vores design ændret sig en del. I starten var vores
+UML-diagram meget mere simpelt, som kan ses på \autoref{UML-diagram-old}.
+Enkeltheden er både grundet de manglende felter og metoder, men også at
+kompleksiteten af programmet ikke var blevet realiseret endnu. \code{View} var
+bare én enkelt klasse som stod for at tegne alt, og \code{Controller} stod kun
+for at tage imod input fra brugeren, og bevæge pacman i \code{Maze}. Alt andet
+logik til spillet var i \code{Maze}, som gjorde at det fyldte rigtig meget. Da
+vi så begynde at implementerer mere, lagde vi mærke til hvor god en idé det
+ville være at splitte det endnu mere op, og specialisere klasserne vi laver, som
+er idéen med \textit{Single Responsibility Principle}.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/UML-diagram-old.png}
+    \end{center}
+    \caption{Det første UML-diagram til projektet.}
+    \label{UML-diagram-old}
+\end{figure}
+I et forsøg på at simplificerer \code{Maze} delte vi den op, og lavede en
+\code{Game} klasse, hvis formål var at repræsenterer spillet. På denne måde
+kunne \code{Controller} stå for at håndterer alt logikken, som også er mere
+typisk af en \textit{Controller} at gøre i \textit{MVC}-modellen. Med denne
+ændring ville maze bare stå for at repræsenterer labyrinten. UML-diagrammet for
+denne forbedring kan ses på \autoref{UML-diagram-old2}.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/UML-diagram-old2.png}
+    \end{center}
+    \caption{Det andet UML-diagram til projektet.}
+    \label{UML-diagram-old2}
+\end{figure}
+% subsection Ændringer (end)
+
+%\begin{itemize}
 %  \item Inkludér et UML-diagram og en beskrivelse af jeres design.
-  \item Giv en kort beskrivelse af jeres diagram:
-  \begin{itemize}
-    \item Hvad er de forskellige dele?
-    \item Har I anvendt designmønstre i jeres design? I så fald, hvor i
-    diagrammet findes disse? Det er ikke et krav at anvende designmønstre, men
-    kan være en god idé.
-  \end{itemize}
-  \item Dokumentér designbeslutninger hvor I har anvendt SOLID, DRY, eller andre
-  OO-principper. 
-  \item Hvis I i løbet af projektet har forfinet jeres design,
-  giv da en kort beskrivelse af hvilke ændringer I har foretaget og hvorfor.
-\end{itemize}
+  %\item Giv en kort beskrivelse af jeres diagram:
+  %\begin{itemize}
+  %  \item Hvad er de forskellige dele?
+  %  \item Har I anvendt designmønstre i jeres design? I så fald, hvor i
+  %  diagrammet findes disse? Det er ikke et krav at anvende designmøUML-diagram til \textit{Controller} delen af projektet.nstre, men
+  %  kan være en god idé.
+  %\end{itemize}
+  %\item Dokumentér designbeslutninger hvor I har anvendt SOLID, DRY, eller andre
+  %OO-principper. 
+%  \item Hvis I i løbet af projektet har forfinet jeres design,
+%  giv da en kort beskrivelse af hvilke ændringer I har foretaget og hvorfor.
+%\end{itemize}
 % section design (end)
 
 \section{Implementation}\label{sec:Implementation} % (fold)
