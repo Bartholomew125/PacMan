@@ -1,7 +1,6 @@
 package com.example.model;
 
 import java.util.Stack;
-
 import javafx.scene.paint.Color;
 
 /**
@@ -58,6 +57,23 @@ public abstract class Ghost extends Moveable {
         this.moveStack = moveStack;
     }
 
+
+    @Override
+    public void move() {
+        if (this.moveStack.isEmpty()) {
+            this.stop();
+        }
+        else if (this.getMoveStack().peek().distanceTo(this) <= 0.1) {
+            this.getMoveStack().pop();
+            if (!this.moveStack.isEmpty()) {
+                this.setDX(this.getMoveStack().peek().getX()-this.getX());
+                this.setDY(this.getMoveStack().peek().getY()-this.getY());
+            }
+        }
+        else {
+            super.move();
+        }
+    }
 
 
     
