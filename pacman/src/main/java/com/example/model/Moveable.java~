@@ -190,6 +190,7 @@ public abstract class Moveable {
         this.dy = dy;
     }
 
+<<<<<<< HEAD
     public float distanceToMoveable(Moveable moveable) {
         float distanceX = this.x - moveable.getX();
         float distanceY = this.y - moveable.getY();
@@ -200,4 +201,7 @@ public abstract class Moveable {
         this.x = this.startX;
         this.y = this.startY;
     }
+=======
+
+>>>>>>> magnus
 }

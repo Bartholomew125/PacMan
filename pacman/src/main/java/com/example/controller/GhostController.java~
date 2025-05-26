@@ -1,10 +1,35 @@
 package com.example.controller;
 
+<<<<<<< HEAD
+import java.util.List;
+
+import com.example.model.Ghost;
+
+public class GhostController implements Controller{
+    
+    private List<Ghost> ghosts;
+
+    public GhostController(List<Ghost> ghosts) {
+        this.ghosts = ghosts;
+    }
+
+    @Override
+    public void update(long nanoTime) {
+        
+        for (Ghost g : this.ghosts) {
+            g.move();
+        }
+    }
+}
+=======
 import java.util.Stack;
 
 import com.example.model.Game;
 import com.example.model.Ghost;
 import com.example.model.Pos2D;
+
+
+
 
 public class GhostController{
     private Ghost ghost;  
@@ -33,3 +58,4 @@ public class GhostController{
     } 
 
 }
+>>>>>>> magnus

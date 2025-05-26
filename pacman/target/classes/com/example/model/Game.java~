@@ -175,16 +175,22 @@ public class Game {
         return this.searchAlgorithm;
     }
 
+<<<<<<< HEAD
     /**
      * Decrease lives.
      */
     public void decreaseLives(){
         this.lives--;
     }
-
+=======
     public Stack<Pos2D> getMoveStack(){ 
         return this.moveStack;
     } 
+
+
+    public void setState(State state) {
+        pacMan.isEdible = state.pacManIsEdible;
+>>>>>>> magnus
 
     /**
      * Set state for ghosts.

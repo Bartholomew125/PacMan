@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.Stack;
+
 import javafx.scene.paint.Color;
 
 /**
@@ -8,6 +10,7 @@ import javafx.scene.paint.Color;
 public abstract class Ghost extends Moveable {
     protected Color color;
     protected boolean isAfraid;
+    protected Stack<Pos2D> moveStack;
 
     /**
      * Create a new ghost which is a moveable with a color.
@@ -22,6 +25,7 @@ public abstract class Ghost extends Moveable {
     protected Ghost(float x, float y, float dx, float dy, double multiplier, Color color) {
         super(x, y, dx, dy, multiplier);
         this.color = color;
+        this.moveStack = new Stack<>();
     }
 
     /**
@@ -45,4 +49,8 @@ public abstract class Ghost extends Moveable {
     public boolean getIsAfraid(){
         return this.isAfraid;
     }
+
+
+
+    
 }
