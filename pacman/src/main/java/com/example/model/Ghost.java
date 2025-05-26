@@ -50,6 +50,14 @@ public abstract class Ghost extends Moveable {
         return this.isAfraid;
     }
 
+    public Stack<Pos2D> getMoveStack() {
+        return this.moveStack;
+    }
+
+    public void setMoveStack(Stack<Pos2D> moveStack) {
+        this.moveStack = moveStack;
+    }
+
 
 
     

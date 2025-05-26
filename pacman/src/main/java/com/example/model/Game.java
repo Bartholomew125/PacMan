@@ -157,11 +157,6 @@ public class Game {
     public ArrayList<Ghost> getGhosts(){ 
         return this.ghosts;
     }  
-
-    public Ghost getOneGhost(){ 
-        return this.ghosts[0];
-    }
-
     
     /**
      * Get the lives.

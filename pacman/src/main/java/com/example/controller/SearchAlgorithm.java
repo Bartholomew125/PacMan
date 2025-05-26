@@ -11,20 +11,18 @@ import com.example.model.Pos2D;
 
 public class SearchAlgorithm {
     private Maze maze; 
-    private Node node;
-    private SearchAlgorithm searchAlgorithm; 
     private Game game;
 
 
     public SearchAlgorithm(Game game){ 
         this.game = game;
+        this.maze = game.getMaze();
     }
     
     
     public Stack<Pos2D> DFS(Ghost ghost){ 
         //Adding ghost and Pacman
         PacMan pacman = this.game.getPacMan();
-        ghost = game.getOneGhost();
         //Adding ghost position, children and parent at the start
         Pos2D gPos = new Pos2D((int)(ghost.getX()),(int)(ghost.getY()));
         //At the start ghost has no children and no parent
@@ -90,7 +88,6 @@ public class SearchAlgorithm {
 
     public ArrayList<Pos2D> getNeighbours(Pos2D pos) {
         ArrayList<Pos2D> neighbours = new ArrayList<>();
-        this.maze = game.getMaze();
 
         //choice directions hardcoded into a list
         ArrayList<Pos2D> cDir = new ArrayList<>();  
@@ -114,11 +111,5 @@ public class SearchAlgorithm {
             }
         }
         return neighbours;
-    }
-
-
-
-    public void getSearchAlgorithm(Ghost ghost){ 
-        this.searchAlgorithm.DFS(ghost);
     }
 }

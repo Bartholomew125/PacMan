@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import com.example.model.Game;
@@ -7,29 +8,30 @@ import com.example.model.Ghost;
 import com.example.model.Pos2D;
 
 public class GhostController{
-    private Ghost ghost;  
-    private Stack<Pos2D> moveStack;
+    private ArrayList<Ghost> ghosts;  
     private Game game;
     
 
-    public GhostController(Ghost ghost, Game game){ 
-        this.ghost = ghost;
-        this.moveStack = new Stack<>(); 
+    public GhostController(ArrayList<Ghost> ghosts, Game game){ 
+        this.ghosts = ghosts;
         this.game = game;
     } 
 
     public void update(long nanoTime){ 
-        if (this.moveStack.isEmpty()){ 
-            this.moveStack = new SearchAlgorithm(this.game).DFS(this.ghost); 
-            this.ghost.setDX(this.moveStack.peek().getX()-this.ghost.getX());
-            this.ghost.setDY(this.moveStack.peek().getY()-this.ghost.getY());
+        for (Ghost ghost : this.ghosts) {
+            if (ghost.getMoveStack().isEmpty()){ 
+                ghost.setMoveStack(new SearchAlgorithm(this.game).DFS(ghost)); 
+                ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
+                ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
+            } 
+            else if (ghost.getMoveStack().peek().distanceTo(ghost) <= 0.1) {
+                ghost.getMoveStack().pop();
+                ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
+                ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
+            }
+            ghost.move();
         } 
-        else if (this.moveStack.peek().distanceTo(this.ghost) <= 0.1) {
-            this.moveStack.pop();
-            this.ghost.setDX(this.moveStack.peek().getX()-this.ghost.getX());
-            this.ghost.setDY(this.moveStack.peek().getY()-this.ghost.getY());
-        }
-        this.ghost.move();
-    } 
+    }
+
 
 }
