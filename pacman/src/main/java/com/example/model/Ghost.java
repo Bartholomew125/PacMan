@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 import javafx.scene.paint.Color;
@@ -11,6 +12,7 @@ public abstract class Ghost extends Moveable {
     protected Color color;
     protected boolean isAfraid;
     protected Stack<Pos2D> moveStack;
+    protected LinkedList<Pos2D> moveQueue;
 
     /**
      * Create a new ghost which is a moveable with a color.
@@ -26,6 +28,7 @@ public abstract class Ghost extends Moveable {
         super(x, y, dx, dy, multiplier);
         this.color = color;
         this.moveStack = new Stack<>();
+        this.moveQueue = new LinkedList<>();
     }
 
     /**
@@ -56,6 +59,14 @@ public abstract class Ghost extends Moveable {
 
     public void setMoveStack(Stack<Pos2D> moveStack) {
         this.moveStack = moveStack;
+    } 
+
+    public LinkedList<Pos2D> getMoveQueue(){ 
+        return this.moveQueue; 
+    } 
+
+    public void setMoveQueue(LinkedList<Pos2D> moveQueue){ 
+        this.moveQueue = moveQueue;
     }
 
 
