@@ -1,14 +1,14 @@
 package com.example.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.example.model.Ghost;
 
 public class GhostController implements Controller{
     
-    private ArrayList<Ghost> ghosts;
+    private List<Ghost> ghosts;
 
-    public GhostController(ArrayList<Ghost> ghosts) {
+    public GhostController(List<Ghost> ghosts) {
         this.ghosts = ghosts;
     }
 
