@@ -13,7 +13,7 @@ public class NormalStateTest {
         NormalState normalState = new NormalState();
         
         assertEquals(false, normalState.getGhostIsAfraid());
-        assertEquals(2.0, normalState.getGhostMovementMultiplier());
+        assertEquals(0.06, normalState.getGhostMovementMultiplier());
         assertEquals(false, normalState.getGhostIsEdible());
         assertEquals(true, normalState.getPacManIsEdible());
     }
