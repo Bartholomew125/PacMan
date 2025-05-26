@@ -1,8 +1,10 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
+import com.example.model.Direction;
 import com.example.model.Game;
 import com.example.model.Ghost;
 import com.example.model.Maze;
@@ -99,6 +101,9 @@ public class SearchAlgorithm {
         cDir.add(down); 
         cDir.add(left); 
         cDir.add(right); 
+
+        // Shuffle the direction to ensure better ghost movement
+        Collections.shuffle(cDir);
 
         //Checking if possible moves
         for (Pos2D dir : cDir) {
