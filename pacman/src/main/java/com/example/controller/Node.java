@@ -32,7 +32,7 @@ public class Node {
     } 
 
     public void setParent(Node node){ 
-        this.parent = node.parent;
+        this.parent = node;
     } 
 
     public void addChild(Node node){ 
