@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Stack;
 
 import com.example.model.Direction;
@@ -86,6 +87,61 @@ public class SearchAlgorithm {
 
         // If no path found, return empty stack
         return new Stack<>();
+    } 
+
+    public LinkedList<Pos2D> BFS(Ghost ghost){ 
+        PacMan pacman = this.game.getPacMan();
+        Pos2D gPos = new Pos2D((int)(ghost.getX()),(int)(ghost.getY()));
+        
+         //At the start ghost has no children and no parent
+        Node gstart = new Node(null, gPos);
+
+        //Set goal as Pacman
+        Pos2D goal = new Pos2D((int)(pacman.getX()), (int)(pacman.getY()));
+
+        ArrayList<Pos2D> visited = new ArrayList<>(){
+            @Override
+            public boolean contains(Object o) {
+                Pos2D p = (Pos2D) o;
+                for (Pos2D pos : this) {
+                    if (p.getX() == pos.getX() && p.getY() == pos.getY()) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+
+        LinkedList<Node> queue = new LinkedList<>(); 
+        queue.add(gstart); 
+        
+        while (!queue.isEmpty()){ 
+            Node currentNode = queue.remove();
+            if (!visited.contains(currentNode.getPos())){ 
+                visited.add(currentNode.getPos());
+            } 
+            if (currentNode.getPos().equals(goal)){ 
+                LinkedList<Pos2D> moveQueue = new LinkedList<>();
+                Node pathNode = currentNode;
+                while (pathNode.getParent()!=null){ 
+                    moveQueue.addFirst(pathNode.getPos()); 
+                    pathNode = pathNode.getParent();
+                } 
+                return moveQueue;
+            } 
+            for (Pos2D pos : getNeighbours(currentNode.getPos())){
+                if (!visited.contains(pos)){ 
+                    Node newNode = new Node(null, pos);
+                    // add newnode as child to currentNode
+                    currentNode.addChild(newNode);
+                    // add currentNode as parent to newnode
+                    newNode.setParent(currentNode); 
+                    // add newnode to queue
+                    queue.add(newNode);
+                }
+            }         
+        } 
+        return new LinkedList<>();
     } 
 
     public ArrayList<Pos2D> getNeighbours(Pos2D pos) {

@@ -18,10 +18,10 @@ public class GhostController{
 
     public void update(long nanoTime){ 
         for (Ghost ghost : this.ghosts) {
-            if (ghost.getMoveStack().isEmpty()){ 
-                ghost.setMoveStack(new SearchAlgorithm(this.game).DFS(ghost)); 
-                ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
-                ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
+            if (ghost.getMoveQueue().isEmpty()){ 
+                ghost.setMoveQueue(new SearchAlgorithm(this.game).BFS(ghost)); 
+                ghost.setDX(ghost.getMoveQueue().peek().getX()-ghost.getX());
+                ghost.setDY(ghost.getMoveQueue().peek().getY()-ghost.getY());
             } 
             ghost.move();
         } 
