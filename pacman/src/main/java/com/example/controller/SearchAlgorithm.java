@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Stack;
 
 import com.example.model.Game;
@@ -27,25 +26,37 @@ public class SearchAlgorithm {
         PacMan pacman = this.game.getPacMan();
         ghost = game.getOneGhost();
         //Adding ghost position, children and parent at the start
-        Pos2D gPos = new Pos2D(Math.round(ghost.getX()),Math.round(ghost.getY()));
+        Pos2D gPos = new Pos2D((int)(ghost.getX()),(int)(ghost.getY()));
         //At the start ghost has no children and no parent
         Node gstart = new Node(null, gPos);
 
         //Set goal as Pacman
-        Pos2D goal = new Pos2D(Math.round(pacman.getX()), Math.round(pacman.getY()));
+        Pos2D goal = new Pos2D((int)(pacman.getX()), (int)(pacman.getY()));
 
         //Add ghost position to stack
         Stack<Node> stack = new Stack<>();
         stack.push(gstart); 
 
-        HashSet<Pos2D> visited = new HashSet<>();
+
+        ArrayList<Pos2D> visited = new ArrayList<>(){
+            @Override
+            public boolean contains(Object o) {
+                Pos2D p = (Pos2D) o;
+                for (Pos2D pos : this) {
+                    if (p.getX() == pos.getX() && p.getY() == pos.getY()) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
         visited.add(gstart.getPos());
         //As long as the stack is not empty and pacman is not found
         //We pop elements 
         while (!stack.isEmpty()){ 
-            System.out.println(stack.size());
+            //System.out.println(stack.size());
             Node currentNode = stack.pop();
-            System.out.println(currentNode.getPos().toString());
+            //System.out.println(currentNode.getPos().toString());
             if (currentNode.getPos().equals(goal)){ 
                 // Build the path and return immediately
                 Stack<Pos2D> moveStack = new Stack<>();
@@ -68,7 +79,6 @@ public class SearchAlgorithm {
                     newNode.setParent(currentNode); 
                     // push newnode to stack
                     stack.push(newNode);
-                    System.out.println(visited);
                     visited.add(pos);
                 }            
             }
@@ -96,7 +106,10 @@ public class SearchAlgorithm {
         //Checking if possible moves
         for (Pos2D dir : cDir) {
             Pos2D newPos = pos.add(dir);
-            if (!this.maze.isWallAt(newPos.getX(), newPos.getY())) {
+            int x = newPos.getX(); 
+            int y = newPos.getY();
+            if (x >= 0 && x < this.maze.getWidth() && y >= 0 && y < this.maze.getHeight() &&
+            !this.maze.isWallAt(newPos.getX(), newPos.getY())) {
                 neighbours.add(newPos);
             }
         }
