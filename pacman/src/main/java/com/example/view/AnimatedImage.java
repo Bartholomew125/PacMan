@@ -1,6 +1,10 @@
 package com.example.view;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 
 /**
  * The AnimatedImage-class represents image animation.
@@ -44,6 +48,23 @@ public class AnimatedImage {
         for (int i = 0; i < files; i++) {
             this.frames[i] = new Image("file:src/main/resources/com/example/" + folder + "/" + fileName + i + ".png",
                     size, size, false, false);
+        }
+    }
+
+    public void replaceColorsInFrames(Color fromColor, Color toColor) {
+        for (int i = 0; i < this.frames.length; i++) {
+            Image frame = this.frames[i];
+            PixelReader pxr = frame.getPixelReader();
+            WritableImage newFrame = new WritableImage(pxr, (int)frame.getWidth(), (int)frame.getHeight());
+            PixelWriter pxw = newFrame.getPixelWriter();
+            for (int y = 0; y < frame.getHeight(); y++) {
+                for (int x = 0; x < frame.getWidth(); x++) {
+                    if (pxr.getColor(x, y).equals(fromColor)) {
+                        pxw.setColor(x, y, toColor);
+                    }
+                }
+            }
+            this.frames[i] = newFrame;
         }
     }
 

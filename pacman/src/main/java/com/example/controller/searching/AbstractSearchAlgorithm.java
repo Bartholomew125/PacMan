@@ -4,37 +4,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
-import com.example.model.Game;
-import com.example.model.Ghost;
 import com.example.model.Maze;
-import com.example.model.PacMan;
+import com.example.model.Moveable;
 import com.example.model.Pos2D;
 
 /**
  * Abstract implementation of a search algorithm which implements
  * SearchAlgorithm.
  */
-public abstract class AbstractSearchAlgorithm implements SearchAlgorithm {
-
-    private final Maze maze;
-    private final PacMan pacMan;
-    private final Ghost ghost;
-    private final Pos2D startPos;
-    private final Pos2D goalPos;
+public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
+    
+    private final Maze maze; 
+    private Pos2D startPos;
+    private Pos2D goalPos;
 
     /**
      * Initializes an AbstractSearchAlgorithm.
      * 
-     * @param game
-     * @param ghost
+     * @param maze
      */
-    public AbstractSearchAlgorithm(Game game, Ghost ghost) {
-        this.maze = game.getMaze();
-        this.pacMan = game.getPacMan();
-        this.ghost = ghost;
-        this.startPos = new Pos2D((int) (this.getGhost().getX()), (int) (this.getGhost().getY()));
-        this.goalPos = new Pos2D((int) (this.getPacMan().getX()), (int) (this.getPacMan().getY()));
+    public AbstractSearchAlgorithm(Maze maze) {
+        this.maze = maze;
+    }
 
+    @Override
+    public void setGoal(Pos2D pos) {
+        this.goalPos = pos;
+    }
+
+    public void setGoal(Moveable m) {
+        Pos2D pos = new Pos2D((int) m.getX(), (int) m.getY());
+        this.setGoal(pos);
+    }
+
+    @Override
+    public void setStart(Pos2D pos) {
+        this.startPos = pos;
+    }
+
+    public void setStart(Moveable m) {
+        Pos2D pos = new Pos2D((int) m.getX(), (int) m.getY());
+        this.setStart(pos);
     }
 
     @Override
@@ -89,14 +99,6 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm {
         return this.maze;
     }
 
-    protected PacMan getPacMan() {
-        return this.pacMan;
-    }
-
-    protected Ghost getGhost() {
-        return this.ghost;
-    }
-
     protected Pos2D getStartPos() {
         return this.startPos;
     }
@@ -104,4 +106,5 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm {
     protected Pos2D getGoalPos() {
         return this.goalPos;
     }
+
 }

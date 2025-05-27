@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.ArrayList;
 import javafx.scene.input.KeyEvent;
 
+import com.example.Algebra;
 import com.example.model.Game;
 import com.example.model.Ghost;
 import com.example.model.PacMan;
@@ -36,7 +37,7 @@ public class MainController implements Controller {
         this.game = game;
         this.viewer = viewer;
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
-        this.ghostController = new GhostController(this.game.getGhosts(), this.game);
+        this.ghostController = new GhostController(this.game.getGhosts(), this.game.getPacMan());
         this.stateController = new StateController(this.game);
 
     }
@@ -92,12 +93,12 @@ public class MainController implements Controller {
         // Collision with walls
         for (Wall wall : walls) {
             // PacMan
-            if (wall.distanceTo(pacMan) < 1) {
+            if (Algebra.distanceBetween(wall, pacMan) < 1) {
                 pacMan.stop();
             }
             // Ghosts
             for (Ghost g : this.game.getGhosts()) {
-                if (wall.distanceTo(g) < 1) {
+                if (Algebra.distanceBetween(wall, g) < 1) {
                     // g.stop();
                     // dummyPath(g);
                     // g.move();
@@ -107,14 +108,14 @@ public class MainController implements Controller {
         
         // Check for collisions between smallPills and pacMan.
         for (Pill pill : smallPills) {
-            if (pill.distanceTo(pacMan) < 0.5) {
+            if (Algebra.distanceBetween(pill, pacMan) < 0.5) {
                 this.game.pacManEatSmallPill(pill);
             }
         }
         
         // Check for collisions between largePills and pacMan.
         for (Pill pill : largePills) {
-            if (pill.distanceTo(pacMan) < 0.8) {
+            if (Algebra.distanceBetween(pill, pacMan) < 0.8) {
                 this.game.pacManEatLargePill(pill);
                 this.stateController.setState(new PowerState());
             }
@@ -123,7 +124,7 @@ public class MainController implements Controller {
         // Handle collision between pacman and ghosts
         int numGhosts = ghosts.size(); // To make sure size of array dosent change when removing ghost
         for (int i = 0; i < numGhosts; i++) {
-            if (ghosts.get(i).distanceToMoveable(pacMan) < 0.5) {
+            if (Algebra.distanceBetween(ghosts.get(i), pacMan) < 0.5) {
                 if (stateController.getState() instanceof PowerState) {
                     this.game.pacManEatGhost(ghosts.get(i));
                     numGhosts--;

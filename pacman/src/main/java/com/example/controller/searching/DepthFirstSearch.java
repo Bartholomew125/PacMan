@@ -3,8 +3,7 @@ package com.example.controller.searching;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import com.example.model.Game;
-import com.example.model.Ghost;
+import com.example.model.Maze;
 import com.example.model.Pos2D;
 
 /**
@@ -12,8 +11,8 @@ import com.example.model.Pos2D;
  */
 public class DepthFirstSearch extends AbstractSearchAlgorithm {
 
-    public DepthFirstSearch(Game game, Ghost ghost) {
-        super(game, ghost);
+    public DepthFirstSearch(Maze maze) {
+        super(maze);
     }
 
     @Override

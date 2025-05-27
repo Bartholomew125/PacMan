@@ -22,4 +22,16 @@ public interface SearchAlgorithm {
      * @return
      */
     public Node search();
+
+    /**
+     * Sets the start position for the algorithm.
+     * @param pos
+     */
+    public void setStart(Pos2D pos);
+
+    /**
+     * Sets the goal position for the algorithm.
+     * @param pos
+     */
+    public void setGoal(Pos2D pos);
 }

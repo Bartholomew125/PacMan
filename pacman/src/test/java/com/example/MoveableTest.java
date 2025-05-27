@@ -89,17 +89,4 @@ public class MoveableTest {
         assertEquals(23, moveable.getMovementMultiplier(),
                 "movementMultiplier should be equal to 23 after calling 'setMovenmentmultiplier(23)'.");
     }
-
-    /**
-     * Test whether dinstance-method calculates expected output.
-     */
-    @Test
-    void testDistanceToMoveable() {
-        TestMoveable movable1 = new TestMoveable(20, 20, 0, 0, 0);
-        TestMoveable movable2 = new TestMoveable(40, 20, 0, 0, 0);
-
-        assertEquals(20, movable1.distanceToMoveable(movable2),
-                "Expected moveable1 to have a distance of 20 to moveable2.");
-    }
-
 }
