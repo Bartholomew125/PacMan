@@ -43,7 +43,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Define codecomment command %%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\code}[1]{\small\mintinline[xleftmargin=2em, xrightmargin=2em, breaklines]{sql}{#1}}
+\newcommand{\code}[1]{\small\mintinline[xleftmargin=2em, xrightmargin=2em, breaklines]{java}{#1}}
 \newcommand{\snippet}[3]{\inputminted[firstline=#1,lastline=#2,linenos, xleftmargin=1.5em, breaklines]{java}{#3}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -159,6 +159,16 @@ Eventuelle afvigelser fra kravsspecifikationen ses dokumenteret/diskuteret i det
 % section Implementation (end)
 
 \section{Kvalitetssikring}\label{sec:Kvalitetssikring} % (fold)
+Til fordel for at sikre, at vores kode/program/spil lever op til kravsspecifikationen (se \autoref{sec:design}), har vi valgt at anvende unit-tests. Unit-testing defineres i denne kontekst som test af enkelte komponenter af programmet, som til sammen skaber det ønskede overblik.
+
+I overenstemmelse med vores valg af unit-tests, er det også underforstået, at vi tester i en form for white-box testing. Med dette betyder det, at dem der skriver testsne (os som udviklere af spillet i dette tilfælde), kender til alt logikken bag implementeringen. Med dette, har man som "\textit{tester}", altså mulighed for at tjekke, om en given invariant for en given metode overholdes under kørsel.
+
+Mere specifikt; har vi valg at benytte at benytte os af \textit{Java}s framework \code{JUnit}, som b.la. understøtter behjælpelige sammenligningsmetoder (f.eks. \code{assert}tions).
+
+Med dette, anvender vi altså også unit-testing som middel til at krydstjekke med vores kravsspecifikation, om disse (krav) samt eventuelle invarianter er overholdt.
+
+Med anvendelse af ovennævnte, kan fejfindingprocessen under udviklingen, i nogle tilfælde, forkortes markant. Man kan med andre ord, nogle gange, såfremt man skriver tilstrækkelige unit-tests, forsimple samt forbedre design og udviklingsprocessen.
+
 \begin{itemize}
   \item Beskriv hvordan I har testet, at jeres kode lever op til
   kravsspecifikationen. Har I, f.eks., benyttet unit tests? Manuelle tests?
@@ -186,6 +196,6 @@ Eventuelle afvigelser fra kravsspecifikationen ses dokumenteret/diskuteret i det
   disse dele kompatible med jeres design? Ville I foretage ændringer for at
   imødekomme ændringer?
 \end{itemize}
-% section Diskussion (end)
+% section Diskussion (en
 
 \end{document}
