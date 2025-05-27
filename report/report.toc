@@ -1,7 +1,0 @@
-\babel@toc {danish}{}\relax 
-\contentsline {section}{\numberline {1}Projektbeskrivelse}{2}{section.1}%
-\contentsline {section}{\numberline {2}design}{3}{section.2}%
-\contentsline {section}{\numberline {3}Implementation}{3}{section.3}%
-\contentsline {section}{\numberline {4}Kvalitetssikring}{4}{section.4}%
-\contentsline {section}{\numberline {5}Proces}{4}{section.5}%
-\contentsline {section}{\numberline {6}Diskussion}{4}{section.6}%

@@ -180,6 +180,14 @@ public abstract class Moveable {
 
     public int getRotation() {
         return this.rotation;
+    } 
+
+    public void setDX(float dx){ 
+        this.dx = dx;
+    } 
+
+    public void setDY(float dy){ 
+        this.dy = dy;
     }
 
     public float distanceToMoveable(Moveable moveable) {

@@ -70,6 +70,19 @@ public class Pos2D {
      */
     public String toString() {
         return "(" + this.getX() + "," + this.getY() + ")";
+    } 
+
+    public Pos2D add(Pos2D pos){
+        Pos2D newPos = new Pos2D(pos.getX()+this.x,pos.getY()+this.y);
+        
+        return newPos;
     }
+
+    
+    
+    public boolean equals(Pos2D pos){ 
+        return pos.getX() == this.getX() && pos.getY() == this.getY();
+    } 
+
 
 }

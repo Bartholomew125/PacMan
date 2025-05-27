@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.example.model.Game;
 import com.example.model.Ghost;
@@ -14,16 +13,13 @@ import com.example.model.states.NormalState;
 import com.example.model.states.PowerState;
 import com.example.view.Viewer;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.input.KeyEvent;
-import javafx.util.Duration;
 
 /**
  * The controller class which is responsible for controlling the pacMan and
  * making him move in the right way.
  */
-public class MainController implements Controller{
+public class MainController implements Controller {
 
     private PacManController pacManController;
     private GhostController ghostController;
@@ -35,7 +31,7 @@ public class MainController implements Controller{
         this.game = game;
         this.viewer = viewer;
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
-        this.ghostController = new GhostController(this.game.getGhosts());
+        this.ghostController = new GhostController(this.game.getGhosts(), this.game);
         this.stateController = new StateController(this.game);
 
     }
@@ -48,8 +44,7 @@ public class MainController implements Controller{
     public void handleKeyPress(KeyEvent event) {
         if (this.stateController.getState() instanceof EndState) {
 
-        }
-        else if (!(this.stateController.getState() instanceof DeadState)){
+        } else if (!(this.stateController.getState() instanceof DeadState)) {
             this.pacManController.handleKeyPress(event);
         }
     }
@@ -65,7 +60,6 @@ public class MainController implements Controller{
         this.viewer.render(nanoTime);
 
         if (viewer.restartButtonClicked()) {
-            System.out.println("BOOO");
             this.restart();
         }
     }
@@ -85,7 +79,7 @@ public class MainController implements Controller{
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
         Pill[] largePills = this.game.getLargePillsArray();
-        ArrayList<Ghost> ghosts = this.game.getGhosts(); 
+        ArrayList<Ghost> ghosts = this.game.getGhosts();
 
         // Collision with walls
         for (Wall wall : walls) {
@@ -96,9 +90,9 @@ public class MainController implements Controller{
             // Ghosts
             for (Ghost g : this.game.getGhosts()) {
                 if (wall.distanceTo(g) < 1) {
-                    g.stop();
-                    dummyPath(g);
-                    g.move();
+                    // g.stop();
+                    // dummyPath(g);
+                    // g.move();
                 }
             }
         }
@@ -115,73 +109,72 @@ public class MainController implements Controller{
                 this.stateController.setState(new PowerState());
             }
         }
-        
+
         // Handle collision between pacman and ghosts
         int numGhosts = ghosts.size(); // To make sure size of array dosent change when removing ghost
         for (int i = 0; i < numGhosts; i++) {
-            if (ghosts.get(i).distanceToMoveable(pacMan) < 0.5){
-                if (stateController.getState() instanceof PowerState){
+            if (ghosts.get(i).distanceToMoveable(pacMan) < 0.5) {
+                if (stateController.getState() instanceof PowerState) {
                     this.game.pacManEatGhost(ghosts.get(i));
                     numGhosts--;
-                }
-                else if (stateController.getState() instanceof NormalState){
+                } else if (stateController.getState() instanceof NormalState) {
                     this.game.ghostEatsPacman();
                     if (this.game.getLives() > 0) {
                         this.stateController.setState(new DeadState());
-                    }
-                    else {
+                    } else {
                         this.stateController.setState(new EndState());
                         this.viewer.setEnd(true);
                     }
                 }
             }
         }
-    }  
-
-    public void dummyPath(Ghost ghost){ 
-        Random rd = new Random(); 
-        char[] directions = {'O', 'V','N','H'};
-        char newPath = directions[rd.nextInt(4)];
-
-        if (newPath == 'O'){ 
-            ghost.up();
-        } 
-        if (newPath == 'V'){ 
-            ghost.left();
-        } 
-        if (newPath == 'N'){ 
-            ghost.down(); 
-        } 
-        if (newPath == 'H'){ 
-            ghost.right();
-        }
-
-    } 
-
-    public void moreRandomPath(Ghost ghost){ 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae -> choice(ghost)));   
-        timeline.setCycleCount(-1); 
-        timeline.setDelay(Duration.millis(1));
-        timeline.playFromStart();
-
-    } 
-
-    public void choice(Ghost ghost){ 
-        Random rd = new Random(); 
-        char[] directions = {'O', 'V','N','H'};
-        char newPath = directions[rd.nextInt(4)]; 
-        if (newPath == 'O'){ 
-            ghost.up();
-        } 
-        if (newPath== 'V'){ 
-            ghost.left(); 
-        } 
-        if (newPath == 'N'){ 
-            ghost.down(); 
-        } 
-        if (newPath== 'H'){ 
-            ghost.right();
-        }  
-        
     }
+
+    // public void dummyPath(Ghost ghost){
+    // Random rd = new Random();
+    // char[] directions = {'O', 'V','N','H'};
+    // char newPath = directions[rd.nextInt(4)];
+
+    // if (newPath == 'O'){
+    // ghost.up();
+    // }
+    // if (newPath == 'V'){
+    // ghost.left();
+    // }
+    // if (newPath == 'N'){
+    // ghost.down();
+    // }
+    // if (newPath == 'H'){
+    // ghost.right();
+    // }
+
+    // }
+
+    // public void moreRandomPath(Ghost ghost){
+    // Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae ->
+    // choice(ghost)));
+    // timeline.setCycleCount(-1);
+    // timeline.setDelay(Duration.millis(1));
+    // timeline.playFromStart();
+
+    // }
+
+    // public void choice(Ghost ghost){
+    // Random rd = new Random();
+    // char[] directions = {'O', 'V','N','H'};
+    // char newPath = directions[rd.nextInt(4)];
+    // if (newPath == 'O'){
+    // ghost.up();
+    // }
+    // if (newPath== 'V'){
+    // ghost.left();
+    // }
+    // if (newPath == 'N'){
+    // ghost.down();
+    // }
+    // if (newPath== 'H'){
+    // ghost.right();
+    // }
+
+    // }
 }

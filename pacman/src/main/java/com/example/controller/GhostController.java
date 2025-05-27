@@ -1,22 +1,34 @@
 package com.example.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 
+import com.example.controller.searching.BredthFirstSearch;
+import com.example.model.Game;
 import com.example.model.Ghost;
 
-public class GhostController implements Controller{
-    
-    private List<Ghost> ghosts;
+/**
+ * GhostController class for controlling the ghosts ai
+ */
+public class GhostController{
+    private ArrayList<Ghost> ghosts;  
+    private Game game;
 
-    public GhostController(List<Ghost> ghosts) {
+    public GhostController(ArrayList<Ghost> ghosts, Game game){ 
         this.ghosts = ghosts;
-    }
+        this.game = game;
+    } 
 
-    @Override
-    public void update(long nanoTime) {
-        
-        for (Ghost g : this.ghosts) {
-            g.move();
+    public void update(long nanoTime){ 
+        for (Ghost ghost : this.ghosts) {
+            if (ghost.getMoveStack().isEmpty()){ 
+                ghost.setMoveStack(new BredthFirstSearch(game, ghost).getMoveStack()); 
+                if (!ghost.getMoveStack().isEmpty()) {
+                    ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
+                    ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
+                }
+            } 
+            ghost.move();
         }
-    }
+    } 
+
 }

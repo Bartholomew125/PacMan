@@ -2,7 +2,9 @@ package com.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
+import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.states.State;
 
 public class Game {
@@ -13,7 +15,9 @@ public class Game {
     private List<Pill> largePills;
     private ArrayList<Ghost> ghosts;
     private int score;
-    private int lives;
+    private int lives; 
+    private SearchAlgorithm searchAlgorithm;
+    private Stack<Pos2D> moveStack;
 
     public Game() {
         // Create maze
@@ -151,8 +155,7 @@ public class Game {
 
     public ArrayList<Ghost> getGhosts(){ 
         return this.ghosts;
-    } 
-
+    }  
     
     /**
      * Get the lives.
@@ -160,6 +163,10 @@ public class Game {
      */
     public int getLives() {
         return this.lives;
+    } 
+
+    public SearchAlgorithm getSearchAlgorithm(){ 
+        return this.searchAlgorithm;
     }
 
     /**
@@ -168,6 +175,10 @@ public class Game {
     public void decreaseLives(){
         this.lives--;
     }
+
+    public Stack<Pos2D> getMoveStack(){ 
+        return this.moveStack;
+    } 
 
     /**
      * Set state for ghosts.

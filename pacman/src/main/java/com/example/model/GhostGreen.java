@@ -5,6 +5,6 @@ import javafx.scene.paint.Color;
 public class GhostGreen extends Ghost { 
 
     public GhostGreen(float x, float y){ 
-        super(x, y, 0, 0, 1, Color.GREEN);
+        super(x, y, 0, 0, 0.06, Color.GREEN);
     }      
 }
