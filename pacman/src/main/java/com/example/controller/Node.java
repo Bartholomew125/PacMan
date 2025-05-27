@@ -11,8 +11,8 @@ public class Node {
     private Pos2D pos;
     private ArrayList<Node> children;
     
-    public Node(Node parent, Pos2D pos){ 
-        this.parent = parent; 
+    public Node(Pos2D pos){ 
+        this.parent = null; 
         this.pos = pos; 
         this.children = new ArrayList<>();   
     }  

@@ -31,7 +31,7 @@ public class MainController implements Controller{
         this.game = game;
         this.viewer = viewer;
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
-        this.ghostController = new GhostController(this.game.getGhosts(), game);
+        this.ghostController = new GhostController(this.game.getGhosts().get(0), new DepthFirstSearch(this.game.getMaze(), this.game.getPacMan(), this.game.getGhosts().get(0)));
         this.stateController = new StateController(this.game);
 
     }

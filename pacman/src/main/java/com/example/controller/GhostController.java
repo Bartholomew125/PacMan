@@ -1,42 +1,28 @@
 package com.example.controller;
 
-import java.util.ArrayList;
-import com.example.model.Game;
 import com.example.model.Ghost;
-import com.example.model.GhostGreen;
 
 /**
  * GhostController class for controlling the ghosts ai
  */
 public class GhostController{
-    private ArrayList<Ghost> ghosts;  
-    private Game game;
+    private Ghost ghost;  
+    private SearchAlgorithm searchAlgorithm;
 
-    public GhostController(ArrayList<Ghost> ghosts, Game game){ 
-        this.ghosts = ghosts;
-        this.game = game;
+    public GhostController(Ghost ghost, SearchAlgorithm searchAlgorithm){ 
+        this.ghost = ghost;
+        this.searchAlgorithm = searchAlgorithm;
     } 
 
     public void update(long nanoTime){ 
-        for (Ghost ghost : this.ghosts) {
-            if (ghost instanceof GhostGreen) {
-                if (ghost.getMoveStack().isEmpty()){ 
-                    ghost.setMoveStack(new SearchAlgorithm(this.game).BFS(ghost)); 
-                    ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
-                    ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
-                } 
+        if (ghost.getMoveStack().isEmpty()){ 
+            ghost.setMoveStack(this.searchAlgorithm.getMoveStack()); 
+            if (!ghost.getMoveStack().isEmpty()) {
+                ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
+                ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
             }
-            else {
-                if (ghost.getMoveStack().isEmpty()){ 
-                    ghost.setMoveStack(new SearchAlgorithm(this.game).DFS(ghost)); 
-                    ghost.setDX(ghost.getMoveStack().peek().getX()-ghost.getX());
-                    ghost.setDY(ghost.getMoveStack().peek().getY()-ghost.getY());
-                } 
-            }
-
-            ghost.move();
         } 
-    }
-
+        ghost.move();
+    } 
 
 }
