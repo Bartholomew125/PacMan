@@ -28,10 +28,12 @@ public class GhostView extends AbstractView {
         super(width, height, positionScaler);
         this.ghosts = ghosts;
 
+        this.ghostAnimations = new ArrayList<>();
+
         for (Ghost ghost : this.ghosts) {
             AnimatedImage newGhostAnimation = new AnimatedImage(300000000, (int) this.getPositionScaler());
-            newGhostAnimation.loadFramesFromDirectory("ghostFrames", "frame", 9);
-            newGhostAnimation.replaceColorsInFrames(Color.color(192/255, 192/255, 192/255), ghost.getColor());
+            newGhostAnimation.loadFramesFromDirectory("ghostFrames", "frame", 3);
+            newGhostAnimation.replaceColorsInFrames(Color.color(0, 0, 1.0/255.0), ghost.getColor());
             this.ghostAnimations.add(new Pair<>(ghost, newGhostAnimation));
         }
     }
