@@ -1,20 +1,30 @@
 package com.example.view;
 
-import com.example.model.Game;
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class HeaderView extends AbstractView{
+import com.example.model.Game;
+
+/**
+ * HeaderView which extends AbstractView.
+ */
+public class HeaderView extends AbstractView {
 
     private Text scoreText;
     private Text livesText;
     private Game game;
     private GraphicsContext gc;
-    
+
+    /**
+     * Creates an instance of HeaderView.
+     * 
+     * @param width
+     * @param height
+     * @param game
+     */
     public HeaderView(int width, int height, Game game) {
         super(width, height, 1);
         this.game = game;
@@ -31,18 +41,18 @@ public class HeaderView extends AbstractView{
         this.scoreText = new Text();
         this.scoreText.setFill(Color.WHITE);
         this.scoreText.setFont(Font.font("Emulogic", 15));
-        this.addTextToSurface(this.scoreText, 20, this.getHeight()/2, 0);
+        this.addTextToSurface(this.scoreText, 20, this.getHeight() / 2, 0);
 
         // Create lives text
         this.livesText = new Text();
         this.livesText.setFill(Color.WHITE);
         this.livesText.setFont(Font.font("Emulogic", 15));
-        this.addTextToSurface(this.livesText, this.getWidth()-200, this.getHeight()/2, 0);
+        this.addTextToSurface(this.livesText, this.getWidth() - 200, this.getHeight() / 2, 0);
     }
 
     @Override
     public void render(double nanoTime) {
-        this.scoreText.setText("Score: "+this.game.getScore());
-        this.livesText.setText("Lives: "+this.game.getLives());
+        this.scoreText.setText("Score: " + this.game.getScore());
+        this.livesText.setText("Lives: " + this.game.getLives());
     }
 }

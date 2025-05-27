@@ -33,25 +33,19 @@ public class Ghost extends Moveable {
         this.searchAlgorithm = searchAlgorithm;
     }
 
-    /**
-     * @return The color of the ghost
-     */
     public Color getColor() {
         return this.color;
     }
 
-    /**
-     * Set the color of the ghost
-     */
     public void setColor(Color color) {
         this.color = color;
     }
 
-    public void setIsAfraid(boolean isAfraid){
+    public void setIsAfraid(boolean isAfraid) {
         this.isAfraid = isAfraid;
     }
-    
-    public boolean getIsAfraid(){
+
+    public boolean getIsAfraid() {
         return this.isAfraid;
     }
 
@@ -75,15 +69,11 @@ public class Ghost extends Moveable {
         else if (Algebra.distanceBetween(this.getMoveStack().peek(), this) <= 0.1) {
             this.getMoveStack().pop();
             if (!this.moveStack.isEmpty()) {
-                this.setDX(this.getMoveStack().peek().getX()-this.getX());
-                this.setDY(this.getMoveStack().peek().getY()-this.getY());
+                this.setDX(this.getMoveStack().peek().getX() - this.getX());
+                this.setDY(this.getMoveStack().peek().getY() - this.getY());
             }
-        }
-        else {
+        } else {
             super.move();
         }
     }
-
-
-    
 }

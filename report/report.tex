@@ -18,6 +18,7 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{color}
+\usepackage{xcolor}
 \usepackage{psfrag}
 \usepackage{pgfplots}
 \usepackage{bm}
@@ -176,7 +177,6 @@ nemmere at udvide med nye features.
     \caption{UML-diagram til \textit{View} delen af projektet.}
     \label{UML-diagram-view}
 \end{figure}
-
 I \textit{View} (se \autoref{UML-diagram-view}) har vi benyttet en
 \textit{grænseflade} ved navn \code{View} som specificere hvilke metoder et
 \textit{View} skal have. Så har vi lavet en abstrakt klasse \code{AbstractView},
@@ -270,13 +270,26 @@ denne forbedring kan ses på \autoref{UML-diagram-old2}.
 \end{itemize}
 % section Implementation (end)
 
+\newpage
 \section{Kvalitetssikring}\label{sec:Kvalitetssikring} % (fold)
-\begin{itemize}
-  \item Beskriv hvordan I har testet, at jeres kode lever op til
-  kravsspecifikationen. Har I, f.eks., benyttet unit tests? Manuelle tests?
-  \item Ville I have taget en anden tilgang til kvalitetssikring hvis I skulle
-  designe og implementere projektet forfra?
-\end{itemize}
+Til fordel for at sikre, at vores kode/program/spil lever op til kravsspecifikationen (se \autoref{sec:design}), har vi valgt at anvende unit-tests. Unit-testing defineres i denne kontekst som test af enkelte komponenter af programmet, som til sammen skaber det ønskede overblik.
+
+I overenstemmelse med vores valg af unit-tests, er det også underforstået, at vi tester i en form for white-box testing. Med dette betyder det, at dem der skriver testsne (os som udviklere af spillet i dette tilfælde), kender til alt logikken bag implementeringen. Med dette, har man som "\textit{tester}", altså mulighed for at tjekke, om en given invariant for en given metode overholdes under kørsel.
+
+Mere specifikt; har vi valg at benytte os af \textit{Java}s framework \code{JUnit}, som b.la. understøtter behjælpelige sammenligningsmetoder (f.eks. \textit{assertions} via \code{assert}).
+
+Med dette, anvender vi altså også unit-testing som middel til at krydstjekke med vores kravsspecifikation, om disse (krav) samt eventuelle invarianter er overholdt.
+
+Med anvendelse af ovennævnte, kan fejfindingprocessen under udviklingen, i nogle tilfælde, forkortes markant. Man kan med andre ord, nogle gange, såfremt man skriver tilstrækkelige unit-tests, forsimple samt forbedre design og udviklingsprocessen.
+
+\textcolor{ocre}{\boxed{\text{INDKLUDER ANDEN TILGANG TIL TEST?}}}
+
+% \begin{itemize}
+%   \item Beskriv hvordan I har testet, at jeres kode lever op til
+%   kravsspecifikationen. Har I, f.eks., benyttet unit tests? Manuelle tests?
+%   \item Ville I have taget en anden tilgang til kvalitetssikring hvis I skulle
+%   designe og implementere projektet forfra?
+% \end{itemize}
 % section Kvalitetssikring (end)
 
 \section{Proces}\label{sec:Proces} % (fold)
@@ -298,6 +311,6 @@ denne forbedring kan ses på \autoref{UML-diagram-old2}.
   disse dele kompatible med jeres design? Ville I foretage ændringer for at
   imødekomme ændringer?
 \end{itemize}
-% section Diskussion (end)
+% section Diskussion (en
 
 \end{document}

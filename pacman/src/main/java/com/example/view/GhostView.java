@@ -1,20 +1,29 @@
 package com.example.view;
 
-
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import java.util.ArrayList;
+import javafx.util.Pair;
 
 import com.example.model.Ghost;
 
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.util.Pair;
-
+/**
+ * GhostView which extends AbstractView.
+ */
 public class GhostView extends AbstractView {
-    
+
     private ArrayList<Ghost> ghosts;
     private Image ghostAfraidImage;
     private ArrayList<Pair<Ghost,AnimatedImage>> ghostAnimations;
 
+    /**
+     * Creates an instance of GhostView.
+     * 
+     * @param width
+     * @param height
+     * @param positionScaler
+     * @param ghosts
+     */
     public GhostView(int width, int height, double positionScaler, ArrayList<Ghost> ghosts) {
         super(width, height, positionScaler);
         this.ghosts = ghosts;

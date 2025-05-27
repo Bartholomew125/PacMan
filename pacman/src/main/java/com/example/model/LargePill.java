@@ -7,11 +7,11 @@ public class LargePill extends Pill {
 
     /**
      * Create a new large pill at the given x and y positions.
+     * 
      * @param x
      * @param y
      */
     public LargePill(int x, int y) {
         super(x, y, 50, 20);
-    } 
-
+    }
 }

@@ -7,7 +7,7 @@ import com.example.model.Game;
  * model, and converting everything in it to a format that can be displayed in
  * the javafx scene from the main class.
  */
-public class GameView extends AbstractView{
+public class GameView extends AbstractView {
 
     private MazeView mazeView;
     private PillView pillView;
@@ -32,22 +32,16 @@ public class GameView extends AbstractView{
         this.addView(this.pillView);
         this.addView(this.pacManView);
         this.addView(this.ghostView);
-
     }
 
-    /**
-     * Render everything to the surface
-     */
     @Override
     public void render(double nanoTime) {
-
-        // Render other views
         this.mazeView.render(nanoTime);
         this.pillView.render(nanoTime);
         this.pacManView.render(nanoTime);
         this.ghostView.render(nanoTime);
     }
-
+    
     public AnimatedImage getPacManAnimation() {
         return this.pacManView.getAnimation();
     }

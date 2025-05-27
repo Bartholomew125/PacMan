@@ -6,18 +6,27 @@ import java.util.LinkedList;
 import com.example.model.Maze;
 import com.example.model.Pos2D;
 
+/**
+ * Implements Breadth First Search which extends AbstractSearchAlgorithm.
+ */
 public class BredthFirstSearch extends AbstractSearchAlgorithm{
     
+    /**
+     * Creates a new BreadthFirstSearch-algorithm.
+     * 
+     * @param game
+     * @param ghost
+     */
     public BredthFirstSearch(Maze maze) {
         super(maze);
     }
 
     @Override
     public Node search() {
-         //At the start ghost has no children and no parent
+        // At the start ghost has no children and no parent
         Node root = new Node(this.getStartPos());
 
-        ArrayList<Pos2D> visited = new ArrayList<>(){
+        ArrayList<Pos2D> visited = new ArrayList<>() {
             @Override
             public boolean contains(Object o) {
                 Pos2D p = (Pos2D) o;
@@ -30,29 +39,29 @@ public class BredthFirstSearch extends AbstractSearchAlgorithm{
             }
         };
 
-        LinkedList<Node> queue = new LinkedList<>(); 
-        queue.add(root); 
-        
-        while (!queue.isEmpty()){ 
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
             Node currentNode = queue.remove();
-            if (!visited.contains(currentNode.getPos())){ 
+            if (!visited.contains(currentNode.getPos())) {
                 visited.add(currentNode.getPos());
-            } 
-            if (currentNode.getPos().equals(this.getGoalPos())){ 
+            }
+            if (currentNode.getPos().equals(this.getGoalPos())) {
                 return currentNode;
-            }  
-            for (Pos2D pos : getNeighbours(currentNode.getPos())){
-                if (!visited.contains(pos)){ 
+            }
+            for (Pos2D pos : getNeighbours(currentNode.getPos())) {
+                if (!visited.contains(pos)) {
                     Node newNode = new Node(pos);
                     // add newnode as child to currentNode
                     currentNode.addChild(newNode);
                     // add currentNode as parent to newnode
-                    newNode.setParent(currentNode); 
+                    newNode.setParent(currentNode);
                     // add newnode to queue
                     queue.add(newNode);
                 }
-            }         
-        } 
+            }
+        }
         return root;
     }
 }

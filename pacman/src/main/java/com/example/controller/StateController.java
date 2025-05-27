@@ -4,49 +4,57 @@ import com.example.model.states.*;
 import com.example.model.Game;
 
 /**
- * StateController
+ * StateController for controlling states of the game.
  */
-public class StateController implements Controller{
+public class StateController implements Controller {
+
     private long powerStateStartTime;
     private long deadStateStartTime;
-    private Game game;
-    private State currentState; 
+    private final Game game;
+    private State currentState;
     private final long nanosecPerSec = 1000000000L;
-    
-    public StateController(Game game){
+
+    /**
+     * Initializes a new StateController.
+     * 
+     * @param game
+     */
+    public StateController(Game game) {
         this.powerStateStartTime = 0;
         this.game = game;
         this.currentState = new NormalState();
     }
 
-    public void update(long nanoTime){
+    @Override
+    public void update(long nanoTime) {
         if (this.currentState instanceof PowerState) {
-            if (nanoTime - this.powerStateStartTime >= 15*this.nanosecPerSec){
+            if (nanoTime - this.powerStateStartTime >= 15 * this.nanosecPerSec) {
                 this.setState(new NormalState());
             }
-        }
-        else if (this.currentState instanceof DeadState) {
-            if (nanoTime - this.deadStateStartTime >= 3*this.nanosecPerSec) {
+        } else if (this.currentState instanceof DeadState) {
+            if (nanoTime - this.deadStateStartTime >= 3 * this.nanosecPerSec) {
                 this.game.resetPositions();
                 this.setState(new NormalState());
             }
         }
     }
 
+    /**
+     * Sets the state of the game.
+     * 
+     * @param state
+     */
     public void setState(State state) {
         this.currentState = state;
         if (state instanceof PowerState) {
             this.powerStateStartTime = System.nanoTime();
             game.setState(state);
-        }
-        else if (state instanceof NormalState) {
+        } else if (state instanceof NormalState) {
             game.setState(state);
-        }
-        else if (state instanceof DeadState) {
+        } else if (state instanceof DeadState) {
             this.deadStateStartTime = System.nanoTime();
             game.setState(state);
-        }
-        else if (state instanceof EndState) {
+        } else if (state instanceof EndState) {
             game.setState(state);
         }
     }

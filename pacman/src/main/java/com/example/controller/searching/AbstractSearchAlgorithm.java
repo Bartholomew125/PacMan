@@ -8,12 +8,21 @@ import com.example.model.Maze;
 import com.example.model.Moveable;
 import com.example.model.Pos2D;
 
+/**
+ * Abstract implementation of a search algorithm which implements
+ * SearchAlgorithm.
+ */
 public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
     
     private final Maze maze; 
     private Pos2D startPos;
     private Pos2D goalPos;
 
+    /**
+     * Initializes an AbstractSearchAlgorithm.
+     * 
+     * @param maze
+     */
     public AbstractSearchAlgorithm(Maze maze) {
         this.maze = maze;
     }
@@ -50,30 +59,36 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
         return moveStack;
     }
 
+    /**
+     * Returns all valid neighbours to a position.
+     * 
+     * @param pos
+     * @return the neighbours of pos.
+     */
     public ArrayList<Pos2D> getNeighbours(Pos2D pos) {
         ArrayList<Pos2D> neighbours = new ArrayList<>();
 
-        //choice directions hardcoded into a list
-        ArrayList<Pos2D> cDir = new ArrayList<>();  
-        Pos2D up = new Pos2D(0, -1); 
-        Pos2D down = new Pos2D(0, 1); 
-        Pos2D right = new Pos2D(1,0); 
+        // choice directions hardcoded into a list
+        ArrayList<Pos2D> cDir = new ArrayList<>();
+        Pos2D up = new Pos2D(0, -1);
+        Pos2D down = new Pos2D(0, 1);
+        Pos2D right = new Pos2D(1, 0);
         Pos2D left = new Pos2D(-1, 0);
-        cDir.add(up); 
-        cDir.add(down); 
-        cDir.add(left);     
-        cDir.add(right); 
+        cDir.add(up);
+        cDir.add(down);
+        cDir.add(left);
+        cDir.add(right);
 
         // Shuffle the direction to ensure better ghost movement
         Collections.shuffle(cDir);
 
-        //Checking if possible moves
+        // Checking if possible moves
         for (Pos2D dir : cDir) {
             Pos2D newPos = pos.add(dir);
-            int x = newPos.getX(); 
+            int x = newPos.getX();
             int y = newPos.getY();
             if (x >= 0 && x < this.maze.getWidth() && y >= 0 && y < this.maze.getHeight() &&
-            !this.maze.isWallAt(newPos.getX(), newPos.getY())) {
+                    !this.maze.isWallAt(newPos.getX(), newPos.getY())) {
                 neighbours.add(newPos);
             }
         }

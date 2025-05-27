@@ -20,11 +20,12 @@ public class Maze {
      * Create a new maze
      */
     public Maze() {
+
         // Read the maze from the file and get its width and height.
         this.textMaze = this.readMazeFromFile();
         this.width = this.textMaze[0].length;
         this.height = this.textMaze.length;
-        
+
         // Locate all the walls and create the wall array.
         Pos2D[] wallPositions = this.locateCharacter("#");
         this.walls = new Wall[wallPositions.length];
@@ -44,12 +45,11 @@ public class Maze {
         Path path = Paths.get(pathName + fileName);
 
         try {
-            // Use a stream to open the file and convert it to the 2D array
             return Files.lines(path)
                     .map(line -> line.split(""))
                     .toArray(String[][]::new);
         }
-        // Catch any IO exceptions and return an empty 2D array
+
         catch (IOException e) {
             e.printStackTrace();
             return new String[0][0];
@@ -68,23 +68,24 @@ public class Maze {
         if (pacManPositions.length != 1) {
             System.out.println("There isn't exactly one p in the maze");
             return new Pos2D(-1, -1);
-        }
-        else {
+        } else {
             return pacManPositions[0];
-        } 
-    } 
+        }
+    }
 
     /**
      * Locate all the small pills in the maze
+     * 
      * @return The positions of the small pills
      */
-    public Pos2D[] locateSmallPills() { 
-        Pos2D[] smallPillPositions = this.locateCharacter("."); 
+    public Pos2D[] locateSmallPills() {
+        Pos2D[] smallPillPositions = this.locateCharacter(".");
         return smallPillPositions;
-    } 
+    }
 
     /**
      * Locate all the large pills in the maze
+     * 
      * @return The positions of the large pills
      */
     public Pos2D[] locateLargePills() {
@@ -94,6 +95,7 @@ public class Maze {
 
     /**
      * Locate all the ghosts in the maze
+     * 
      * @return The positions of the ghosts
      */
     public Pos2D[] locateGhosts() {
@@ -108,6 +110,7 @@ public class Maze {
      * @return Array of 2D positions of c in the maze
      */
     private Pos2D[] locateCharacter(String c) {
+
         // Starting list with variable length
         ArrayList<Pos2D> positions = new ArrayList<Pos2D>();
 
@@ -122,6 +125,13 @@ public class Maze {
         return positions.toArray(new Pos2D[positions.size()]);
     }
 
+    /**
+     * Checks whether there is a wall at position.
+     * 
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean isWallAt(int x, int y) {
         if (x < 0 || x > this.getWidth() || y < 0 || y > this.getHeight()) {
             return false;
@@ -129,30 +139,18 @@ public class Maze {
         return this.getTextMaze()[y][x].equals("#");
     }
 
-    /**
-     * @return The maze file
-     */
     public String[][] getTextMaze() {
         return this.textMaze;
     }
 
-    /**
-     * @return The walls of the maze
-     */
     public Wall[] getWalls() {
         return this.walls;
     }
 
-    /**
-     * @return The width of the maze
-     */
     public int getWidth() {
         return this.width;
     }
 
-    /**
-     * @return The height of the maze
-     */
     public int getHeight() {
         return this.height;
     }

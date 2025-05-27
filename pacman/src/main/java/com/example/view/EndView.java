@@ -1,12 +1,15 @@
 package com.example.view;
 
-import com.example.model.Game;
-
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import com.example.model.Game;
+
+/**
+ * The implementation of games endview which extends AbstractView.
+ */
 public class EndView extends AbstractView {
 
     private Game game;
@@ -14,6 +17,14 @@ public class EndView extends AbstractView {
     private Button restartButton;
     private boolean restartButtonPressed;
 
+    /**
+     * Creates new insance of EndView.
+     * 
+     * @param width
+     * @param height
+     * @param positionScaler
+     * @param game
+     */
     public EndView(int width, int height, double positionScaler, Game game) {
         super(width, height, positionScaler);
 
@@ -51,6 +62,11 @@ public class EndView extends AbstractView {
         this.getSurface().getChildren().add(this.restartButton);
     }
 
+    /**
+     * Get button-state.
+     * 
+     * @return boolean that represents whether button is pressed or not.
+     */
     public boolean restartButtonClicked() {
         boolean state = this.restartButtonPressed;
         this.restartButtonPressed = false;
