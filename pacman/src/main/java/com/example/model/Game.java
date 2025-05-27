@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.example.controller.searching.BredthFirstSearch;
+import com.example.controller.searching.BreadthFirstSearch;
 import com.example.controller.searching.DepthFirstSearch;
 import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.states.State;
@@ -57,8 +57,8 @@ public class Game {
         Pos2D[] ghostPositions = this.maze.locateGhosts();
         this.ghosts = new ArrayList<>();
         this.ghosts.add(new Ghost(ghostPositions[0].getX(), ghostPositions[0].getY(), Color.GREEN, new DepthFirstSearch(this.maze)));
-        this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BredthFirstSearch(this.maze)));
-        this.ghosts.add(new Ghost(ghostPositions[2].getX(), ghostPositions[2].getY(), Color.RED, new BredthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BreadthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[2].getX(), ghostPositions[2].getY(), Color.RED, new BreadthFirstSearch(this.maze)));
         this.ghosts.add(new Ghost(ghostPositions[3].getX(), ghostPositions[3].getY(), Color.PINK, new DepthFirstSearch(this.maze)));
 
         this.score = 0;
@@ -231,8 +231,8 @@ public class Game {
 
         Pos2D[] ghostPositions = this.maze.locateGhosts();
         this.ghosts.add(new Ghost(ghostPositions[0].getX(), ghostPositions[0].getY(), Color.GREEN, new DepthFirstSearch(this.maze)));
-        this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BredthFirstSearch(this.maze)));
-        this.ghosts.add(new Ghost(ghostPositions[2].getX(), ghostPositions[2].getY(), Color.RED, new BredthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BreadthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[2].getX(), ghostPositions[2].getY(), Color.RED, new BreadthFirstSearch(this.maze)));
         this.ghosts.add(new Ghost(ghostPositions[3].getX(), ghostPositions[3].getY(), Color.PINK, new DepthFirstSearch(this.maze)));
 
         this.score = 0;

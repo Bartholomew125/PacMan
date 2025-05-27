@@ -9,7 +9,7 @@ import com.example.model.Pos2D;
 /**
  * Implements Breadth First Search which extends AbstractSearchAlgorithm.
  */
-public class BredthFirstSearch extends AbstractSearchAlgorithm{
+public class BreadthFirstSearch extends AbstractSearchAlgorithm{
     
     /**
      * Creates a new BreadthFirstSearch-algorithm.
@@ -17,7 +17,7 @@ public class BredthFirstSearch extends AbstractSearchAlgorithm{
      * @param game
      * @param ghost
      */
-    public BredthFirstSearch(Maze maze) {
+    public BreadthFirstSearch(Maze maze) {
         super(maze);
     }
 
