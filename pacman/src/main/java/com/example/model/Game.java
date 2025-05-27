@@ -62,7 +62,7 @@ public class Game {
         this.ghosts.add(new Ghost(ghostPositions[3].getX(), ghostPositions[3].getY(), Color.PINK, new DepthFirstSearch(this.maze)));
 
         this.score = 0;
-        this.lives = 1;
+        this.lives = 3;
     }
 
     /**
