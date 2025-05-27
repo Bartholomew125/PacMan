@@ -1,17 +1,20 @@
 package com.example.model;
 
-import java.util.LinkedList;
 import java.util.Stack;
+
+import com.example.Algebra;
+import com.example.controller.searching.SearchAlgorithm;
+
 import javafx.scene.paint.Color;
 
 /**
  * This is the abstract ghost class from which actual ghosts should extend.
  */
-public abstract class Ghost extends Moveable {
-    protected Color color;
-    protected boolean isAfraid;
-    protected Stack<Pos2D> moveStack;
-    protected LinkedList<Pos2D> moveQueue;
+public class Ghost extends Moveable {
+    private Color color;
+    private boolean isAfraid;
+    private Stack<Pos2D> moveStack;
+    private SearchAlgorithm searchAlgorithm;
 
     /**
      * Create a new ghost which is a moveable with a color.
@@ -23,11 +26,11 @@ public abstract class Ghost extends Moveable {
      * @param multiplier
      * @param color
      */
-    protected Ghost(float x, float y, float dx, float dy, double multiplier, Color color) {
-        super(x, y, dx, dy, multiplier);
+    public Ghost(float x, float y, Color color, SearchAlgorithm searchAlgorithm) {
+        super(x, y, 0, 0, 0.06);
         this.color = color;
         this.moveStack = new Stack<>();
-        this.moveQueue = new LinkedList<>();
+        this.searchAlgorithm = searchAlgorithm;
     }
 
     /**
@@ -60,12 +63,16 @@ public abstract class Ghost extends Moveable {
         this.moveStack = moveStack;
     }
 
+    public SearchAlgorithm getSearchAlgorithm() {
+        return this.searchAlgorithm;
+    }
+
     @Override
     public void move() {
         if (this.moveStack.isEmpty()) {
             this.stop();
         }
-        else if (this.getMoveStack().peek().distanceTo(this) <= 0.1) {
+        else if (Algebra.distanceBetween(this.getMoveStack().peek(), this) <= 0.1) {
             this.getMoveStack().pop();
             if (!this.moveStack.isEmpty()) {
                 this.setDX(this.getMoveStack().peek().getX()-this.getX());
