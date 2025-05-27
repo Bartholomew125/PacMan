@@ -96,22 +96,6 @@ public class Pos2DTest {
     }
 
     /**
-     * Test of the distanceTo-method.
-     * 
-     * This test verifies that the distanceTo-method returns expected value of the distance betweeen 
-     * a given Pos2D object and some know x and y-coordinates.
-     */
-    @Test
-    @DisplayName("Test whether the distanceTo-method of the Pos2D class returns expected value.")
-    void testDistanceTo(){
-        // Arrange: create new position with known x and y.
-        Pos2D position = new Pos2D(2, 2);
-        
-        // Assert: check whether the distanace between the given object and its own coordinates is 0.
-        assertEquals(0, position.distanceTo(position));
-    }
-
-    /**
      * Test of the toString-method.
      * 
      * This test verifies that the method toString returns the expected output in expected format.

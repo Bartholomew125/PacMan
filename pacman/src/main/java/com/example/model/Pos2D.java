@@ -46,26 +46,6 @@ public class Pos2D {
     }
 
     /**
-     * Calculate the euclidian distance from this position to the movable.
-     * @param x
-     * @param y
-     * @return
-     */
-    public double distanceTo(Moveable moveable) {
-        // Takes into account the velocity of the moveable
-        return Math.sqrt(Math.pow((moveable.getX()+moveable.getDX()/100) - this.x, 2) + Math.pow((moveable.getY()+moveable.getDY()/100) - this.y, 2));
-    }
-
-    /**
-     * Calculates the euclidian distance from this position to the given one.
-     * @param pos
-     * @return
-     */
-    public double distanceTo(Pos2D pos) {
-        return Math.sqrt(Math.pow(pos.getX() - this.x, 2) + Math.pow(pos.getY() - this.y, 2));
-    }
-
-    /**
      * @return A textual representation of the position.
      */
     public String toString() {
@@ -77,8 +57,6 @@ public class Pos2D {
         
         return newPos;
     }
-
-    
     
     public boolean equals(Pos2D pos){ 
         return pos.getX() == this.getX() && pos.getY() == this.getY();
