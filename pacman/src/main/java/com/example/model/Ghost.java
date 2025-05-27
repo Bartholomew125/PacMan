@@ -27,7 +27,7 @@ public class Ghost extends Moveable {
      * @param color
      */
     public Ghost(float x, float y, Color color, SearchAlgorithm searchAlgorithm) {
-        super(x, y, 0, 0, 0.06);
+        super(x, y, 0, 0, 0.05);
         this.color = color;
         this.moveStack = new Stack<>();
         this.searchAlgorithm = searchAlgorithm;
