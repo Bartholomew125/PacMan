@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import com.example.controller.searching.BredthFirstSearch;
+import com.example.controller.searching.DepthFirstSearch;
 import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.states.State;
+
+import javafx.scene.paint.Color;
 
 public class Game {
 
@@ -45,19 +49,11 @@ public class Game {
 
         // Create ghosts
         Pos2D[] ghostPositions = this.maze.locateGhosts();
-        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
-        this.ghosts = new ArrayList<Ghost>();
-        for (int i = 0; i < ghostPositions.length; i++) {
-            try {
-                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
-                .getConstructor(float.class, float.class)
-                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
-                ghosts.add(ghost);               
-            }
-            catch (Exception e) {
-                e.getStackTrace();
-            }
-        }
+        this.ghosts = new ArrayList<>();
+        this.ghosts.add(new Ghost(ghostPositions[0].getX(), ghostPositions[0].getY(), Color.GREEN, new DepthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BredthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[2].getX(), ghostPositions[2].getY(), Color.RED, new BredthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[3].getX(), ghostPositions[3].getY(), Color.PINK, new DepthFirstSearch(this.maze)));
 
         this.score = 0;
         this.lives = 1;
@@ -223,18 +219,10 @@ public class Game {
         }
 
         Pos2D[] ghostPositions = this.maze.locateGhosts();
-        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
-        for (int i = 0; i < ghostPositions.length; i++) {
-            try {
-                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
-                .getConstructor(float.class, float.class)
-                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
-                ghosts.add(ghost);               
-            }
-            catch (Exception e) {
-                e.getStackTrace();
-            }
-        }
+        this.ghosts.add(new Ghost(ghostPositions[0].getX(), ghostPositions[0].getY(), Color.GREEN, new DepthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BredthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[2].getX(), ghostPositions[2].getY(), Color.RED, new BredthFirstSearch(this.maze)));
+        this.ghosts.add(new Ghost(ghostPositions[3].getX(), ghostPositions[3].getY(), Color.PINK, new DepthFirstSearch(this.maze)));
 
         this.score = 0;
         this.lives = 3;
