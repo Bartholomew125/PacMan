@@ -3,14 +3,13 @@ package com.example.controller.searching;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import com.example.model.Game;
-import com.example.model.Ghost;
+import com.example.model.Maze;
 import com.example.model.Pos2D;
 
 public class BredthFirstSearch extends AbstractSearchAlgorithm{
     
-    public BredthFirstSearch(Game game, Ghost ghost) {
-        super(game, ghost);
+    public BredthFirstSearch(Maze maze) {
+        super(maze);
     }
 
     @Override
