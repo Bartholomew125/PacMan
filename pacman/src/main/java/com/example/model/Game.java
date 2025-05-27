@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import com.example.controller.SearchAlgorithm;
-
+import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.states.State;
 
 public class Game {

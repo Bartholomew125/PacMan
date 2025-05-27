@@ -1,28 +1,22 @@
-package com.example.controller;
+package com.example.controller.searching;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import com.example.model.Game;
 import com.example.model.Ghost;
-import com.example.model.Maze;
-import com.example.model.PacMan;
 import com.example.model.Pos2D;
 
 public class BredthFirstSearch extends AbstractSearchAlgorithm{
     
-    public BredthFirstSearch(Maze maze, PacMan pacMan, Ghost ghost) {
-        super(maze, pacMan, ghost);
+    public BredthFirstSearch(Game game, Ghost ghost) {
+        super(game, ghost);
     }
 
     @Override
     public Node search() {
-        Pos2D gPos = new Pos2D((int)(this.getGhost().getX()),(int)(this.getGhost().getY()));
-        
          //At the start ghost has no children and no parent
-        Node root = new Node(gPos);
-
-        //Set goal as Pacman
-        Pos2D goal = new Pos2D((int)(this.getPacMan().getX()), (int)(this.getPacMan().getY()));
+        Node root = new Node(this.getStartPos());
 
         ArrayList<Pos2D> visited = new ArrayList<>(){
             @Override
@@ -45,7 +39,7 @@ public class BredthFirstSearch extends AbstractSearchAlgorithm{
             if (!visited.contains(currentNode.getPos())){ 
                 visited.add(currentNode.getPos());
             } 
-            if (currentNode.getPos().equals(goal)){ 
+            if (currentNode.getPos().equals(this.getGoalPos())){ 
                 return currentNode;
             }  
             for (Pos2D pos : getNeighbours(currentNode.getPos())){

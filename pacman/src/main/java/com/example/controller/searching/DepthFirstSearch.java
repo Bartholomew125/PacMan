@@ -1,17 +1,16 @@
-package com.example.controller;
+package com.example.controller.searching;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
+import com.example.model.Game;
 import com.example.model.Ghost;
-import com.example.model.Maze;
-import com.example.model.PacMan;
 import com.example.model.Pos2D;
 
 public class DepthFirstSearch extends AbstractSearchAlgorithm {
 
-    public DepthFirstSearch(Maze maze, PacMan pacMan, Ghost ghost) {
-        super(maze, pacMan, ghost);
+    public DepthFirstSearch(Game game, Ghost ghost) {
+        super(game, ghost);
     }
     
     /**
@@ -21,12 +20,8 @@ public class DepthFirstSearch extends AbstractSearchAlgorithm {
      */
     @Override
     public Node search(){ 
-        //Adding ghost position, children and parent at the start
-        Pos2D ghostPos = new Pos2D((int)(this.getGhost().getX()),(int)(this.getGhost().getY()));
         //At the start ghost has no children and no parent
-        Node root = new Node(ghostPos);
-        //Set goal as Pacman
-        Pos2D goal = new Pos2D((int)(this.getPacMan().getX()), (int)(this.getPacMan().getY()));
+        Node root = new Node(this.getStartPos());
 
         // Add the root to the stack
         Stack<Node> stack = new Stack<>();
@@ -51,7 +46,7 @@ public class DepthFirstSearch extends AbstractSearchAlgorithm {
         //We pop elements 
         while (!stack.isEmpty()){ 
             Node currentNode = stack.pop();
-            if (currentNode.getPos().equals(goal)){ 
+            if (currentNode.getPos().equals(this.getGoalPos())){ 
                 return currentNode;
             }  
             //We create a new Node and add it as a child of the previous Node 

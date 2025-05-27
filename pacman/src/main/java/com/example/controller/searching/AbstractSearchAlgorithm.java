@@ -1,9 +1,10 @@
-package com.example.controller;
+package com.example.controller.searching;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
+import com.example.model.Game;
 import com.example.model.Ghost;
 import com.example.model.Maze;
 import com.example.model.PacMan;
@@ -14,11 +15,16 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
     private final Maze maze; 
     private final PacMan pacMan;
     private final Ghost ghost;
+    private final Pos2D startPos;
+    private final Pos2D goalPos;
 
-    public AbstractSearchAlgorithm(Maze maze, PacMan pacMan, Ghost ghost) {
-        this.maze = maze;
-        this.pacMan = pacMan;
+    public AbstractSearchAlgorithm(Game game, Ghost ghost) {
+        this.maze = game.getMaze();
+        this.pacMan = game.getPacMan();
         this.ghost = ghost;
+        this.startPos = new Pos2D((int)(this.getGhost().getX()),(int)(this.getGhost().getY()));
+        this.goalPos = new Pos2D((int)(this.getPacMan().getX()), (int)(this.getPacMan().getY()));
+
     }
 
     @Override
@@ -73,5 +79,13 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
 
     protected Ghost getGhost() {
         return this.ghost;
+    }
+
+    protected Pos2D getStartPos() {
+        return this.startPos;
+    }
+
+    protected Pos2D getGoalPos() {
+        return this.goalPos;
     }
 }

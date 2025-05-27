@@ -1,6 +1,7 @@
-package com.example.controller;
+package com.example.controller.searching;
 
 import java.util.Stack;
+
 import com.example.model.Pos2D;
 
 public interface SearchAlgorithm {
