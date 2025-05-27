@@ -3,7 +3,6 @@ package com.example.view;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
-import javafx.util.Pair;
 
 import com.example.model.Ghost;
 
@@ -14,7 +13,7 @@ public class GhostView extends AbstractView {
 
     private ArrayList<Ghost> ghosts;
     private Image ghostAfraidImage;
-    private ArrayList<Pair<Ghost,AnimatedImage>> ghostAnimations;
+    private ArrayList<AnimatedImage> ghostAnimations;
 
     /**
      * Creates an instance of GhostView.
@@ -30,11 +29,14 @@ public class GhostView extends AbstractView {
 
         this.ghostAnimations = new ArrayList<>();
 
+        this.ghostAfraidImage = new Image("file:src/main/resources/com/example/ghostAfraid.png", this.getPositionScaler(),
+                this.getPositionScaler(), false, false);
+
         for (Ghost ghost : this.ghosts) {
             AnimatedImage newGhostAnimation = new AnimatedImage(300000000, (int) this.getPositionScaler());
             newGhostAnimation.loadFramesFromDirectory("ghostFrames", "frame", 3);
             newGhostAnimation.replaceColorsInFrames(Color.color(0, 0, 1.0/255.0), ghost.getColor());
-            this.ghostAnimations.add(new Pair<>(ghost, newGhostAnimation));
+            this.ghostAnimations.add(newGhostAnimation);
         }
     }
 
@@ -42,15 +44,17 @@ public class GhostView extends AbstractView {
     public void render(double nanoTime) {
         this.clear();
 
-        for (Pair<Ghost, AnimatedImage> pair : this.ghostAnimations) {
-            Ghost ghost = pair.getKey();
-            AnimatedImage animatedImage = pair.getValue();
-            if (pair.getKey().getIsAfraid()) {
+        for (int i = 0; i < this.ghosts.size(); i++) {
+            Ghost ghost = this.ghosts.get(i);
+            AnimatedImage ghostAnimation = this.ghostAnimations.get(i);
+
+            if (ghost.getIsAfraid()) {
                 this.addImageToSurface(ghostAfraidImage, ghost.getX(), ghost.getY(), 0, ghost.getRotation()==0);
             }
             else {
-                this.addImageToSurface(animatedImage.getFrame(nanoTime), ghost.getX(), ghost.getY(), 0, ghost.getRotation()==0);
+                this.addImageToSurface(ghostAnimation.getFrame(nanoTime), ghost.getX(), ghost.getY(), 0, ghost.getRotation()==0);
             }
         }
+
     }
 }
