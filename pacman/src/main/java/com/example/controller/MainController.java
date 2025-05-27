@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+import javafx.scene.input.KeyEvent;
 
 import com.example.model.Game;
 import com.example.model.Ghost;
@@ -12,8 +13,6 @@ import com.example.model.states.EndState;
 import com.example.model.states.NormalState;
 import com.example.model.states.PowerState;
 import com.example.view.Viewer;
-
-import javafx.scene.input.KeyEvent;
 
 /**
  * The controller class which is responsible for controlling the pacMan and
@@ -27,6 +26,12 @@ public class MainController implements Controller {
     private Viewer viewer;
     private Game game;
 
+    /**
+     * Creates a new MainController.
+     *
+     * @param game
+     * @param viewer
+     */
     public MainController(Game game, Viewer viewer) {
         this.game = game;
         this.viewer = viewer;
@@ -63,7 +68,10 @@ public class MainController implements Controller {
             this.restart();
         }
     }
-
+    
+    /**
+     * Restarts game and sets state to NormalState.
+     */
     public void restart() {
         this.game.restart();
         this.stateController.setState(new NormalState());
@@ -96,13 +104,15 @@ public class MainController implements Controller {
                 }
             }
         }
-
+        
+        // Check for collisions between smallPills and pacMan.
         for (Pill pill : smallPills) {
             if (pill.distanceTo(pacMan) < 0.5) {
                 this.game.pacManEatSmallPill(pill);
             }
         }
-
+        
+        // Check for collisions between largePills and pacMan.
         for (Pill pill : largePills) {
             if (pill.distanceTo(pacMan) < 0.8) {
                 this.game.pacManEatLargePill(pill);
@@ -129,52 +139,4 @@ public class MainController implements Controller {
             }
         }
     }
-
-    // public void dummyPath(Ghost ghost){
-    // Random rd = new Random();
-    // char[] directions = {'O', 'V','N','H'};
-    // char newPath = directions[rd.nextInt(4)];
-
-    // if (newPath == 'O'){
-    // ghost.up();
-    // }
-    // if (newPath == 'V'){
-    // ghost.left();
-    // }
-    // if (newPath == 'N'){
-    // ghost.down();
-    // }
-    // if (newPath == 'H'){
-    // ghost.right();
-    // }
-
-    // }
-
-    // public void moreRandomPath(Ghost ghost){
-    // Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), ae ->
-    // choice(ghost)));
-    // timeline.setCycleCount(-1);
-    // timeline.setDelay(Duration.millis(1));
-    // timeline.playFromStart();
-
-    // }
-
-    // public void choice(Ghost ghost){
-    // Random rd = new Random();
-    // char[] directions = {'O', 'V','N','H'};
-    // char newPath = directions[rd.nextInt(4)];
-    // if (newPath == 'O'){
-    // ghost.up();
-    // }
-    // if (newPath== 'V'){
-    // ghost.left();
-    // }
-    // if (newPath == 'N'){
-    // ghost.down();
-    // }
-    // if (newPath== 'H'){
-    // ghost.right();
-    // }
-
-    // }
 }

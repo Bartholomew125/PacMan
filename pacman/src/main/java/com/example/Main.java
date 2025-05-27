@@ -24,7 +24,7 @@ public class Main extends Application {
 
         // Create the Game, Viewer and Controller
         Game game = new Game();
-        Viewer viewer = new Viewer(800,800, game);
+        Viewer viewer = new Viewer(800, 800, game);
         MainController controller = new MainController(game, viewer);
 
         // Attach the viewers surface to the root, so it is displayed
@@ -38,11 +38,9 @@ public class Main extends Application {
 
         // The loop of the game
         Timeline timeline = new Timeline(
-            new KeyFrame(
-            javafx.util.Duration.millis(1000.0 / 60), // 60 FPS
-            event -> controller.update(System.nanoTime())
-            )
-        );
+                new KeyFrame(
+                        javafx.util.Duration.millis(1000.0 / 60), // 60 FPS
+                        event -> controller.update(System.nanoTime())));
         timeline.setCycleCount(javafx.animation.Animation.INDEFINITE);
         timeline.play();
 
@@ -51,6 +49,11 @@ public class Main extends Application {
 
     }
 
+    /**
+     * Launches main.
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

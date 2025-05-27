@@ -7,6 +7,9 @@ import java.util.Stack;
 import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.states.State;
 
+/**
+ * The instance of the game that represents the 'PacMan game'.
+ */
 public class Game {
 
     private Maze maze;
@@ -15,10 +18,13 @@ public class Game {
     private List<Pill> largePills;
     private ArrayList<Ghost> ghosts;
     private int score;
-    private int lives; 
+    private int lives;
     private SearchAlgorithm searchAlgorithm;
     private Stack<Pos2D> moveStack;
 
+    /**
+     * Create and place game-objects.
+     */
     public Game() {
         // Create maze
         this.maze = new Maze();
@@ -45,16 +51,15 @@ public class Game {
 
         // Create ghosts
         Pos2D[] ghostPositions = this.maze.locateGhosts();
-        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
+        Class<?>[] availableGhosts = { GhostGreen.class, GhostMint.class, GhostOrange.class, GhostPink.class };
         this.ghosts = new ArrayList<Ghost>();
         for (int i = 0; i < ghostPositions.length; i++) {
             try {
-                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
-                .getConstructor(float.class, float.class)
-                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
-                ghosts.add(ghost);               
-            }
-            catch (Exception e) {
+                Ghost ghost = (Ghost) availableGhosts[i % availableGhosts.length]
+                        .getConstructor(float.class, float.class)
+                        .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());
+                ghosts.add(ghost);
+            } catch (Exception e) {
                 e.getStackTrace();
             }
         }
@@ -85,19 +90,21 @@ public class Game {
 
     /**
      * Make pacMan eat ghost.
+     * 
      * @param ghost
      */
     public void pacManEatGhost(Ghost ghost) {
         this.increaseScore(20);
         this.ghosts.remove(ghost);
     }
-    
+
     /**
      * Decrease score when pacman collides with ghost in NormalState.
      */
-    public void ghostEatsPacman(){
+    public void ghostEatsPacman() {
         this.decreaseLives();
     }
+
     /**
      * Increasee score by some value.
      * 
@@ -107,21 +114,17 @@ public class Game {
         this.score = this.score + value;
     }
 
-    /**
-     * @return The maze of the game
-     */
     public Maze getMaze() {
         return this.maze;
     }
 
-    /**
-     * @return The pacMan of the game
-     */
     public PacMan getPacMan() {
         return this.pacMan;
     }
 
     /**
+     * Get pointer to array which contains small pills.
+     *
      * @return A pointer to the array of small pills int the game.
      */
     public List<Pill> getSmallPills() {
@@ -129,13 +132,17 @@ public class Game {
     }
 
     /**
-     * @return A pointer to the array of large pills int the game.
+     * Get pointer to array which contains large pills.
+     * 
+     * @return A pointer to the array of large pills in the game.
      */
     public List<Pill> getLargePills() {
         return this.largePills;
     }
 
     /**
+     * Get smallPills as array.
+     * 
      * @return A a array copy of the small pills.
      */
     public Pill[] getSmallPillsArray() {
@@ -143,6 +150,8 @@ public class Game {
     }
 
     /**
+     * Get largePills as array.
+     * 
      * @return A a array copy of the large pills.
      */
     public Pill[] getLargePillsArray() {
@@ -151,37 +160,34 @@ public class Game {
 
     public int getScore() {
         return this.score;
-    } 
+    }
 
-    public ArrayList<Ghost> getGhosts(){ 
+    public ArrayList<Ghost> getGhosts() {
         return this.ghosts;
-    }  
-    
-    /**
-     * Get the lives.
-     * @return lives 
-     */
+    }
+
     public int getLives() {
         return this.lives;
-    } 
+    }
 
-    public SearchAlgorithm getSearchAlgorithm(){ 
+    public SearchAlgorithm getSearchAlgorithm() {
         return this.searchAlgorithm;
     }
 
     /**
      * Decrease lives.
      */
-    public void decreaseLives(){
+    public void decreaseLives() {
         this.lives--;
     }
 
-    public Stack<Pos2D> getMoveStack(){ 
+    public Stack<Pos2D> getMoveStack() {
         return this.moveStack;
-    } 
+    }
 
     /**
-     * Set state for ghosts.
+     * Applies state on game.
+     * 
      * @param state
      */
     public void setState(State state) {
@@ -195,15 +201,19 @@ public class Game {
         }
     }
 
+    /**
+     * Resets Moveables postions.
+     */
     public void resetPositions() {
-        // Reset pacman
         this.pacMan.resetPosition();
-
         for (Ghost g : this.ghosts) {
             g.resetPosition();
         }
     }
 
+    /**
+     * Restarts game.
+     */
     public void restart() {
         this.resetPositions();
         this.ghosts.clear();
@@ -223,15 +233,14 @@ public class Game {
         }
 
         Pos2D[] ghostPositions = this.maze.locateGhosts();
-        Class<?>[] availableGhosts = {GhostGreen.class,  GhostMint.class, GhostOrange.class, GhostPink.class};
+        Class<?>[] availableGhosts = { GhostGreen.class, GhostMint.class, GhostOrange.class, GhostPink.class };
         for (int i = 0; i < ghostPositions.length; i++) {
             try {
-                Ghost ghost = (Ghost) availableGhosts[i%availableGhosts.length]
-                .getConstructor(float.class, float.class)
-                .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());     
-                ghosts.add(ghost);               
-            }
-            catch (Exception e) {
+                Ghost ghost = (Ghost) availableGhosts[i % availableGhosts.length]
+                        .getConstructor(float.class, float.class)
+                        .newInstance(ghostPositions[i].getX(), ghostPositions[i].getY());
+                ghosts.add(ghost);
+            } catch (Exception e) {
                 e.getStackTrace();
             }
         }
@@ -239,6 +248,5 @@ public class Game {
         this.score = 0;
         this.lives = 3;
     }
-    
-}
 
+}

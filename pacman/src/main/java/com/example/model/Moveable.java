@@ -1,8 +1,8 @@
 package com.example.model;
 
-import com.example.controller.DirectionAdapter;
-
 import javafx.util.Pair;
+
+import com.example.controller.DirectionAdapter;
 
 /**
  * The movable class represents anything that needs to be moved.
@@ -88,69 +88,38 @@ public abstract class Moveable {
         }
     }
 
-    /**
-     * @return The direction of the Moveable.
-     */
     public Direction getDirection() {
         return DirectionAdapter.adapt(this.dx, this.dy);
     }
 
-    /**
-     * @return Moveables x-value.
-     */
     public float getX() {
         return this.x;
     }
 
-    /**
-     * Sets the x-value of the Moveable
-     * @param x
-     */
     public void setX(float x) {
         this.x = x;
     }
 
-    /**
-     * @return Moveables y-value.
-     */
     public float getY() {
         return this.y;
     }
 
-    /**
-     * Set the y-value of the Movable
-     * @param y
-     */
     public void setY(float y) {
         this.y = y;
     }
 
-    /**
-     * @return The x direction of the moveable
-     */
     public float getDX() {
         return this.dx;
     }
 
-    /**
-     * @return The y direrction of the moveable
-     */
     public float getDY() {
         return this.dy;
     }
 
-    /**
-     * Sets Moveables movementmultiplier.
-     * 
-     * @param multiplier
-     */
     public void setMovementMultiplier(double multiplier) {
         this.movementMultiplier = multiplier;
     }
 
-    /**
-     * @return The movement multiplier of the
-     */
     public double getMovementMultiplier() {
         return this.movementMultiplier;
     }
@@ -173,20 +142,20 @@ public abstract class Moveable {
     public boolean getIsEdible() {
         return this.isEdible;
     }
-    
-    public void setIsEdible(boolean isEdible){
+
+    public void setIsEdible(boolean isEdible) {
         this.isEdible = isEdible;
     }
 
     public int getRotation() {
         return this.rotation;
-    } 
+    }
 
-    public void setDX(float dx){ 
+    public void setDX(float dx) {
         this.dx = dx;
-    } 
+    }
 
-    public void setDY(float dy){ 
+    public void setDY(float dy) {
         this.dy = dy;
     }
 

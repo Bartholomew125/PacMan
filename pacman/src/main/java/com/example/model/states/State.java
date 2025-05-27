@@ -1,7 +1,7 @@
 package com.example.model.states;
 
 /**
- * State
+ * State represents the state of the game.
  */
 public abstract class State {
     private boolean ghostIsAfraid;
@@ -10,7 +10,17 @@ public abstract class State {
     private boolean pacManIsEdible;
     private double pacManMovementmultiplier;
 
-    public State(boolean ghostIsAfraid, double ghostMovementMultiplier, boolean ghostIsEdible, boolean pacManIsEdible, double pacManMovementmultiplier) {
+    /**
+     * Creates State.
+     * 
+     * @param ghostIsAfraid
+     * @param ghostMovementMultiplier
+     * @param ghostIsEdible
+     * @param pacManIsEdible
+     * @param pacManMovementmultiplier
+     */
+    public State(boolean ghostIsAfraid, double ghostMovementMultiplier, boolean ghostIsEdible, boolean pacManIsEdible,
+            double pacManMovementmultiplier) {
         this.ghostIsAfraid = ghostIsAfraid;
         this.ghostMovementMultiplier = ghostMovementMultiplier;
         this.ghostIsEdible = ghostIsEdible;
@@ -22,19 +32,19 @@ public abstract class State {
         return this.ghostIsAfraid;
     }
 
-    public double getGhostMovementMultiplier(){
+    public double getGhostMovementMultiplier() {
         return this.ghostMovementMultiplier;
     }
-    
-    public boolean getGhostIsEdible(){
+
+    public boolean getGhostIsEdible() {
         return this.ghostIsEdible;
     }
 
-    public boolean getPacManIsEdible(){
+    public boolean getPacManIsEdible() {
         return this.pacManIsEdible;
     }
 
-    public double getPacManMovementmultiplier(){
+    public double getPacManMovementmultiplier() {
         return this.pacManMovementmultiplier;
     }
 

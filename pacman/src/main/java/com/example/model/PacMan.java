@@ -3,8 +3,7 @@ package com.example.model;
 /**
  * The PacMan class which represents the pacMan
  */
-public class PacMan extends Moveable{
-    
+public class PacMan extends Moveable {
 
     /**
      * Creates a new PacMan moving to the right.

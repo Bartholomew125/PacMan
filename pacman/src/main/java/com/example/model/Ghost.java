@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
  * This is the abstract ghost class from which actual ghosts should extend.
  */
 public abstract class Ghost extends Moveable {
+
     protected Color color;
     protected boolean isAfraid;
     protected Stack<Pos2D> moveStack;
@@ -30,25 +31,19 @@ public abstract class Ghost extends Moveable {
         this.moveQueue = new LinkedList<>();
     }
 
-    /**
-     * @return The color of the ghost
-     */
     public Color getColor() {
         return this.color;
     }
 
-    /**
-     * Set the color of the ghost
-     */
     public void setColor(Color color) {
         this.color = color;
     }
 
-    public void setIsAfraid(boolean isAfraid){
+    public void setIsAfraid(boolean isAfraid) {
         this.isAfraid = isAfraid;
     }
-    
-    public boolean getIsAfraid(){
+
+    public boolean getIsAfraid() {
         return this.isAfraid;
     }
 
@@ -64,19 +59,14 @@ public abstract class Ghost extends Moveable {
     public void move() {
         if (this.moveStack.isEmpty()) {
             this.stop();
-        }
-        else if (this.getMoveStack().peek().distanceTo(this) <= 0.1) {
+        } else if (this.getMoveStack().peek().distanceTo(this) <= 0.1) {
             this.getMoveStack().pop();
             if (!this.moveStack.isEmpty()) {
-                this.setDX(this.getMoveStack().peek().getX()-this.getX());
-                this.setDY(this.getMoveStack().peek().getY()-this.getY());
+                this.setDX(this.getMoveStack().peek().getX() - this.getX());
+                this.setDY(this.getMoveStack().peek().getY() - this.getY());
             }
-        }
-        else {
+        } else {
             super.move();
         }
     }
-
-
-    
 }

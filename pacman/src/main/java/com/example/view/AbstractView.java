@@ -5,13 +5,23 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+/**
+ * An abstract view which implemnts View.
+ */
 public abstract class AbstractView implements View {
-     
+
     protected Group surface;
     protected int width;
     protected int height;
     protected double positionScaler;
 
+    /**
+     * Creates a new instance of AbstractView.
+     * 
+     * @param width
+     * @param height
+     * @param positionScaler
+     */
     public AbstractView(int width, int height, double positionScaler) {
         this.width = width;
         this.height = height;
@@ -19,29 +29,45 @@ public abstract class AbstractView implements View {
         this.surface = new Group();
     }
 
+    /**
+     * Clears surface.
+     */
     public void clear() {
         this.getSurface().getChildren().clear();
     }
 
+    /**
+     * Adds view to surface.
+     */
     public void addView(View view) {
         this.getSurface().getChildren().add(view.getSurface());
     }
 
     /**
-     * Adds the given image to the surface of the view at the given x and y positions.
+     * Adds the given image to the surface of the view at the given x and y
+     * positions.
+     * 
      * @param image
      * @param x
      * @param y
      */
     public void addImageToSurface(Image image, float x, float y, int rotation, boolean flipped) {
         ImageView imageView = new ImageView(image);
-        imageView.setX(x*positionScaler);
-        imageView.setY(y*positionScaler);
+        imageView.setX(x * positionScaler);
+        imageView.setY(y * positionScaler);
         imageView.setRotate(rotation);
         imageView.setScaleX(flipped ? -1 : 1);
         this.getSurface().getChildren().add(imageView);
     }
 
+    /**
+     * Adds text to surface.
+     * 
+     * @param text
+     * @param x
+     * @param y
+     * @param rotation
+     */
     public void addTextToSurface(Text text, int x, int y, int rotation) {
         text.setX(x);
         text.setY(y);

@@ -1,18 +1,27 @@
 package com.example.controller;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 import com.example.model.Direction;
 import com.example.model.Maze;
 import com.example.model.PacMan;
 
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-
+/**
+ * PacManController for controlling PacMan.
+ */
 public class PacManController {
-    
-    private PacMan pacMan;
-    private Maze maze;
+
+    private final PacMan pacMan;
+    private final Maze maze;
     private Direction waitingDirection;
 
+    /**
+     * Initalizes a GhostController.
+     * 
+     * @param pacMan
+     * @param maze
+     */
     public PacManController(PacMan pacMan, Maze maze) {
         this.pacMan = pacMan;
         this.maze = maze;
@@ -35,7 +44,7 @@ public class PacManController {
             pacMan.setDirection(dir);
         }
         // Check if there is a passage in the direction pressed
-        else if (isPassage(dir)){
+        else if (isPassage(dir)) {
             this.setWaitingDirection(dir);
         }
         // Any other case
@@ -64,16 +73,13 @@ public class PacManController {
             pacManFutureY = (int) this.pacMan.getY() + (int) this.pacMan.getDY();
         }
         if (dir == Direction.LEFT) {
-            return !maze.isWallAt(pacManFutureX-1, pacManFutureY);
-        }
-        else if (dir == Direction.RIGHT) {
-            return !maze.isWallAt(pacManFutureX+1, pacManFutureY);
-        }
-        else if (dir == Direction.UP) {
-            return !maze.isWallAt(pacManFutureX, pacManFutureY-1);
-        }
-        else {
-            return !maze.isWallAt(pacManFutureX, pacManFutureY+1);
+            return !maze.isWallAt(pacManFutureX - 1, pacManFutureY);
+        } else if (dir == Direction.RIGHT) {
+            return !maze.isWallAt(pacManFutureX + 1, pacManFutureY);
+        } else if (dir == Direction.UP) {
+            return !maze.isWallAt(pacManFutureX, pacManFutureY - 1);
+        } else {
+            return !maze.isWallAt(pacManFutureX, pacManFutureY + 1);
         }
     }
 
@@ -88,6 +94,7 @@ public class PacManController {
 
     /**
      * Updates the pacMan direction at the right time.
+     * 
      * @param nanoTime
      */
     public void update(long nanoTime) {
@@ -95,11 +102,11 @@ public class PacManController {
             float x = this.pacMan.getX();
             float y = this.pacMan.getY();
             double varriance = 0.1;
-    
+
             // The position is at an integer position within a varraince
-            if (Math.abs(x-Math.round(x)) < varriance && 
-                Math.abs(y-Math.round(y)) < varriance ) {
-                    this.changeDirection();
+            if (Math.abs(x - Math.round(x)) < varriance &&
+                    Math.abs(y - Math.round(y)) < varriance) {
+                this.changeDirection();
             }
         }
         this.pacMan.move();
@@ -113,14 +120,11 @@ public class PacManController {
 
         if (this.waitingDirection == Direction.UP) {
             this.pacMan.up();
-        }
-        else if (this.waitingDirection == Direction.LEFT) {
+        } else if (this.waitingDirection == Direction.LEFT) {
             this.pacMan.left();
-        }
-        else if (this.waitingDirection == Direction.DOWN) {
+        } else if (this.waitingDirection == Direction.DOWN) {
             this.pacMan.down();
-        }
-        else if (this.waitingDirection == Direction.RIGHT) {
+        } else if (this.waitingDirection == Direction.RIGHT) {
             this.pacMan.right();
         }
 

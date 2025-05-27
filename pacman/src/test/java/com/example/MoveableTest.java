@@ -1,7 +1,6 @@
 package com.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.example.model.Moveable;
@@ -19,7 +18,6 @@ public class MoveableTest {
      * Test that calling right() sets the movement in the positive x-direction.
      */
     @Test
-    @DisplayName("Test that 'right()' sets dx=1 and dy=0")
     void testRight() {
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.right();
@@ -31,7 +29,6 @@ public class MoveableTest {
      * Test that calling left() sets the movement in the negative x-direction.
      */
     @Test
-    @DisplayName("Test that 'left()' sets dx=-1 and dy=0")
     void testLeft() {
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.left();
@@ -43,7 +40,6 @@ public class MoveableTest {
      * Test that calling down() sets the movement in the positive y-direction.
      */
     @Test
-    @DisplayName("Test that 'down()' sets dx=0 and dy=1")
     void testDown() {
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.down();
@@ -55,7 +51,6 @@ public class MoveableTest {
      * Test that calling up() set the movement in the negative y-direction.
      */
     @Test
-    @DisplayName("Test that 'up()' sets dx=0 and dy=-1")
     void testUp() {
         TestMoveable moveable = new TestMoveable(0, 0, 0, 0, 1);
         moveable.up();
@@ -69,7 +64,6 @@ public class MoveableTest {
      * object.
      */
     @Test
-    @DisplayName("Test that 'getX() returns 42")
     void testGetX() {
         TestMoveable moveable = new TestMoveable(42, 0, 0, 0, 1);
         assertEquals(42, moveable.getX(), "returned value of 'getX()' should be equal to 42.");
@@ -80,7 +74,6 @@ public class MoveableTest {
      * object.
      */
     @Test
-    @DisplayName("Test that 'getY()' returns 123")
     void testGetY() {
         TestMoveable moveable = new TestMoveable(42, 123, 0, 0, 1);
         assertEquals(123, moveable.getY(), "returned value of 'getY()' should be equal to 123.");
@@ -90,7 +83,6 @@ public class MoveableTest {
      * Test that setMovementMultiplier sets the objects field to expected value.
      */
     @Test
-    @DisplayName("Test that 'setMovementMultiplier()' sets the moveable.movementMultiplier to 23")
     void testSetMovementMultiplier() {
         TestMoveable moveable = new TestMoveable(42, 123, 0, 0, 0);
         moveable.setMovementMultiplier(23);
