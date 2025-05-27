@@ -3,4 +3,5 @@ module com.example {
     requires javafx.graphics;
     exports com.example;
     exports com.example.model.states;
+    exports com.example.model;
 }
