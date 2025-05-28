@@ -313,7 +313,18 @@ udskifte den farve med farven af spøgelset.
 
 Når man så laver et nyt \code{AnimatedImage}, så specificerer man hvor lang tid
 én frame varer i nanosekunder. På denne måde kan vi i \code{getFrame()} metode
-regne ud hvilken frame vi giver, ud fra den nuværende tid som metoden for.
+regne ud hvilken frame vi giver, ud fra den nuværende tid som metoden for. Det
+gør den ved først at regne ud hvor lang tid hele animationen tager. Derefter
+finder vi hvor langt inde i den animation cyklus vi er ved at tage den
+nuværende tid modulus længden af animationen. Med dette kan vi så dividerer med
+længden af én frame og få det frame indeks som vi er nået til.
+
+For at farve spøgelsernes animationerne de rigtige farver benytter vi vores
+metode \code{replaceColorsInFrames()}, som udskifter alle farver som er lig med
+\code{fromColor} i en animations frames, og sætter dem til farven
+\code{toColor}. Dette gør den ved at gå igennem hver frame pixelvis og tjekke om
+de matcher \code{fromColor}, for så at udskifte det med \code{toColor} på en
+kopi af framet, så det til sidst kan blive overskrevet.
 % subsection Animationer (end)
 
 \begin{itemize}
