@@ -34,7 +34,7 @@ public class GhostView extends AbstractView {
 
         for (Ghost ghost : this.ghosts) {
             AnimatedImage newGhostAnimation = new AnimatedImage(300000000, (int) this.getPositionScaler());
-            newGhostAnimation.loadFramesFromDirectory("ghostFrames", "frame", 3);
+            newGhostAnimation.loadFramesFromDirectory("ghostFrames", "frame", 2);
             newGhostAnimation.replaceColorsInFrames(Color.color(0, 0, 1.0/255.0), ghost.getColor());
             this.ghostAnimations.add(newGhostAnimation);
         }
