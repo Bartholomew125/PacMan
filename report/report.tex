@@ -129,7 +129,7 @@ Eventuelle afvigelser fra kravsspecifikationen ses dokumenteret/diskuteret i det
     \label{UML-diagram}
 \end{figure}
 
-Projekts design følger \textit{MVC} (Model-View-Controller) modellen. Det
+Projektets design følger \textit{MVC} (Model-View-Controller) modellen. Det
 vil sige at vores \textit{Model} repræsenterer hvordan PacMan spillet er bygget
 op med spøgelser, væge, piller osv. Så har vi vores \textit{Controller} som står
 for alt logikken med hvordan ting skal kolliderer og bevæge sig, og hvornår de
@@ -161,9 +161,10 @@ hedder \code{Moveable}, som er en abstrakt enhed der kan bevæge sig. Dette
 tillader os at \textit{nedarve} fra den når vi skal lave ting der skal bevæge
 sig som \code{Ghost} og \code{PacMan}. Ud over dette er \code{Ghost} også en
 abstrakt klasse, så vi kan udvide de enkelte spøgelser fra den. Udover
-\code{Moveable} klasse, har vi også en abstrakt klass, \code{Pos2D}, til at
+\code{Moveable} klasse, har vi også en klasse, \code{Pos2D}, til at
 beskrive positioner som ikke skal kunne bevæge sige. Fra denne klasse kan vi så
-nedarve klasser som \code{Pill} og \code{Wall}. På denne måde benytter vi
+nedarve klasser som \code{Pill} og \code{Wall}, da de bare er positioner, men vi
+godt vil kunne skelne imellem dem. På denne måde benytter vi
 \textit{klasseafhængighedsprincippet} til at simplificerer koden, og gøre det
 nemmere at udvide med nye features.
 % subsection Model (end)
@@ -184,7 +185,7 @@ som implementerer dette interface. Vi nedarver på denne måde fra det abstrakte
 \textit{View} hver gang vi laver et nyt \textit{View} som står for at vise noget
 andet. Så kan vi lave specifikke views som står for at tegne kun én slags ting,
 f.eks. \code{PacManView}. På denne måde benytter vi princippet om et enkelt
-ansvar.
+ansvar, svarende til \textit{Single Responsibility Principle} eller \textit{SRP}.
 % subsection View (end)
 
 \subsection{Controller}\label{sub:Controller} % (fold)
@@ -196,12 +197,12 @@ ansvar.
     \label{UML-diagram-controller}
 \end{figure}
 
-Til \textit{Controller} (set \autoref{UML-diagram-controller}) har vi også lavet
-en grænseflade, for at specificerer hvad en "Controller" gør. Så har vi lavet
-controllers til at styre henholdsvis PacMan, spøgelser og de forskellige stadier
-af spillet. Med dette har vi lavet en \code{MainController} som bestemmer
-hvornår alle de andre controllers skal kaldes, og hvornår vores \textit{View}
-bliver kaldt.
+Til \textit{Controller} (se \autoref{UML-diagram-controller}) har vi også lavet
+en grænseflade, for at specificerer hvad en "Controller" gør. Derefter har vi
+lavet controllers til at styre henholdsvis PacMan, spøgelser og de forskellige
+stadier af spillet. Med dette har vi lavet en \code{MainController} som
+bestemmer hvornår alle de andre controllers skal opdateres, og hvornår vores
+\textit{View} bliver opdateret.
 % subsection Controller (end)
 
 \subsection{Ændringer}\label{sub:Ændringer} % (fold)
@@ -210,11 +211,11 @@ UML-diagram meget mere simpelt, som kan ses på \autoref{UML-diagram-old}.
 Enkeltheden er både grundet de manglende felter og metoder, men også at
 kompleksiteten af programmet ikke var blevet realiseret endnu. \code{View} var
 bare én enkelt klasse som stod for at tegne alt, og \code{Controller} stod kun
-for at tage imod input fra brugeren, og bevæge pacman i \code{Maze}. Alt andet
-logik til spillet var i \code{Maze}, som gjorde at det fyldte rigtig meget. Da
-vi så begynde at implementerer mere, lagde vi mærke til hvor god en idé det
-ville være at splitte det endnu mere op, og specialisere klasserne vi laver, som
-er idéen med \textit{Single Responsibility Principle}.
+for at tage imod input fra brugeren, og bevæge PacMan i labyrinten. Alt
+andet logik til spillet var i \code{Maze}, som gjorde projektet uoverskueligt,
+samtidig med at det bryder \textit{SRP}. Da vi så begynde at implementerer mere,
+lagde vi mærke til hvor god en idé det ville være at splitte det endnu mere op,
+og specialisere klasserne vi laver, som er idéen med \textit{SRP}.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/UML-diagram-old.png}
@@ -236,6 +237,8 @@ denne forbedring kan ses på \autoref{UML-diagram-old2}.
     \caption{Det andet UML-diagram til projektet.}
     \label{UML-diagram-old2}
 \end{figure}
+Siden da har vi udvidet endnu mere på projektet, og det ser nu ud som det gør på
+\autoref{UML-diagram}.
 % subsection Ændringer (end)
 
 %\begin{itemize}
@@ -255,14 +258,62 @@ denne forbedring kan ses på \autoref{UML-diagram-old2}.
 % section design (end)
 
 \section{Implementation}\label{sec:Implementation} % (fold)
+
+States
+
+% \subsection{Moveable}\label{sub:Moveable} % (fold)
+% Som nævnt i design sektionen har vi lavet en \code{Moveable} klasse. Det smarte
+% ved den er at vi bare kan kalde metoden \code{move()} på en movable, og så
+% bevæger den sig i den retning den har fået tildelt. 
+% subsection Moveable (end)
+
+\subsection{PacManController}\label{sub:PacManController} % (fold)
+Siden vi har gjort at en \textit{Moveable}'s position er beskrevet med decimal
+tal, så skal der noget smart logik til for at PacMan kan bevæge sig "smooth"
+omkring hjørner i labyrinten, da den består af en masse væge på
+heltals-positioner, og PacMan er samme størrelse som væggene, så han passer kun
+lige akurat imellem dem.
+
+Idéen er at man kigger frem foran PacMan for at se om der er en passage til den
+side man gerne vil hen, indikeret med et tastetryk. Hvis der er en passage
+venter controlleren med at dreje PacMan indtil han er lige ved siden af
+passagen. Dette har vi gjort ved at gemme retningn i et felt kaldet for
+\code{waitingDirection}, og så hver gang \code{PacManController}'s
+\code{update()} metode bliver kaldt, så tjekker den om PacMan's position er en
+heltalsværdi. Det må nemlig betyde at han nu står foran den passage som der
+tidligere blev set. I så fald drejer PacMan nu til retningen af
+\code{waitingDirection}. 
+
+Der er også casen hvor PacMan skifter retning til det modsatte af hvad han
+bevæger sig. Så kan vi ikke kigge efter en passage der, for det vil der altid
+være, og han vil dermed ikke skifte retning med det samme. Så i dette tilfælde
+skifter vi bare retning med det samme. Hvis det er sådan at PacMan står stille,
+så er vi ikke interreseret i at kigge efter en passage, og han skal bare bevæge
+sig i den retning som man trykker med det samme.
+
+For at lave alt dette med retninger, lavede vi en \code{enum} klasse til at
+holde styr på de fire retninger vi tillader: op, ned, højre og venstre. For at
+finde ud af hvilken en af disse retninger vores tastetryk svarer til, lavede vi
+også en \code{DirectionAdapter} klasse, som står for at konverterer imellem
+\code{Direction} og andre representationer af en retning.
+% subsection PacManController (end)
+
+\subsection{Ghost AI}\label{sub:Ghost AI} % (fold)
+
+% subsection Ghost AI (end)
+
+\subsection{Animationer}\label{sub:Animationer} % (fold)
+
+% subsection Animationer (end)
+
 \begin{itemize}
   \item Formålet med denne rapportsektion er at give den interesserede læser et
   overblik over de interessante implementationsdetaljer, som er værd at kigge
   nærmere på i jeres kodebase, samt nødvendige detaljer for at køre jeres kode.
-  \item Angiv hvilken version af Java I har brugt til at teste og kompilere
+  \item angiv hvilken version af java i har brugt til at teste og kompilere
   jeres kode, og inkludérkorte instruktioner til hvordan man kompilerer og kører
   koden.
-  \item Giv en beskrivelse på højniveau af interessante implementationsaspekter.
+  \item giv en beskrivelse på højniveau af interessante implementationsaspekter.
   F.eks., aspekter, I har brugt særligt meget tid eller energi på.
   \item Det kunne f.eks. være mere avancerede aspekter såsom hvordan I håndterer
   AI, hvordan I håndterer spilhandlinger, animation, eller andet.
