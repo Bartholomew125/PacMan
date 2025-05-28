@@ -1,8 +1,11 @@
 package com.example.view;
 
 import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -14,6 +17,7 @@ public abstract class AbstractView implements View {
     protected int width;
     protected int height;
     protected double positionScaler;
+    private final String fontPath = "/com/example/font/Emulogic.ttf";
 
     /**
      * Creates a new instance of AbstractView.
@@ -68,11 +72,33 @@ public abstract class AbstractView implements View {
      * @param y
      * @param rotation
      */
-    public void addTextToSurface(Text text, int x, int y, int rotation) {
+    public void addTextToSurface(Text text, int x, int y, int textSize) {
         text.setX(x);
         text.setY(y);
-        text.setRotate(rotation);
+        this.setTextFont(text, textSize);
         this.getSurface().getChildren().add(text);
+    }
+
+    /**
+     * Sets font and color of text.
+     * 
+     * @param text
+     * @param textSize
+     */
+    private void setTextFont(Text text, int textSize) {
+        text.setFill(Color.WHITE);
+        Font textFont = Font.loadFont(getClass().getResourceAsStream(this.fontPath), textSize);
+        text.setFont(textFont);
+    }
+
+    public Button addButtonToSuface(Text text, int textSize, double width, double height, double x, double y) {
+        Button newButton = new Button(text);
+        this.setTextFont(text, textSize);
+        newButton.setPrefWidth(width);
+        newButton.setPrefHeight(height);
+        newButton.setLayoutX(x);
+        newButton.setLayoutX(y);
+        return newButton;
     }
 
     public Group getSurface() {

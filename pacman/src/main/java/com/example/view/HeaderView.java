@@ -43,15 +43,11 @@ public class HeaderView extends AbstractView {
 
         // Create score text
         this.scoreText = new Text();
-        this.scoreText.setFont(this.textFont);
-        this.scoreText.setFill(Color.WHITE);
-        this.addTextToSurface(this.scoreText, 30, this.getHeight() / 2, 0);
+        this.addTextToSurface(this.scoreText, 30, this.getHeight() / 2, 20);
 
         // Create lives text
         this.livesText = new Text();
-        this.livesText.setFill(Color.WHITE);
-        this.livesText.setFont(this.textFont);
-        this.addTextToSurface(this.livesText, this.getWidth() - 200, this.getHeight() / 2, 0);
+        this.addTextToSurface(this.livesText, this.getWidth() - 200, this.getHeight() / 2, 20);
     }
 
     @Override
