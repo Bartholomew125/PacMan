@@ -51,6 +51,12 @@ public class AnimatedImage {
         }
     }
 
+    /**
+     * Replaces all the colors that are fromColor in all the frames to the toColor.
+     * 
+     * @param fromColor
+     * @param toColor
+     */
     public void replaceColorsInFrames(Color fromColor, Color toColor) {
         for (int i = 0; i < this.frames.length; i++) {
             Image frame = this.frames[i];
