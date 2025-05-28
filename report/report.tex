@@ -267,7 +267,7 @@ States
 % bevæger den sig i den retning den har fået tildelt. 
 % subsection Moveable (end)
 
-\subsection{PacManController}\label{sub:PacManController} % (fold)
+\subsection{PacMan kontrol}\label{sub:PacMan Kontrol} % (fold)
 Siden vi har gjort at en \textit{Moveable}'s position er beskrevet med decimal
 tal, så skal der noget smart logik til for at PacMan kan bevæge sig "smooth"
 omkring hjørner i labyrinten, da den består af en masse væge på
@@ -296,14 +296,24 @@ holde styr på de fire retninger vi tillader: op, ned, højre og venstre. For at
 finde ud af hvilken en af disse retninger vores tastetryk svarer til, lavede vi
 også en \code{DirectionAdapter} klasse, som står for at konverterer imellem
 \code{Direction} og andre representationer af en retning.
-% subsection PacManController (end)
+% subsection PacMan Kontrol (end)
 
 \subsection{Ghost AI}\label{sub:Ghost AI} % (fold)
 
 % subsection Ghost AI (end)
 
 \subsection{Animationer}\label{sub:Animationer} % (fold)
+Da vi gerne ville have animationer i spillet, lavede vi en klasse kaldet
+\code{AnimatedImage}, som står for at repræsenterer de forskellige frames af en
+animation, indlæse frames fra en sti, og ændre farver i dem hvis der er brug for
+det. Det med at ændre farver har vi gjort så vi ikke selv skal tegne et nyt set
+frames for hvert spøgelse vi vil lave i en anden farve, men i stedet for kan
+lave ét set med en meget specifik farve (hvis hex værdi er \#000001), og så
+udskifte den farve med farven af spøgelset.
 
+Når man så laver et nyt \code{AnimatedImage}, så specificerer man hvor lang tid
+én frame varer i nanosekunder. På denne måde kan vi i \code{getFrame()} metode
+regne ud hvilken frame vi giver, ud fra den nuværende tid som metoden for.
 % subsection Animationer (end)
 
 \begin{itemize}
