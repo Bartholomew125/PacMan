@@ -63,16 +63,18 @@ public class Ghost extends Moveable {
 
     @Override
     public void move() {
-        if (this.moveStack.isEmpty()) {
+        if (this.getMoveStack().isEmpty()) {
             this.stop();
         }
         else if (Algebra.distanceBetween(this.getMoveStack().peek(), this) <= 0.1) {
+            this.stop();
             this.getMoveStack().pop();
             if (!this.moveStack.isEmpty()) {
                 this.setDX(this.getMoveStack().peek().getX() - this.getX());
                 this.setDY(this.getMoveStack().peek().getY() - this.getY());
             }
-        } else {
+        } 
+        else {
             super.move();
         }
     }
