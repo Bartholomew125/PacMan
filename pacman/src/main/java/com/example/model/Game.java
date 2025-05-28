@@ -206,7 +206,6 @@ public class Game {
         this.pacMan.right();
         for (Ghost g : this.ghosts) {
             g.resetPosition();
-            g.setMoveStack(new Stack<Pos2D>());
         }
     }
 

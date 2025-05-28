@@ -78,4 +78,10 @@ public class Ghost extends Moveable {
             super.move();
         }
     }
+
+    @Override
+    public void resetPosition() {
+        this.setMoveStack(new Stack<Pos2D>());
+        super.resetPosition();
+    }
 }
