@@ -1,5 +1,7 @@
 package com.example.view;
 
+import java.io.InputStream;
+
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
@@ -17,6 +19,8 @@ public abstract class AbstractView implements View {
     protected int width;
     protected int height;
     protected double positionScaler;
+    private final String fontPath = "/com/example/font/Emulogic.ttf";
+        
 
     /**
      * Creates a new instance of AbstractView.
@@ -75,7 +79,8 @@ public abstract class AbstractView implements View {
         text.setX(x);
         text.setY(y);
         text.setFill(Color.WHITE);
-        text.setFont(Font.font("Emulogic", textSize));
+
+        text.setFont(Font.loadFont(getClass().getResourceAsStream(fontPath), textSize));
         this.getSurface().getChildren().add(text);
     }
 
@@ -85,7 +90,7 @@ public abstract class AbstractView implements View {
         newButton.setPrefHeight(height);
         newButton.setLayoutX(x);
         newButton.setLayoutY(y);
-        newButton.setFont(Font.font("Emulogic", textSize));
+        newButton.setFont(Font.loadFont(getClass().getResourceAsStream(fontPath), textSize));
         return newButton;
     }
     
