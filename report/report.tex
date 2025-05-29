@@ -5,7 +5,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fancyhdr}
 \usepackage{lastpage}
-\usepackage{titling}
 \usepackage[danish]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -172,6 +171,7 @@ nedarve klasser som \class{Pill} og \class{Wall}, da de bare er positioner, men 
 godt vil kunne skelne imellem dem. På denne måde benytter vi
 \textit{klasseafhængighedsprincippet} til at simplificerer koden, og gøre det
 nemmere at udvide med nye features.
+Alle disse afhængigheder samt nedarvelser, kan ses på ovenstående billede (se \autoref{UML-diagram-Model}).
 % subsection Model (end)
 
 
@@ -304,6 +304,59 @@ også en \class{DirectionAdapter} klasse, som står for at konverterer imellem
 % subsection PacMan Kontrol (end)
 
 \subsection{Ghost AI}\label{sub:Ghost AI} % (fold)
+\textbf{Søge Strategier}
+Vi valgte at implementere forskellige måder for spøgelserne i PacMan til at jage PacMan(spilleren). 
+Som vores primære metoder valgte vi to kendte søgealgoritmer, nemlig \textit{DepthFirstSearch} \& \textit{BreadthFirstSearch}. 
+Vores grund for at bruge to søgealgoritmer og ikke kun en, var for at sikre lidt udforudselighed i spillet, 
+da spøgelserne så skulle tage forskellige ruter mod PacMan.\\ 
+\\
+\textbf{Node klassen}
+For at kunne skabe fundamentet for at behandle vores Maze som et binært træ skabte vi klassen Node. 
+Node objektet består af en forældre node, en arrayliste af noder som er dets børn og en Pos2D som er nodens position i Maze. 
+Det første Node objekt ville være roden og have ingen forældre og ingen børn til at starte med, 
+men den ville skulle have en start position(Pos2D).\\ 
+\\
+Metoderne i Node klassen som gav gavn til os senere var addChild(), og setParent() som gjorde os i stand til at opdatere vores binære træ. 
+
+\\
+\textbf{SearchAlgorithm grænsefladen} 
+Grænsefladen SearchAlgorithm var ment som en måde at kunne give metoder til vores Abstrakte klasse AbstracSearchAlgorithm. 
+De metoder vi valgte at give videre var to setters, setGoal() \& setStart(), samt en metode search() og en getter getMoveStack(). 
+Metoden getMoveStack() er vores metode for at hente den sti af Pos2D spøgelserne skal gå for at nå PacMans position. 
+Metoden search() ville blive brugt som en måde at søge efter et mål med den valgte søge strategi. 
+\\
+
+\textbf{AbstractSearchAlgorithm abstrakt klasse}
+Vores plan med AbstractSearchAlgorithm som en abstrakt klasse var, så kunne vi bruge AbstractSearchAlgorithm som skabelon for andre søgealgoritmer, og implementere SearchAlgorithm grænsefladen for at abstrahere de muligheder, de kommende søgealgoritmer skal have. Vi følte, at det var en god idé at limitere metoderne tilgængelige for de kommende søgealgoritmer for at undgå unødvendig komplesiktet og uforudselighed.\\ 
+\\
+En metode fra AbstractSearchAlgorithm som er essentiel for søgealgoritmen var vores metode getNeighbours(). Den er essentiel fordi den bruges til at undersøge de fire mulige bevægelser til rådighed(op, ned, højre, venstre) ud fra nuværende position. Ved brug af en \textit{for-løkke}, en \textit{boolean} metode IsWallAt() fra Pos2D klassen og to lokale \textit{Integer} variabler kan vi så sikre, at spøgelsernes nye positioner er lovlige(der er ikke en væg) og heller ikke uden for Mazen.
+\\
+
+\textbf{DepthFirstSearch klasse }
+I Depth-First Search er strategien at traversere et binært træ ved at søge første venstre gren i træet og fortsætte til målet nås. 
+Hvis målet ikke nås i første søgning og vi istedet når bunden af træet, så \textit{backtracker} vi fra efterkommer noden op mod roden og udforsker de forskellige efterkommeres grene for at finde målet der. 
+Hvis målet ikke findes returneres fejl.\\ 
+\\ 
+For at implementere Depth-First Search brugte vi pseudokoden fra wikipedia(INSERT KILDEHENVISNING HERE) og oversatte den til vores program. 
+For at kunne bruge metoden getNeighbours() fra abstrakt klassen, skal DepthFirstSearch klassen have adgang til vores Maze i DepthFirstSearch konstruktøren. 
+Ved at følge pseudokoden, getNeighbours() og to metoder fra Node klassen undersøgte vi stier af Pos2D til PacMan, og returnerede en Stack af bevægelser som kunne gives til GhostController og updatere spøgelserne med update() metoden fra GhostController.\\ 
+\\ 
+En anden ændring er ved Stacks medfødte metode contains(). 
+Når man i Stack vil undersøge om en Stack har objektet man spørger efter, kaldes contains() der bruges som en boolean til at sammenligne et objekt med objekterne i Stacken. 
+Den metode har vi måtte override og ændre for at passe til Pos2D objektet. 
+Ændringen er en \textit{for-løkke} der sammenligner Pos2D'ers X og Y værdier.
+\\
+\textbf{Breadth-FirstSearch klasse} 
+I Breadth-FirstSearch er strategien at traversere et binært træ ved at søge først venstre gren og så hver gren i et binært træ (i samme dybde). 
+Vi går derefter først dybere i træet når hver gren er undersøgt. Hvis målet ikke findes returneres fejl.\\
+\\
+For at implementere Breadth-First Search brugte vi pseudokoden fra wikipedia(INSERT KILDEHENVSNING HERE) og oversatte den til vores program. 
+For at kunne bruge metoden getNeighbours() fra abstrakt klassen, skal BreadthFirstSearch klassen have adgang til vores Maze i BreadthFirstSearch konstruktøren. 
+Ved at følge pseudokoden, getNeighbours() og to metoder fra Node klassen undersøgte vi stier af Pos2D til PacMan, 
+og returnerede en Stack af bevægelser som kunne gives til GhostController og updatere spøgelserne med update() metoden fra GhostController. 
+Da vi brugte lænkede lister som vores kø i BreadthFirstSearch, 
+og lænkede lister i Java også har metoden contains(),  valgte vi at Override contains() og ændre den for samme grunde og på samme vis som i DepthFirstSearch klassen.
+
 
 % subsection Ghost AI (end)
 
@@ -380,7 +433,7 @@ logikken bag implementeringen. Med dette, har man som "\textit{tester}", altså
 mulighed for at tjekke, om en given invariant for en given metode overholdes
 under kørsel.
 
-Mere specifikt; har vi valg at benytte os af \textit{Java}s framework
+Mere specifikt; har vi valgt at benytte os af \textit{Java}s framework
 \code{JUnit}, som b.la. understøtter behjælpelige sammenligningsmetoder (f.eks.
 \textit{assertions} via \code{assert}).
 
@@ -398,10 +451,12 @@ nye branches under udvikling af nye programfunktionaliteter. Dette konstruerer
 en form for automatiseret testing, da man ikke kan publicere ny funktionalitet,
 før det passer med den resterende kodebase (f.eks. håndtering af mergeconflicts
 mm.). Denne form for \textit{automatiseret} testing er også kendt som
-\textit{Continuous integration testing}.
+\textit{Continuous integration testing}. I det følgende, kan man se hvorledes sådanne en unit-test kunne se ud.
 
-\textcolor{ocre}{\boxed{\text{INDKLUDER ANDEN TILGANG TIL TEST?}}}
+Det kan eksempelvis være behjælpeligt at være sikker på, at ens metoder som er konstrueret til at beregne distancen mellem objecter, rent faktisk returnerer ønskede værdier. For at sikre os, at vores adhoc polymorfiske metode \code{distanceBetween}, overholder dette, har vi valgt at konstruere følgende unit-test:
+\snippet{12}{55}{./code/AlgebraTest.java}
 
+Man kunne derudover også have valgt at lave en form for black-box-testing hvorved individer som ikke kender til kode-basen f.eks. prøver at spille spillet og derved rapportere evt. fejl (både visuelle og logiske).
 % \begin{itemize}
 %   \item Beskriv hvordan I har testet, at jeres kode lever op til
 %   kravsspecifikationen. Har I, f.eks., benyttet unit tests? Manuelle tests?
