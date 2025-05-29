@@ -30,7 +30,7 @@ public class EndView extends AbstractView {
 
         // Create score text
         this.scoreText = new Text();
-        this.scoreText.setText("Game Over\n  Score: " + this.game.getScore());
+        this.scoreText.setText("Game Over\nScore " + this.game.getScore());
         int placeTextX = (int) ((this.width - this.scoreText.getLayoutBounds().getWidth()) / 2);
         int placeTextY = (int) ((this.height - this.scoreText.getLayoutBounds().getHeight()) / 2);
         this.addTextToSurface(this.scoreText, placeTextX, placeTextY, 20);
@@ -42,7 +42,7 @@ public class EndView extends AbstractView {
     public void render(double nanoTime) {
 
         // Calculate where to place "game-over" text.
-        this.scoreText.setText("Game Over\n  Score: " + this.game.getScore());
+        this.scoreText.setText("Game Over\nScore " + this.game.getScore());
         int placeTextX = (int) ((this.getWidth() - this.scoreText.getLayoutBounds().getWidth()) / 2);
         int placeTextY = (int) ((this.getHeight() - this.scoreText.getLayoutBounds().getHeight()) / 2);
         this.addTextToSurface(this.scoreText, placeTextX, placeTextY, 20);
