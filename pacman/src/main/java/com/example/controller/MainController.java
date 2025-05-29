@@ -3,7 +3,6 @@ package com.example.controller;
 import java.util.ArrayList;
 import javafx.scene.input.KeyEvent;
 
-import com.example.Algebra;
 import com.example.model.Game;
 import com.example.model.Ghost;
 import com.example.model.PacMan;
