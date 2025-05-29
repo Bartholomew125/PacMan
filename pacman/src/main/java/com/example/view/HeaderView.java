@@ -17,7 +17,6 @@ public class HeaderView extends AbstractView {
     private Text livesText;
     private Game game;
     private GraphicsContext gc;
-    private final Font textFont;
 
     /**
      * Creates an instance of HeaderView.
@@ -29,10 +28,7 @@ public class HeaderView extends AbstractView {
     public HeaderView(int width, int height, Game game) {
         super(width, height, 1);
         this.game = game;
-
-        // Set global font.
-        this.textFont = Font.loadFont(getClass().getResourceAsStream("/com/example/font/Emulogic.ttf"), 20);
-
+        
         // Draw a rectangle to the header
         Canvas canvas = new Canvas(this.getWidth(), this.getHeight());
         this.gc = canvas.getGraphicsContext2D();

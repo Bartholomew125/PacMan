@@ -17,7 +17,6 @@ public abstract class AbstractView implements View {
     protected int width;
     protected int height;
     protected double positionScaler;
-    private final String fontPath = "/com/example/font/Emulogic.ttf";
 
     /**
      * Creates a new instance of AbstractView.
@@ -75,32 +74,21 @@ public abstract class AbstractView implements View {
     public void addTextToSurface(Text text, int x, int y, int textSize) {
         text.setX(x);
         text.setY(y);
-        this.setTextFont(text, textSize);
+        text.setFill(Color.WHITE);
+        text.setFont(Font.font("Emulogic", textSize));
         this.getSurface().getChildren().add(text);
     }
 
-    /**
-     * Sets font and color of text.
-     * 
-     * @param text
-     * @param textSize
-     */
-    private void setTextFont(Text text, int textSize) {
-        text.setFill(Color.WHITE);
-        Font textFont = Font.loadFont(getClass().getResourceAsStream(this.fontPath), textSize);
-        text.setFont(textFont);
-    }
-
-    public Button addButtonToSuface(Text text, int textSize, double width, double height, double x, double y) {
+    public Button addButtonToSuface(String text, int textSize, int width, int height, double x, double y) {
         Button newButton = new Button(text);
-        this.setTextFont(text, textSize);
         newButton.setPrefWidth(width);
         newButton.setPrefHeight(height);
         newButton.setLayoutX(x);
-        newButton.setLayoutX(y);
+        newButton.setLayoutY(y);
+        newButton.setFont(Font.font("Emulogic", textSize));
         return newButton;
     }
-
+    
     public Group getSurface() {
         return this.surface;
     }
