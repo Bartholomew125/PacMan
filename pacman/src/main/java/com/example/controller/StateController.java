@@ -32,7 +32,7 @@ public class StateController implements Controller {
                 this.setState(new NormalState());
             }
         } else if (this.currentState instanceof DeadState) {
-            if (nanoTime - this.deadStateStartTime >= 1 * this.nanosecPerSec) {
+            if (nanoTime - this.deadStateStartTime >= 2 * this.nanosecPerSec) {
                 this.game.resetPositions();
                 this.setState(new NormalState());
             }
