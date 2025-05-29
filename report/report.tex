@@ -172,6 +172,7 @@ nedarve klasser som \class{Pill} og \class{Wall}, da de bare er positioner, men 
 godt vil kunne skelne imellem dem. På denne måde benytter vi
 \textit{klasseafhængighedsprincippet} til at simplificerer koden, og gøre det
 nemmere at udvide med nye features.
+Alle disse afhængigheder samt nedarvelser, kan ses på ovenstående billede (se \autoref{UML-diagram-Model}).
 % subsection Model (end)
 
 
@@ -380,7 +381,7 @@ logikken bag implementeringen. Med dette, har man som "\textit{tester}", altså
 mulighed for at tjekke, om en given invariant for en given metode overholdes
 under kørsel.
 
-Mere specifikt; har vi valg at benytte os af \textit{Java}s framework
+Mere specifikt; har vi valgt at benytte os af \textit{Java}s framework
 \code{JUnit}, som b.la. understøtter behjælpelige sammenligningsmetoder (f.eks.
 \textit{assertions} via \code{assert}).
 
@@ -398,10 +399,12 @@ nye branches under udvikling af nye programfunktionaliteter. Dette konstruerer
 en form for automatiseret testing, da man ikke kan publicere ny funktionalitet,
 før det passer med den resterende kodebase (f.eks. håndtering af mergeconflicts
 mm.). Denne form for \textit{automatiseret} testing er også kendt som
-\textit{Continuous integration testing}.
+\textit{Continuous integration testing}. I det følgende, kan man se hvorledes sådanne en unit-test kunne se ud.
 
-\textcolor{ocre}{\boxed{\text{INDKLUDER ANDEN TILGANG TIL TEST?}}}
+Det kan eksempelvis være behjælpeligt at være sikker på, at ens metoder som er konstrueret til at beregne distancen mellem objecter, rent faktisk returnerer ønskede værdier. For at sikre os, at vores adhoc polymorfiske metode \code{distanceBetween}, overholder dette, har vi valgt at konstruere følgende unit-test:
+\snippet{12}{55}{./code/AlgebraTest.java}
 
+Man kunne derudover også have valgt at lave en form for black-box-testing hvorved individer som ikke kender til kode-basen f.eks. prøver at spille spillet og derved rapportere evt. fejl (både visuelle og logiske).
 % \begin{itemize}
 %   \item Beskriv hvordan I har testet, at jeres kode lever op til
 %   kravsspecifikationen. Har I, f.eks., benyttet unit tests? Manuelle tests?
