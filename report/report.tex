@@ -392,7 +392,7 @@ for netop dette. Det ville nemlig bryde \textit{SRP}, hvis en klasse der kun
 står for at repræsenterer en position, også skulle stå for at udregne afstanden
 mellem positioner.
 
-\subsection{Maze}
+\subsection{Maze \& Walls}
 Til formålet for at lave labyrinten til spillet, skulle vi have en måde hvorpå
 det var nemt at ændre i den, og bygge den op. Derfor lavede vi den som en tekst
 fil. For så at læse denne tekst fil, og finde de forskellige elementer i den,
@@ -402,7 +402,16 @@ af filen, of finde positionerne af alt i filen, ved brug af metode
 
 Udover dette har vi også lavet en klasse \class{Maze} som kun holder alle
 væggene. På denne måde står \class{Maze} ikke selv for at læse en tekstfil og
-kigge rundt i den. På denne måde benytter vi også \textit{SRP}.
+kigge rundt i den, som gør at det overholder \textit{SRP}. 
+
+\class{Wall} klassen udvider \class{Pos2D}, men med tilføjelsen af bolske
+værdier der beskriver hvorvidt den har naboer i kompasretninger. Dette gjorde vi
+for at gøre labyrinten mindre firkantet, ved at bruge specifikke væg billeder ud
+fra hvilke af deres naboer også var vægge. Hvis der f.eks. var to vægge ved
+siden af hindanden, så vil vi ikke vise en væg der hvor de rør, men i stedet
+rundt om dem. Vi kom frem til at det krævede fem mulige væg billeder, og 11
+cases for at opnå dette. 
+
 
 \begin{itemize}
   \item Formålet med denne rapportsektion er at give den interesserede læser et
