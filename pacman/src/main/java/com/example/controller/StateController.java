@@ -28,17 +28,16 @@ public class StateController implements Controller {
     @Override
     public void update(long nanoTime) {
         if (this.currentState instanceof PowerState) {
-            if (nanoTime - this.powerStateStartTime >= 15 * this.nanosecPerSec) {
+            if (nanoTime - this.powerStateStartTime >= 8 * this.nanosecPerSec) {
                 this.setState(new NormalState());
             }
         } else if (this.currentState instanceof DeadState) {
-            if (nanoTime - this.deadStateStartTime >= 3 * this.nanosecPerSec) {
+            if (nanoTime - this.deadStateStartTime >= 1 * this.nanosecPerSec) {
                 this.game.resetPositions();
                 this.setState(new NormalState());
             }
         }
     }
-
     /**
      * Sets the state of the game.
      * 

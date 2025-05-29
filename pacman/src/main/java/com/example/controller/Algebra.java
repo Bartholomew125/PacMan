@@ -1,4 +1,4 @@
-package com.example;
+package com.example.controller;
 
 import com.example.model.Moveable;
 import com.example.model.Pos2D;
@@ -15,7 +15,7 @@ public class Algebra {
     public static double distanceBetween(Moveable m1, Moveable m2) {
         float distanceX = m2.getX() - m1.getX();
         float distanceY = m2.getY() - m1.getY();
-        return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
+        return Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
     }
 
     /**

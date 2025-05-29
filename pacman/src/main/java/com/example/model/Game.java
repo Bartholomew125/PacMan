@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import com.example.controller.TextualMaze;
 import com.example.controller.searching.BreadthFirstSearch;
 import com.example.controller.searching.DepthFirstSearch;
 import com.example.controller.searching.SearchAlgorithm;
@@ -17,6 +18,7 @@ import javafx.scene.paint.Color;
 public class Game {
 
     private Maze maze;
+    private TextualMaze textualMaze;
     private PacMan pacMan;
     private List<Pill> smallPills;
     private List<Pill> largePills;
@@ -31,14 +33,15 @@ public class Game {
      */
     public Game() {
         // Create maze
-        this.maze = new Maze();
+        this.textualMaze = new TextualMaze();
+        this.maze = new Maze(this.textualMaze.getWidth(), this.textualMaze.getHeight(), this.textualMaze.getWallPositions());
 
         // Create pacMan
-        Pos2D pos = this.maze.locatePacMan();
+        Pos2D pos = this.textualMaze.getPacManPosition();
         this.pacMan = new PacMan(pos.getX(), pos.getY());
 
         // Create small pills
-        Pos2D[] smallPillPositions = this.maze.locateSmallPills();
+        Pos2D[] smallPillPositions = this.textualMaze.getSmallPillPositions();
         this.smallPills = new ArrayList<Pill>();
         for (int i = 0; i < smallPillPositions.length; i++) {
             this.smallPills.add(new SmallPill(smallPillPositions[i].getX(),
@@ -46,7 +49,7 @@ public class Game {
         }
 
         // Create large pills
-        Pos2D[] largePillPositions = this.maze.locateLargePills();
+        Pos2D[] largePillPositions = this.textualMaze.getLargePillPositions();
         this.largePills = new ArrayList<Pill>();
         for (int i = 0; i < largePillPositions.length; i++) {
             this.largePills.add(new LargePill(largePillPositions[i].getX(),
@@ -54,7 +57,7 @@ public class Game {
         }
 
         // Create ghosts
-        Pos2D[] ghostPositions = this.maze.locateGhosts();
+        Pos2D[] ghostPositions = this.textualMaze.getGhostPositions();
         this.ghosts = new ArrayList<>();
         this.ghosts.add(new Ghost(ghostPositions[0].getX(), ghostPositions[0].getY(), Color.GREEN, new DepthFirstSearch(this.maze)));
         this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BreadthFirstSearch(this.maze)));
@@ -218,19 +221,19 @@ public class Game {
         this.smallPills.clear();
         this.largePills.clear();
 
-        Pos2D[] smallPillPositions = this.maze.locateSmallPills();
+        Pos2D[] smallPillPositions = this.textualMaze.getSmallPillPositions();
         for (int i = 0; i < smallPillPositions.length; i++) {
             this.smallPills.add(new SmallPill(smallPillPositions[i].getX(),
                     smallPillPositions[i].getY()));
         }
 
-        Pos2D[] largePillPositions = this.maze.locateLargePills();
+        Pos2D[] largePillPositions = this.textualMaze.getLargePillPositions();
         for (int i = 0; i < largePillPositions.length; i++) {
             this.largePills.add(new LargePill(largePillPositions[i].getX(),
                     largePillPositions[i].getY()));
         }
 
-        Pos2D[] ghostPositions = this.maze.locateGhosts();
+        Pos2D[] ghostPositions = this.textualMaze.getGhostPositions();
         this.ghosts.add(new Ghost(ghostPositions[0].getX(), ghostPositions[0].getY(), Color.GREEN, new DepthFirstSearch(this.maze)));
         this.ghosts.add(new Ghost(ghostPositions[1].getX(), ghostPositions[1].getY(), Color.BLUE, new BreadthFirstSearch(this.maze)));
         this.ghosts.add(new Ghost(ghostPositions[2].getX(), ghostPositions[2].getY(), Color.RED, new BreadthFirstSearch(this.maze)));

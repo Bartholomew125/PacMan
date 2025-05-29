@@ -2,7 +2,7 @@ package com.example.model;
 
 import java.util.Stack;
 
-import com.example.Algebra;
+import com.example.controller.Algebra;
 import com.example.controller.searching.SearchAlgorithm;
 
 import javafx.scene.paint.Color;
