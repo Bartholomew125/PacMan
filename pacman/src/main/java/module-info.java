@@ -5,4 +5,5 @@ module com.example {
     exports com.example.model.states;
     exports com.example.model;
     exports com.example.controller.searching;
+    requires javafx.media;
 }

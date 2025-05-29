@@ -25,6 +25,7 @@ public class MainController implements Controller {
     private StateController stateController;
     private Viewer viewer;
     private Game game;
+    private SoundController soundController;
 
     /**
      * Creates a new MainController.
@@ -38,7 +39,8 @@ public class MainController implements Controller {
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
         this.ghostController = new GhostController(this.game.getGhosts(), this.game.getPacMan());
         this.stateController = new StateController(this.game);
-
+        this.soundController = new SoundController(this.game);
+        this.soundController.playChompSound();
     }
 
     /**
@@ -72,6 +74,7 @@ public class MainController implements Controller {
         this.game.restart();
         this.stateController.setState(new NormalState());
         this.viewer.setEnd(false);
+        this.soundController.playChompSound();
     }
 
     /**
@@ -123,13 +126,16 @@ public class MainController implements Controller {
                 if (stateController.getState() instanceof PowerState) {
                     this.game.pacManEatGhost(ghosts.get(i));
                     numGhosts--;
+                    this.soundController.playEatGhostSound();
                 } else if (stateController.getState() instanceof NormalState) {
                     this.game.ghostEatsPacman();
                     if (this.game.getLives() > 0) {
-                        this.stateController.setState(new DeadState());
+                       this.stateController.setState(new DeadState());
+                       this.soundController.playDeathSound();
                     } else {
                         this.stateController.setState(new EndState());
                         this.viewer.setEnd(true);
+                        this.soundController.playDeathSound();
                     }
                 }
             }

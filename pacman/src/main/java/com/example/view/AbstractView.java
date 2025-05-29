@@ -1,7 +1,5 @@
 package com.example.view;
 
-import java.io.InputStream;
-
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
