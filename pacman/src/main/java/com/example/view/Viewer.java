@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
+import com.example.controller.MainController;
 import com.example.model.Game;
 
 /**
@@ -25,7 +26,7 @@ public class Viewer extends AbstractView {
      * @param maxHeight
      * @param game
      */
-    public Viewer(int maxWidth, int maxHeight, Game game) {
+    public Viewer(int maxWidth, int maxHeight, Game game, MainController controller) {
         super(maxWidth, 0, 0);
 
         this.end = false;
@@ -37,7 +38,7 @@ public class Viewer extends AbstractView {
         int height = game.getMaze().getHeight() * squareSize;
         this.gameView = new GameView(width, height, squareSize, game);
         this.headerView = new HeaderView(width, headerHeight, game);
-        this.endView = new EndView(width, maxHeight, squareSize, game);
+        this.endView = new EndView(width, maxHeight, squareSize, game, controller);
 
         this.setWidth(width);
         this.setHeight(height + headerHeight);
@@ -54,11 +55,17 @@ public class Viewer extends AbstractView {
         this.addView(endView);
     }
 
+    private boolean endViewRendered = false;
+
     @Override
     public void render(double nanoTime) {
         if (this.end) {
-            this.endView.render(nanoTime);
+            if (!endViewRendered) {
+                this.endView.render(nanoTime);
+                endViewRendered = true;
+            }
         } else {
+            endViewRendered = false;
             this.endView.clear();
             // Set background to black
             this.gc.fillRect(0, 0, this.width, this.height);
@@ -74,9 +81,5 @@ public class Viewer extends AbstractView {
     
     public void setEnd(boolean isEnded) {
         this.end = isEnded;
-    }
-
-    public boolean restartButtonClicked() {
-        return this.endView.restartButtonClicked();
     }
 }

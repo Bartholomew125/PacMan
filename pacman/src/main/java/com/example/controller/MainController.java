@@ -33,9 +33,9 @@ public class MainController implements Controller {
      * @param game
      * @param viewer
      */
-    public MainController(Game game, Viewer viewer) {
-        this.game = game;
-        this.viewer = viewer;
+    public MainController(int maxWidth, int maxHeight){
+        this.game = new Game();
+        this.viewer = new Viewer(maxWidth, maxHeight, this.game, this);
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
         this.ghostController = new GhostController(this.game.getGhosts(), this.game.getPacMan());
         this.stateController = new StateController(this.game);
@@ -64,10 +64,6 @@ public class MainController implements Controller {
         this.stateController.update(nanoTime);
         this.handleCollisions();
         this.viewer.render(nanoTime);
-
-        if (viewer.restartButtonClicked()) {
-            this.restart();
-        }
     }
     
     /**
@@ -139,5 +135,9 @@ public class MainController implements Controller {
                 }
             }
         }
+    }
+    
+    public Viewer getView(){
+        return this.viewer;
     }
 }
