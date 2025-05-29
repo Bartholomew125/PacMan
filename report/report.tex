@@ -264,7 +264,8 @@ Siden da har vi udvidet endnu mere på projektet, og det ser nu ud som det gør 
 
 \section{Implementation}\label{sec:Implementation} % (fold)
 
-States
+\subsection{Stadier}
+
 
 % \subsection{Moveable}\label{sub:Moveable} % (fold)
 % Som nævnt i design sektionen har vi lavet en \code{Moveable} klasse. Det smarte
@@ -293,7 +294,7 @@ Der er også casen hvor PacMan skifter retning til det modsatte af hvad han
 bevæger sig. Så kan vi ikke kigge efter en passage der, for det vil der altid
 være, og han vil dermed ikke skifte retning med det samme. Så i dette tilfælde
 skifter vi bare retning med det samme. Hvis det er sådan at PacMan står stille,
-så er vi ikke interreseret i at kigge efter en passage, og han skal bare bevæge
+så er vi ikke interesseret i at kigge efter en passage, og han skal bare bevæge
 sig i den retning som man trykker med det samme.
 
 For at lave alt dette med retninger, lavede vi en \code{enum} klasse til at
@@ -392,7 +393,7 @@ for netop dette. Det ville nemlig bryde \textit{SRP}, hvis en klasse der kun
 står for at repræsenterer en position, også skulle stå for at udregne afstanden
 mellem positioner.
 
-\subsection{Maze \& Walls}
+\subsection{labyrinten}
 Til formålet for at lave labyrinten til spillet, skulle vi have en måde hvorpå
 det var nemt at ændre i den, og bygge den op. Derfor lavede vi den som en tekst
 fil. For så at læse denne tekst fil, og finde de forskellige elementer i den,
@@ -411,7 +412,6 @@ fra hvilke af deres naboer også var vægge. Hvis der f.eks. var to vægge ved
 siden af hindanden, så vil vi ikke vise en væg der hvor de rør, men i stedet
 rundt om dem. Vi kom frem til at det krævede fem mulige væg billeder, og 11
 cases for at opnå dette. 
-
 
 \begin{itemize}
   \item Formålet med denne rapportsektion er at give den interesserede læser et
