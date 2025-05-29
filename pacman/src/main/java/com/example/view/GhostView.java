@@ -3,6 +3,7 @@ package com.example.view;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.model.Ghost;
 
@@ -11,9 +12,9 @@ import com.example.model.Ghost;
  */
 public class GhostView extends AbstractView {
 
-    private ArrayList<Ghost> ghosts;
+    private List<Ghost> ghosts;
     private Image ghostAfraidImage;
-    private ArrayList<AnimatedImage> ghostAnimations;
+    private List<AnimatedImage> ghostAnimations;
 
     /**
      * Creates an instance of GhostView.
@@ -23,7 +24,7 @@ public class GhostView extends AbstractView {
      * @param positionScaler
      * @param ghosts
      */
-    public GhostView(int width, int height, double positionScaler, ArrayList<Ghost> ghosts) {
+    public GhostView(int width, int height, double positionScaler, List<Ghost> ghosts) {
         super(width, height, positionScaler);
         this.ghosts = ghosts;
 

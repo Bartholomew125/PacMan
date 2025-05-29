@@ -2,8 +2,10 @@ package com.example.controller.searching;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Stack;
 
+import com.example.controller.Algebra;
 import com.example.model.Maze;
 import com.example.model.Moveable;
 import com.example.model.Pos2D;
@@ -65,7 +67,7 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
      * @param pos
      * @return the neighbours of pos.
      */
-    public ArrayList<Pos2D> getNeighbours(Pos2D pos) {
+    protected List<Pos2D> getNeighbours(Pos2D pos) {
         ArrayList<Pos2D> neighbours = new ArrayList<>();
 
         // choice directions hardcoded into a list
@@ -84,7 +86,7 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
 
         // Checking if possible moves
         for (Pos2D dir : cDir) {
-            Pos2D newPos = pos.add(dir);
+            Pos2D newPos = Algebra.add(pos, dir);
             int x = newPos.getX();
             int y = newPos.getY();
             if (x >= 0 && x < this.maze.getWidth() && y >= 0 && y < this.maze.getHeight() &&

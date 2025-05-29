@@ -2,12 +2,10 @@ package com.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import com.example.controller.TextualMaze;
 import com.example.controller.searching.BreadthFirstSearch;
 import com.example.controller.searching.DepthFirstSearch;
-import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.states.State;
 
 import javafx.scene.paint.Color;
@@ -22,11 +20,9 @@ public class Game {
     private PacMan pacMan;
     private List<Pill> smallPills;
     private List<Pill> largePills;
-    private ArrayList<Ghost> ghosts;
+    private List<Ghost> ghosts;
     private int score;
     private int lives;
-    private SearchAlgorithm searchAlgorithm;
-    private Stack<Pos2D> moveStack;
 
     /**
      * Create and place game-objects.
@@ -101,7 +97,7 @@ public class Game {
     /**
      * Decrease score when pacman collides with ghost in NormalState.
      */
-    public void ghostEatsPacman() {
+    public void ghostEatPacMan() {
         this.decreaseLives();
     }
 
@@ -162,7 +158,7 @@ public class Game {
         return this.score;
     }
 
-    public ArrayList<Ghost> getGhosts() {
+    public List<Ghost> getGhosts() {
         return this.ghosts;
     }
 
@@ -170,19 +166,11 @@ public class Game {
         return this.lives;
     }
 
-    public SearchAlgorithm getSearchAlgorithm() {
-        return this.searchAlgorithm;
-    }
-
     /**
      * Decrease lives.
      */
     public void decreaseLives() {
         this.lives--;
-    }
-
-    public Stack<Pos2D> getMoveStack() {
-        return this.moveStack;
     }
 
     /**

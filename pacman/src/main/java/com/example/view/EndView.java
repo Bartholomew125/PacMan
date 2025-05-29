@@ -23,7 +23,7 @@ public class EndView extends AbstractView {
      * @param positionScaler
      * @param game
      */
-    public EndView(int width, int height, double positionScaler, Game game, MainController controller) {
+    public EndView(int width, int height, double positionScaler, Game game, MainController mainController) {
         super(width, height, positionScaler);
 
         this.game = game;
@@ -35,7 +35,7 @@ public class EndView extends AbstractView {
         int placeTextY = (int) ((this.height - this.scoreText.getLayoutBounds().getHeight()) / 2);
         this.addTextToSurface(this.scoreText, placeTextX, placeTextY, 20);
         this.restartButton = addButtonToSuface("Restart", 15, 200, 50, this.getWidth()/ 2 - 200 / 2, this.getHeight() / 1.5); 
-        this.restartButton.setOnAction(e -> controller.restart());
+        this.restartButton.setOnAction(e -> mainController.restart());
     }
 
     @Override

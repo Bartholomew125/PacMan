@@ -1,6 +1,7 @@
 package com.example.controller.searching;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.model.Pos2D;
 
@@ -10,7 +11,7 @@ import com.example.model.Pos2D;
 public class Node {
     private Node parent;
     private Pos2D pos;
-    private ArrayList<Node> children;
+    private List<Node> children;
 
     /**
      * Creates a new dangling node with a position-value.
@@ -31,7 +32,7 @@ public class Node {
         return this.pos;
     }
 
-    public ArrayList<Node> getChildren() {
+    public List<Node> getChildren() {
         return this.children;
     }
 

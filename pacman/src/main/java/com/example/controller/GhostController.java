@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.Ghost;
@@ -11,7 +11,7 @@ import com.example.model.Pos2D;
  * GhostController class for controlling the ghosts ai
  */
 public class GhostController implements Controller {
-    private ArrayList<Ghost> ghosts;
+    private List<Ghost> ghosts;
     private PacMan pacMan;
 
     /**
@@ -20,7 +20,7 @@ public class GhostController implements Controller {
      * @param ghosts
      * @param game
      */
-    public GhostController(ArrayList<Ghost> ghosts, PacMan pacMan) {
+    public GhostController(List<Ghost> ghosts, PacMan pacMan) {
         this.ghosts = ghosts;
         this.pacMan = pacMan;
 

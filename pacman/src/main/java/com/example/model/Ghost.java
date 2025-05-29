@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
  * This is the abstract ghost class from which actual ghosts should extend.
  */
 public class Ghost extends Moveable {
-    private Color color;
+    private final Color color;
     private boolean isAfraid;
     private Stack<Pos2D> moveStack;
     private SearchAlgorithm searchAlgorithm;
@@ -35,10 +35,6 @@ public class Ghost extends Moveable {
 
     public Color getColor() {
         return this.color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 
     public void setIsAfraid(boolean isAfraid) {

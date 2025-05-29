@@ -5,9 +5,9 @@ package com.example.model;
  */
 public class Maze {
 
-    private int width;
-    private int height;
-    private Wall[] walls;
+    private final int width;
+    private final int height;
+    private final Wall[] walls;
 
     /**
      * Create a new maze
