@@ -5,6 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Using Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage{titling}
 \usepackage[danish]{babel}
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -211,16 +212,12 @@ bestemmer hvornår alle de andre controllers skal opdateres, og hvornår vores
 % subsection Controller (end)
 
 \subsection{Ændringer}\label{sub:Ændringer} % (fold)
-I løbet af projektet har vores design ændret sig en del. I starten var vores
-UML-diagram meget mere simpelt, som kan ses på \autoref{UML-diagram-old}.
-Enkeltheden er både grundet de manglende felter og metoder, men også at
-kompleksiteten af programmet ikke var blevet realiseret endnu. \class{View} var
-bare én enkelt klasse som stod for at tegne alt, og \class{Controller} stod kun
-for at tage imod input fra brugeren, og bevæge PacMan i labyrinten. Alt
-andet logik til spillet var i \class{Maze}, som gjorde projektet uoverskueligt,
-samtidig med at det bryder \textit{SRP}. Da vi så begynde at implementerer mere,
-lagde vi mærke til hvor god en idé det ville være at splitte det endnu mere op,
-og specialisere klasserne vi laver, som er idéen med \textit{SRP}.
+Under udviklingsprocessen har vi valgt at arbejde i iterationer. Dette skal forstås i den forstand, at vi først designede implementeringer via. UML-digrammer, derefter implementerede disse designs, hvorefter vi konkluderede på, om hvorvidt vores kodebase overholdte de ønskede designprincipper (\textit{SOLID}). Denne process mundede ud i flere refaktoreringsprocesser, som havde til formål, at rette op på eventuelle brud på netop disse principper. 
+Efter hver refaktorisering påbegyndte vi selvsamme udviklingsprocess, indtil nuværende stadie af spillet.
+Disse refaktoriseringer, ændrede naturligvis også på klassernes afhængigheder mm., hvilket derfor også krævede tilpasning af UML-diagrammet. 
+Et eksempel på refaktorisering i denne procces er, at vi i starten, blott havde sat \code{View}-klassen til at have alt ansvaret for at tegne objeketer på skærmen, samt at \code{Controller} havde ansvaret for at tage imod input fra brugeren og styre PacMan. Resten af spillets logik i denne iteration af udviklingsprocessen lå i \code{Maze}. Dette bryder \textit{SRP}, som derfor krævede refaktorisering inden viderudvilking.
+
+
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/UML-diagram-old.png}
@@ -309,55 +306,51 @@ også en \class{DirectionAdapter} klasse, som står for at konverterer imellem
 Vi valgte at implementere forskellige måder for spøgelserne i PacMan til at jage PacMan(spilleren). 
 Som vores primære metoder valgte vi to kendte søgealgoritmer, nemlig \textit{DepthFirstSearch} \& \textit{BreadthFirstSearch}. 
 Vores grund for at bruge to søgealgoritmer og ikke kun en, var for at sikre lidt udforudselighed i spillet, 
-da spøgelserne så skulle tage forskellige ruter mod PacMan.\\ 
-\\
+da spøgelserne så skulle tage forskellige ruter mod PacMan.
+
 \textbf{Node klassen}
 For at kunne skabe fundamentet for at behandle vores Maze som et binært træ skabte vi klassen Node. 
 Node objektet består af en forældre node, en arrayliste af noder som er dets børn og en Pos2D som er nodens position i Maze. 
 Det første Node objekt ville være roden og have ingen forældre og ingen børn til at starte med, 
-men den ville skulle have en start position(Pos2D).\\ 
-\\
+men den ville skulle have en start position(Pos2D).
+
 Metoderne i Node klassen som gav gavn til os senere var addChild(), og setParent() som gjorde os i stand til at opdatere vores binære træ. 
 
-\\
 \textbf{SearchAlgorithm grænsefladen} 
 Grænsefladen SearchAlgorithm var ment som en måde at kunne give metoder til vores Abstrakte klasse AbstracSearchAlgorithm. 
 De metoder vi valgte at give videre var to setters, setGoal() \& setStart(), samt en metode search() og en getter getMoveStack(). 
 Metoden getMoveStack() er vores metode for at hente den sti af Pos2D spøgelserne skal gå for at nå PacMans position. 
 Metoden search() ville blive brugt som en måde at søge efter et mål med den valgte søge strategi. 
-\\
 
 \textbf{AbstractSearchAlgorithm abstrakt klasse}
-Vores plan med AbstractSearchAlgorithm som en abstrakt klasse var, så kunne vi bruge AbstractSearchAlgorithm som skabelon for andre søgealgoritmer, og implementere SearchAlgorithm grænsefladen for at abstrahere de muligheder, de kommende søgealgoritmer skal have. Vi følte, at det var en god idé at limitere metoderne tilgængelige for de kommende søgealgoritmer for at undgå unødvendig komplesiktet og uforudselighed.\\ 
-\\
+Vores plan med AbstractSearchAlgorithm som en abstrakt klasse var, så kunne vi bruge AbstractSearchAlgorithm som skabelon for andre søgealgoritmer, og implementere SearchAlgorithm grænsefladen for at abstrahere de muligheder, de kommende søgealgoritmer skal have. Vi følte, at det var en god idé at limitere metoderne tilgængelige for de kommende søgealgoritmer for at undgå unødvendig komplesiktet og uforudselighed. 
+
 En metode fra AbstractSearchAlgorithm som er essentiel for søgealgoritmen var vores metode getNeighbours(). Den er essentiel fordi den bruges til at undersøge de fire mulige bevægelser til rådighed(op, ned, højre, venstre) ud fra nuværende position. Ved brug af en \textit{for-løkke}, en \textit{boolean} metode IsWallAt() fra Pos2D klassen og to lokale \textit{Integer} variabler kan vi så sikre, at spøgelsernes nye positioner er lovlige(der er ikke en væg) og heller ikke uden for Mazen.
-\\
 
 \textbf{DepthFirstSearch klasse }
 I Depth-First Search er strategien at traversere et binært træ ved at søge første venstre gren i træet og fortsætte til målet nås. 
 Hvis målet ikke nås i første søgning og vi istedet når bunden af træet, så \textit{backtracker} vi fra efterkommer noden op mod roden og udforsker de forskellige efterkommeres grene for at finde målet der. 
-Hvis målet ikke findes returneres fejl.\\ 
-\\ 
+Hvis målet ikke findes returneres fejl.
+
 For at implementere Depth-First Search brugte vi pseudokoden fra wikipedia(INSERT KILDEHENVISNING HERE) og oversatte den til vores program. 
 For at kunne bruge metoden getNeighbours() fra abstrakt klassen, skal DepthFirstSearch klassen have adgang til vores Maze i DepthFirstSearch konstruktøren. 
-Ved at følge pseudokoden, getNeighbours() og to metoder fra Node klassen undersøgte vi stier af Pos2D til PacMan, og returnerede en Stack af bevægelser som kunne gives til GhostController og updatere spøgelserne med update() metoden fra GhostController.\\ 
-\\ 
+Ved at følge pseudokoden, getNeighbours() og to metoder fra Node klassen undersøgte vi stier af Pos2D til PacMan, og returnerede en Stack af bevægelser som kunne gives til GhostController og updatere spøgelserne med update() metoden fra GhostController. 
+
 En anden ændring er ved Stacks medfødte metode contains(). 
 Når man i Stack vil undersøge om en Stack har objektet man spørger efter, kaldes contains() der bruges som en boolean til at sammenligne et objekt med objekterne i Stacken. 
 Den metode har vi måtte override og ændre for at passe til Pos2D objektet. 
 Ændringen er en \textit{for-løkke} der sammenligner Pos2D'ers X og Y værdier.
-\\
+
 \textbf{Breadth-FirstSearch klasse} 
 I Breadth-FirstSearch er strategien at traversere et binært træ ved at søge først venstre gren og så hver gren i et binært træ (i samme dybde). 
 Vi går derefter først dybere i træet når hver gren er undersøgt. Hvis målet ikke findes returneres fejl.\\
-\\
+
 For at implementere Breadth-First Search brugte vi pseudokoden fra wikipedia(INSERT KILDEHENVSNING HERE) og oversatte den til vores program. 
 For at kunne bruge metoden getNeighbours() fra abstrakt klassen, skal BreadthFirstSearch klassen have adgang til vores Maze i BreadthFirstSearch konstruktøren. 
 Ved at følge pseudokoden, getNeighbours() og to metoder fra Node klassen undersøgte vi stier af Pos2D til PacMan, 
 og returnerede en Stack af bevægelser som kunne gives til GhostController og updatere spøgelserne med update() metoden fra GhostController. 
 Da vi brugte lænkede lister som vores kø i BreadthFirstSearch, 
 og lænkede lister i Java også har metoden contains(),  valgte vi at Override contains() og ændre den for samme grunde og på samme vis som i DepthFirstSearch klassen.
-
 
 % subsection Ghost AI (end)
 
