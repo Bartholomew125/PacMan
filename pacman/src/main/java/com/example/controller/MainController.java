@@ -64,6 +64,7 @@ public class MainController implements Controller {
         this.pacManController.update(nanoTime);
         this.ghostController.update(nanoTime);
         this.stateController.update(nanoTime);
+        this.soundController.update(nanoTime);
         this.handleCollisions();
         this.viewer.render(nanoTime);
     }

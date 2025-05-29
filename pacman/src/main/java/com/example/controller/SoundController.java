@@ -6,39 +6,38 @@ import javafx.scene.media.AudioClip;
 public class SoundController implements Controller {
 
     private final Game game;
-    private AudioClip currentAudioClip = null;
+    private AudioClip currentAudioClip;
     
     public SoundController(Game game) {
         this.game = game;
+        this.currentAudioClip = new AudioClip(getClass().getResource("/com/example/sound/pacman_chomp.wav").toExternalForm());
     }
     @Override
     public void update(long nanoTime) {
+        this.playChompSound();
     }
 
     public void playDeathSound() {
-       playSound("/com/example/sound/pacman_death.wav");
+        this.currentAudioClip.stop();
+       this.playSound("/com/example/sound/pacman_death.wav");
     }
 
     public void playChompSound(){
-
-        if (currentAudioClip == null) {
-            AudioClip chompSound = new AudioClip(getClass().getResource("/com/example/sound/pacman_chomp.wav").toExternalForm());
-            chompSound.setCycleCount(AudioClip.INDEFINITE);
-            chompSound.play();
-            currentAudioClip = chompSound;
-        }
+        this.playSound("/com/example/sound/pacman_chomp.wav");
     }
 
     public void playEatGhostSound(){
-        playSound("/com/example/sound/pacman_eatghost.wav");
+        this.currentAudioClip.stop();
+        this.playSound("/com/example/sound/pacman_eatghost.wav");
     }
 
     public void playSound(String path){
-        if (currentAudioClip.isPlaying()) {
+        AudioClip newAudioClip = new AudioClip(getClass().getResource(path).toExternalForm());
+        if (currentAudioClip != null && !currentAudioClip.isPlaying()) {
             currentAudioClip.stop();
+            currentAudioClip = newAudioClip;
+            newAudioClip.play();
         }
-        currentAudioClip = new AudioClip(getClass().getResource(path).toExternalForm());
-        currentAudioClip.play();
     }
 }
 
