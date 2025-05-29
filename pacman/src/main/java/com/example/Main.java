@@ -25,10 +25,10 @@ public class Main extends Application {
         MainController controller = new MainController(800,800);
 
         // Attach the viewers surface to the root, so it is displayed
-        root.getChildren().add(controller.getView().getSurface());
+        root.getChildren().add(controller.getViewer().getSurface());
 
         // Create the scene with the root, and the size of the viewers surface.
-        Scene scene = new Scene(root, controller.getView().getWidth(), controller.getView().getHeight());
+        Scene scene = new Scene(root, controller.getViewer().getWidth(), controller.getViewer().getHeight());
 
         // Send all key press events to the controller to be handled.
         scene.setOnKeyPressed(event -> controller.handleKeyPress(event));

@@ -17,7 +17,7 @@ public class Viewer extends AbstractView {
     private HeaderView headerView;
     private EndView endView;
     private GraphicsContext gc;
-    private boolean end;
+    private boolean showEndView;
 
     /**
      * Creates an instance of Viewer.
@@ -29,7 +29,7 @@ public class Viewer extends AbstractView {
     public Viewer(int maxWidth, int maxHeight, Game game, MainController controller) {
         super(maxWidth, 0, 0);
 
-        this.end = false;
+        this.showEndView = false;
 
         int headerHeight = 100;
         int squareSize = Math.min(maxWidth / game.getMaze().getWidth(),
@@ -59,7 +59,7 @@ public class Viewer extends AbstractView {
 
     @Override
     public void render(double nanoTime) {
-        if (this.end) {
+        if (this.showEndView) {
             if (!endViewRendered) {
                 this.endView.render(nanoTime);
                 endViewRendered = true;
@@ -74,12 +74,8 @@ public class Viewer extends AbstractView {
             this.headerView.render(nanoTime);
         }
     }
-
-    public AnimatedImage getPacManAnimation() {
-        return this.gameView.getPacManAnimation();
-    }
     
-    public void setEnd(boolean isEnded) {
-        this.end = isEnded;
+    public void showEndView(boolean showEndView) {
+        this.showEndView = showEndView;
     }
 }

@@ -212,10 +212,21 @@ bestemmer hvornår alle de andre controllers skal opdateres, og hvornår vores
 % subsection Controller (end)
 
 \subsection{Ændringer}\label{sub:Ændringer} % (fold)
-Under udviklingsprocessen har vi valgt at arbejde i iterationer. Dette skal forstås i den forstand, at vi først designede implementeringer via. UML-digrammer, derefter implementerede disse designs, hvorefter vi konkluderede på, om hvorvidt vores kodebase overholdte de ønskede designprincipper (\textit{SOLID}). Denne process mundede ud i flere refaktoreringsprocesser, som havde til formål, at rette op på eventuelle brud på netop disse principper. 
-Efter hver refaktorisering påbegyndte vi selvsamme udviklingsprocess, indtil nuværende stadie af spillet.
-Disse refaktoriseringer, ændrede naturligvis også på klassernes afhængigheder mm., hvilket derfor også krævede tilpasning af UML-diagrammet. 
-Et eksempel på refaktorisering i denne procces er, at vi i starten, blott havde sat \code{View}-klassen til at have alt ansvaret for at tegne objeketer på skærmen, samt at \code{Controller} havde ansvaret for at tage imod input fra brugeren og styre PacMan. Resten af spillets logik i denne iteration af udviklingsprocessen lå i \code{Maze}. Dette bryder \textit{SRP}, som derfor krævede refaktorisering inden viderudvilking.
+Under udviklingsprocessen har vi valgt at arbejde i iterationer. Dette skal
+forstås i den forstand, at vi først designede implementeringer via.
+UML-digrammer, derefter implementerede disse designs, hvorefter vi konkluderede
+på, om hvorvidt vores kodebase overholdte de ønskede designprincipper
+(\textit{SOLID}). Denne process mundede ud i flere refaktoreringsprocesser, som
+havde til formål, at rette op på eventuelle brud på netop disse principper.
+Efter hver refaktorisering påbegyndte vi selvsamme udviklingsproces, indtil
+nuværende stadie af spillet. Disse refaktoriseringer, ændrede naturligvis også
+på klassernes afhængigheder mm., hvilket derfor også krævede tilpasning af
+UML-diagrammet. Et eksempel på refaktorisering i denne proces er, at vi i
+starten, blot havde sat \code{View}-klassen til at have alt ansvaret for at
+tegne objekter på skærmen, samt at \code{Controller} havde ansvaret for at tage
+imod input fra brugeren og styre PacMan. Resten af spillets logik i denne
+iteration af udviklingsprocessen lå i \code{Maze}. Dette bryder \textit{SRP},
+som derfor krævede refaktorisering inden viderudvikling.
 
 
 \begin{figure}[H]
@@ -261,14 +272,21 @@ Siden da har vi udvidet endnu mere på projektet, og det ser nu ud som det gør 
 
 \section{Implementation}\label{sec:Implementation} % (fold)
 
-\subsection{Stadier}
+\subsection{Spil Stadier}
+For at implementere de forskellige stadier i PacMan, lavede vi en abstrakt
+klasse \class{State}, som står for at definere alle de ting i spillet som kan
+ændre sig i de forskellige stadier. På denne måde kan vi udvide denne stadie
+når vi skal lave en konkret stadie, så som \class{PowerState}, og så bare
+specificere for alle attributterne deres værdier. Så med hjælp fra
+\code{setState()} metoden i \class{Game} kan vi ændre på stadiet af spillet ved
+bare at give spillet et nyt stadie som har supertypen \class{State}.
 
+Til formål at forbedre og forsimple denne interraktion, lavede vi klassen
+\class{StateController}. Denne klasse har også en metode \code{setState()}, og
+kalder \code{setState()}. Men hvis det så er en stadie, som \class{PowerState},
+der skal køre i en specifik mængde tid, så sørger controlleren også for det,
+igennem dens \code{update()} metode.
 
-% \subsection{Moveable}\label{sub:Moveable} % (fold)
-% Som nævnt i design sektionen har vi lavet en \code{Moveable} klasse. Det smarte
-% ved den er at vi bare kan kalde metoden \code{move()} på en movable, og så
-% bevæger den sig i den retning den har fået tildelt. 
-% subsection Moveable (end)
 
 \subsection{PacMan kontrol}\label{sub:PacMan Kontrol} % (fold)
 Siden vi har gjort at en \textit{Moveable}'s position er beskrevet med decimal
@@ -301,7 +319,7 @@ også en \class{DirectionAdapter} klasse, som står for at konverterer imellem
 \class{Direction} og andre representationer af en retning.
 % subsection PacMan Kontrol (end)
 
-\subsection{Ghost AI}\label{sub:Ghost AI} % (fold)
+\subsection{Spøgelses AI}\label{sub:Ghost AI} % (fold)
 \textbf{Søge Strategier}
 Vi valgte at implementere forskellige måder for spøgelserne i PacMan til at jage PacMan(spilleren). 
 Som vores primære metoder valgte vi to kendte søgealgoritmer, nemlig \textit{DepthFirstSearch} \& \textit{BreadthFirstSearch}. 
@@ -386,7 +404,7 @@ for netop dette. Det ville nemlig bryde \textit{SRP}, hvis en klasse der kun
 står for at repræsenterer en position, også skulle stå for at udregne afstanden
 mellem positioner.
 
-\subsection{labyrinten}
+\subsection{Labyrinten}
 Til formålet for at lave labyrinten til spillet, skulle vi have en måde hvorpå
 det var nemt at ændre i den, og bygge den op. Derfor lavede vi den som en tekst
 fil. For så at læse denne tekst fil, og finde de forskellige elementer i den,

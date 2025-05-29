@@ -9,15 +9,15 @@ import com.example.controller.DirectionAdapter;
  */
 public abstract class Moveable {
 
-    protected float startX;
-    protected float startY;
-    protected float x;
-    protected float y;
-    protected float dx;
-    protected float dy;
-    protected double movementMultiplier;
-    protected boolean isEdible;
-    protected int rotation;
+    private final float startX;
+    private final float startY;
+    private float x;
+    private float y;
+    private float dx;
+    private float dy;
+    private double movementMultiplier;
+    private boolean isEdible;
+    private int rotation;
 
     public Moveable(float x, float y, float dx, float dy, double movementMultiplier) {
         this.startX = x;
@@ -96,16 +96,8 @@ public abstract class Moveable {
         return this.x;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
     public float getY() {
         return this.y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
     }
 
     public float getDX() {
@@ -159,6 +151,9 @@ public abstract class Moveable {
         this.dy = dy;
     }
 
+    /**
+     * Resets the position of the moveable back to its starting position.
+     */
     public void resetPosition() {
         this.x = this.startX;
         this.y = this.startY;

@@ -41,8 +41,4 @@ public class GameView extends AbstractView {
         this.pacManView.render(nanoTime);
         this.ghostView.render(nanoTime);
     }
-    
-    public AnimatedImage getPacManAnimation() {
-        return this.pacManView.getAnimation();
-    }
 }

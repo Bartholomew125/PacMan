@@ -1,6 +1,7 @@
 package com.example.controller;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.input.KeyEvent;
 
 import com.example.model.Game;
@@ -73,8 +74,8 @@ public class MainController implements Controller {
     public void restart() {
         this.game.restart();
         this.stateController.setState(new NormalState());
-        this.viewer.setEnd(false);
         this.soundController.playChompSound();
+        this.viewer.showEndView(false);
     }
 
     /**
@@ -86,7 +87,7 @@ public class MainController implements Controller {
         Wall[] walls = this.game.getMaze().getWalls();
         Pill[] smallPills = this.game.getSmallPillsArray();
         Pill[] largePills = this.game.getLargePillsArray();
-        ArrayList<Ghost> ghosts = this.game.getGhosts();
+        List<Ghost> ghosts = this.game.getGhosts();
 
         // Collision with walls
         for (Wall wall : walls) {
@@ -128,21 +129,21 @@ public class MainController implements Controller {
                     numGhosts--;
                     this.soundController.playEatGhostSound();
                 } else if (stateController.getState() instanceof NormalState) {
-                    this.game.ghostEatsPacman();
+                    this.game.ghostEatPacMan();
                     if (this.game.getLives() > 0) {
                        this.stateController.setState(new DeadState());
                        this.soundController.playDeathSound();
                     } else {
                         this.stateController.setState(new EndState());
-                        this.viewer.setEnd(true);
                         this.soundController.playDeathSound();
+                        this.viewer.showEndView(true);
                     }
                 }
             }
         }
     }
     
-    public Viewer getView(){
+    public Viewer getViewer(){
         return this.viewer;
     }
 }

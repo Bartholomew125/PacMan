@@ -5,10 +5,8 @@ package com.example.model;
  * will be set in the constructor of the pills that extend it.
  */
 public abstract class Pill extends Pos2D {
-    protected int value;
-    protected int size;
-    protected int x;
-    protected int y;
+    private final int value;
+    private final int size;
 
     protected Pill(int x, int y, int value, int size) {
         super(x, y);

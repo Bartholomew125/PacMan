@@ -43,4 +43,14 @@ public class Algebra {
         int distanceY = p2.getY() - p1.getY();
         return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2));
     }
+
+    /**
+     * Adds two positions together
+     * @param p1
+     * @param p2
+     * @return sum of positions
+     */
+    public static Pos2D add(Pos2D p1, Pos2D p2) {
+        return new Pos2D(p1.getX() + p2.getX(), p1.getY() + p2.getY());
+    }
 }
