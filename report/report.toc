@@ -9,6 +9,8 @@
 \contentsline {subsection}{\numberline {3.1}PacMan kontrol}{8}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Ghost AI}{9}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Animationer}{9}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Afstande \& Algebra}{9}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Maze}{9}{subsection.3.5}%
 \contentsline {section}{\numberline {4}Kvalitetssikring}{10}{section.4}%
 \contentsline {section}{\numberline {5}Proces}{10}{section.5}%
 \contentsline {section}{\numberline {6}Diskussion}{10}{section.6}%

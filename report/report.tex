@@ -18,7 +18,7 @@
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{color}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{psfrag}
 \usepackage{pgfplots}
 \usepackage{bm}
@@ -47,6 +47,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Define codecomment command %%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\code}[1]{\small\mintinline[xleftmargin=2em, xrightmargin=2em,
 breaklines]{java}{#1}}
+\newcommand{\class}[1]{\textcolor{BlueViolet}{\small\mintinline[xleftmargin=2em,
+xrightmargin=2em, breaklines]{java}{#1}}}
 \newcommand{\snippet}[3]{\inputminted[firstline=#1,lastline=#2,linenos,
 xleftmargin=1.5em, breaklines]{java}{#3}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,9 +103,12 @@ xleftmargin=1.5em, breaklines]{java}{#3}}
     \newpage
 \section{Projektbeskrivelse}\label{sec:Beskrivelse} % (fold)
 
-Til fordel for at sikre en så tro kopi til orignalen som overhovedet muligt, er dette projekts hovedformål, at udvilke spilfunktionalitet mht. kravsspecifikationen. Målet herefter, er at udvide både spillets funktionalitet samt dets brugervenlighed.
+Til fordel for at sikre en så tro kopi til orignalen som overhovedet muligt, er
+dette projekts hovedformål, at udvilke spilfunktionalitet mht.
+kravsspecifikationen. 
 
-Eventuelle afvigelser fra kravsspecifikationen ses dokumenteret/diskuteret i det følgende.
+Eventuelle afvigelser fra kravsspecifikationen ses dokumenteret/diskuteret i det
+følgende.
 % \begin{itemize}
 %   \item Antag, at læseren af jeres rapport har læst kravsspecifikationen fra
 %   projektbeskrivelsen i slutningen af dette dokument, og undlad at gentage
@@ -157,13 +162,13 @@ princippet, ved at samle ens opførsel i fælles \textit{superklasser}.
 \end{figure}
 
 I \textit{Model} (se \autoref{UML-diagram-Model}) har vi lavet et abstrakt klasse der
-hedder \code{Moveable}, som er en abstrakt enhed der kan bevæge sig. Dette
+hedder \class{Moveable}, som er en abstrakt enhed der kan bevæge sig. Dette
 tillader os at \textit{nedarve} fra den når vi skal lave ting der skal bevæge
-sig som \code{Ghost} og \code{PacMan}. Ud over dette er \code{Ghost} også en
+sig som \class{Ghost} og \class{PacMan}. Ud over dette er \class{Ghost} også en
 abstrakt klasse, så vi kan udvide de enkelte spøgelser fra den. Udover
-\code{Moveable} klasse, har vi også en klasse, \code{Pos2D}, til at
+\class{Moveable} klasse, har vi også en klasse, \class{Pos2D}, til at
 beskrive positioner som ikke skal kunne bevæge sige. Fra denne klasse kan vi så
-nedarve klasser som \code{Pill} og \code{Wall}, da de bare er positioner, men vi
+nedarve klasser som \class{Pill} og \class{Wall}, da de bare er positioner, men vi
 godt vil kunne skelne imellem dem. På denne måde benytter vi
 \textit{klasseafhængighedsprincippet} til at simplificerer koden, og gøre det
 nemmere at udvide med nye features.
@@ -179,12 +184,12 @@ nemmere at udvide med nye features.
     \label{UML-diagram-view}
 \end{figure}
 I \textit{View} (se \autoref{UML-diagram-view}) har vi benyttet en
-\textit{grænseflade} ved navn \code{View} som specificere hvilke metoder et
-\textit{View} skal have. Så har vi lavet en abstrakt klasse \code{AbstractView},
+\textit{grænseflade} ved navn \class{View} som specificere hvilke metoder et
+\textit{View} skal have. Så har vi lavet en abstrakt klasse \class{AbstractView},
 som implementerer dette interface. Vi nedarver på denne måde fra det abstrakte
 \textit{View} hver gang vi laver et nyt \textit{View} som står for at vise noget
 andet. Så kan vi lave specifikke views som står for at tegne kun én slags ting,
-f.eks. \code{PacManView}. På denne måde benytter vi princippet om et enkelt
+f.eks. \class{PacManView}. På denne måde benytter vi princippet om et enkelt
 ansvar, svarende til \textit{Single Responsibility Principle} eller \textit{SRP}.
 % subsection View (end)
 
@@ -200,7 +205,7 @@ ansvar, svarende til \textit{Single Responsibility Principle} eller \textit{SRP}
 Til \textit{Controller} (se \autoref{UML-diagram-controller}) har vi også lavet
 en grænseflade, for at specificerer hvad en "Controller" gør. Derefter har vi
 lavet controllers til at styre henholdsvis PacMan, spøgelser og de forskellige
-stadier af spillet. Med dette har vi lavet en \code{MainController} som
+stadier af spillet. Med dette har vi lavet en \class{MainController} som
 bestemmer hvornår alle de andre controllers skal opdateres, og hvornår vores
 \textit{View} bliver opdateret.
 % subsection Controller (end)
@@ -209,10 +214,10 @@ bestemmer hvornår alle de andre controllers skal opdateres, og hvornår vores
 I løbet af projektet har vores design ændret sig en del. I starten var vores
 UML-diagram meget mere simpelt, som kan ses på \autoref{UML-diagram-old}.
 Enkeltheden er både grundet de manglende felter og metoder, men også at
-kompleksiteten af programmet ikke var blevet realiseret endnu. \code{View} var
-bare én enkelt klasse som stod for at tegne alt, og \code{Controller} stod kun
+kompleksiteten af programmet ikke var blevet realiseret endnu. \class{View} var
+bare én enkelt klasse som stod for at tegne alt, og \class{Controller} stod kun
 for at tage imod input fra brugeren, og bevæge PacMan i labyrinten. Alt
-andet logik til spillet var i \code{Maze}, som gjorde projektet uoverskueligt,
+andet logik til spillet var i \class{Maze}, som gjorde projektet uoverskueligt,
 samtidig med at det bryder \textit{SRP}. Da vi så begynde at implementerer mere,
 lagde vi mærke til hvor god en idé det ville være at splitte det endnu mere op,
 og specialisere klasserne vi laver, som er idéen med \textit{SRP}.
@@ -223,9 +228,9 @@ og specialisere klasserne vi laver, som er idéen med \textit{SRP}.
     \caption{Det første UML-diagram til projektet.}
     \label{UML-diagram-old}
 \end{figure}
-I et forsøg på at simplificerer \code{Maze} delte vi den op, og lavede en
-\code{Game} klasse, hvis formål var at repræsenterer spillet. På denne måde
-kunne \code{Controller} stå for at håndterer alt logikken, som også er mere
+I et forsøg på at simplificerer \class{Maze} delte vi den op, og lavede en
+\class{Game} klasse, hvis formål var at repræsenterer spillet. På denne måde
+kunne \class{Controller} stå for at håndterer alt logikken, som også er mere
 typisk af en \textit{Controller} at gøre i \textit{MVC}-modellen. Med denne
 ændring ville maze bare stå for at repræsenterer labyrinten. UML-diagrammet for
 denne forbedring kan ses på \autoref{UML-diagram-old2}.
@@ -278,7 +283,7 @@ Idéen er at man kigger frem foran PacMan for at se om der er en passage til den
 side man gerne vil hen, indikeret med et tastetryk. Hvis der er en passage
 venter controlleren med at dreje PacMan indtil han er lige ved siden af
 passagen. Dette har vi gjort ved at gemme retningn i et felt kaldet for
-\code{waitingDirection}, og så hver gang \code{PacManController}'s
+\code{waitingDirection}, og så hver gang \class{PacManController}'s
 \code{update()} metode bliver kaldt, så tjekker den om PacMan's position er en
 heltalsværdi. Det må nemlig betyde at han nu står foran den passage som der
 tidligere blev set. I så fald drejer PacMan nu til retningen af
@@ -294,8 +299,8 @@ sig i den retning som man trykker med det samme.
 For at lave alt dette med retninger, lavede vi en \code{enum} klasse til at
 holde styr på de fire retninger vi tillader: op, ned, højre og venstre. For at
 finde ud af hvilken en af disse retninger vores tastetryk svarer til, lavede vi
-også en \code{DirectionAdapter} klasse, som står for at konverterer imellem
-\code{Direction} og andre representationer af en retning.
+også en \class{DirectionAdapter} klasse, som står for at konverterer imellem
+\class{Direction} og andre representationer af en retning.
 % subsection PacMan Kontrol (end)
 
 \subsection{Ghost AI}\label{sub:Ghost AI} % (fold)
@@ -304,14 +309,14 @@ også en \code{DirectionAdapter} klasse, som står for at konverterer imellem
 
 \subsection{Animationer}\label{sub:Animationer} % (fold)
 Da vi gerne ville have animationer i spillet, lavede vi en klasse kaldet
-\code{AnimatedImage}, som står for at repræsenterer de forskellige frames af en
+\class{AnimatedImage}, som står for at repræsenterer de forskellige frames af en
 animation, indlæse frames fra en sti, og ændre farver i dem hvis der er brug for
 det. Det med at ændre farver har vi gjort så vi ikke selv skal tegne et nyt set
 frames for hvert spøgelse vi vil lave i en anden farve, men i stedet for kan
 lave ét set med en meget specifik farve (hvis hex værdi er \#000001), og så
 udskifte den farve med farven af spøgelset.
 
-Når man så laver et nyt \code{AnimatedImage}, så specificerer man hvor lang tid
+Når man så laver et nyt \class{AnimatedImage}, så specificerer man hvor lang tid
 én frame varer i nanosekunder. På denne måde kan vi i \code{getFrame()} metode
 regne ud hvilken frame vi giver, ud fra den nuværende tid som metoden for. Det
 gør den ved først at regne ud hvor lang tid hele animationen tager. Derefter
@@ -326,6 +331,25 @@ metode \code{replaceColorsInFrames()}, som udskifter alle farver som er lig med
 de matcher \code{fromColor}, for så at udskifte det med \code{toColor} på en
 kopi af framet, så det til sidst kan blive overskrevet.
 % subsection Animationer (end)
+
+\subsection{Afstande \& Algebra}
+For at en \class{Moveable} og en \class{Pos2D} selv skal stå for at udregne en
+afstand til andre objekter, så har vi lavet en klasse \class{Algebra} som står
+for netop dette. Det ville nemlig bryde \textit{SRP}, hvis en klasse der kun
+står for at repræsenterer en position, også skulle stå for at udregne afstanden
+mellem positioner.
+
+\subsection{Maze}
+Til formålet for at lave labyrinten til spillet, skulle vi have en måde hvorpå
+det var nemt at ændre i den, og bygge den op. Derfor lavede vi den som en tekst
+fil. For så at læse denne tekst fil, og finde de forskellige elementer i den,
+har lavede vi en klasse \class{TextualMaze}. Dens formål er kun at læse indholdet
+af filen, of finde positionerne af alt i filen, ved brug af metode
+\code{locateCharacter()}.
+
+Udover dette har vi også lavet en klasse \class{Maze} som kun holder alle
+væggene. På denne måde står \class{Maze} ikke selv for at læse en tekstfil og
+kigge rundt i den. På denne måde benytter vi også \textit{SRP}.
 
 \begin{itemize}
   \item Formålet med denne rapportsektion er at give den interesserede læser et
@@ -344,17 +368,37 @@ kopi af framet, så det til sidst kan blive overskrevet.
 
 \newpage
 \section{Kvalitetssikring}\label{sec:Kvalitetssikring} % (fold)
-Til fordel for at sikre, at vores kode/program/spil lever op til kravsspecifikationen (se \autoref{sec:design}), har vi valgt at anvende unit-tests. Unit-testing defineres i denne kontekst som test af enkelte komponenter af programmet, som til sammen skaber det ønskede overblik.
+Til fordel for at sikre, at vores kode/program/spil lever op til
+kravsspecifikationen (se \autoref{sec:design}), har vi valgt at anvende
+unit-tests. Unit-testing defineres i denne kontekst som test af enkelte
+komponenter af programmet, som til sammen skaber det ønskede overblik.
 
-I overenstemmelse med vores valg af unit-tests, er det også underforstået, at vi tester i en form for white-box testing. Med dette betyder det, at dem der skriver testsne (os som udviklere af spillet i dette tilfælde), kender til alt logikken bag implementeringen. Med dette, har man som "\textit{tester}", altså mulighed for at tjekke, om en given invariant for en given metode overholdes under kørsel.
+I overenstemmelse med vores valg af unit-tests, er det også underforstået, at vi
+tester i en form for white-box testing. Med dette betyder det, at dem der
+skriver testsne (os som udviklere af spillet i dette tilfælde), kender til alt
+logikken bag implementeringen. Med dette, har man som "\textit{tester}", altså
+mulighed for at tjekke, om en given invariant for en given metode overholdes
+under kørsel.
 
-Mere specifikt; har vi valg at benytte os af \textit{Java}s framework \code{JUnit}, som b.la. understøtter behjælpelige sammenligningsmetoder (f.eks. \textit{assertions} via \code{assert}).
+Mere specifikt; har vi valg at benytte os af \textit{Java}s framework
+\code{JUnit}, som b.la. understøtter behjælpelige sammenligningsmetoder (f.eks.
+\textit{assertions} via \code{assert}).
 
-Med dette, anvender vi altså også unit-testing som middel til at krydstjekke med vores kravsspecifikation, om disse (krav) samt eventuelle invarianter er overholdt.
+Med dette, anvender vi altså også unit-testing som middel til at krydstjekke med
+vores kravsspecifikation, om disse (krav) samt eventuelle invarianter er
+overholdt.
 
-Med anvendelse af ovennævnte, kan fejfindingprocessen under udviklingen, i nogle tilfælde, forkortes markant. Man kan med andre ord, nogle gange, såfremt man skriver tilstrækkelige unit-tests, forsimple samt forbedre design og udviklingsprocessen.
+Med anvendelse af ovennævnte, kan fejfindingprocessen under udviklingen, i nogle
+tilfælde, forkortes markant. Man kan med andre ord, nogle gange, såfremt man
+skriver tilstrækkelige unit-tests, forsimple samt forbedre design og
+udviklingsprocessen.
 
-Ydermere, har vi til håndtering af versionsstyring anvendt \code{git} i form af nye branches under udvikling af nye programfunktionaliteter. Dette konstruerer en form for automatiseret testing, da man ikke kan publicere ny funktionalitet, før det passer med den resterende kodebase (f.eks. håndtering af mergeconflicts mm.). Denne form for \textit{automatiseret} testing er også kendt som \textit{Continuous integration testing}.
+Ydermere, har vi til håndtering af versionsstyring anvendt \code{git} i form af
+nye branches under udvikling af nye programfunktionaliteter. Dette konstruerer
+en form for automatiseret testing, da man ikke kan publicere ny funktionalitet,
+før det passer med den resterende kodebase (f.eks. håndtering af mergeconflicts
+mm.). Denne form for \textit{automatiseret} testing er også kendt som
+\textit{Continuous integration testing}.
 
 \textcolor{ocre}{\boxed{\text{INDKLUDER ANDEN TILGANG TIL TEST?}}}
 
