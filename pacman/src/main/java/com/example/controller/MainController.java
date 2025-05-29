@@ -40,7 +40,7 @@ public class MainController implements Controller {
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
         this.ghostController = new GhostController(this.game.getGhosts(), this.game.getPacMan());
         this.stateController = new StateController(this.game);
-        this.soundController = new SoundController(this.game);
+        this.soundController = new SoundController();
         this.soundController.playChompSound();
     }
 

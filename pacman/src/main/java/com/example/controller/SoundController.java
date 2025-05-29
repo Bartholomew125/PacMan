@@ -1,43 +1,63 @@
 package com.example.controller;
-import com.example.model.Game;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.media.AudioClip;
 
 public class SoundController implements Controller {
 
-    private final Game game;
-    private AudioClip currentAudioClip;
+    private final AudioClip pacManChomp;
+    private final AudioClip pacManDeath;
+    private final AudioClip pacManEatGhost;
+    private AudioClip currentClip;
+    private final List<AudioClip> priorityList;
     
-    public SoundController(Game game) {
-        this.game = game;
-        this.currentAudioClip = new AudioClip(getClass().getResource("/com/example/sound/pacman_chomp.wav").toExternalForm());
+    public SoundController() {
+        this.pacManChomp = this.loadClip("/com/example/sound/pacman_chomp.wav");
+        this.pacManDeath = this.loadClip("/com/example/sound/pacman_death.wav");
+        this.pacManEatGhost = this.loadClip("/com/example/sound/pacman_eatghost.wav");
+        this.currentClip = this.pacManChomp;
+        this.currentClip.play();
+
+        this.priorityList = new ArrayList<>();
+        this.priorityList.add(this.pacManChomp);
+        this.priorityList.add(this.pacManEatGhost);
+        this.priorityList.add(this.pacManDeath);
     }
+
     @Override
     public void update(long nanoTime) {
         this.playChompSound();
     }
 
     public void playDeathSound() {
-        this.currentAudioClip.stop();
-       this.playSound("/com/example/sound/pacman_death.wav");
+        this.playSound(this.pacManDeath);
     }
 
     public void playChompSound(){
-        this.playSound("/com/example/sound/pacman_chomp.wav");
+        this.playSound(this.pacManChomp);
     }
 
     public void playEatGhostSound(){
-        this.currentAudioClip.stop();
-        this.playSound("/com/example/sound/pacman_eatghost.wav");
+        this.playSound(this.pacManEatGhost);
     }
 
-    public void playSound(String path){
-        AudioClip newAudioClip = new AudioClip(getClass().getResource(path).toExternalForm());
-        if (currentAudioClip != null && !currentAudioClip.isPlaying()) {
-            currentAudioClip.stop();
-            currentAudioClip = newAudioClip;
-            newAudioClip.play();
+    public void playSound(AudioClip audioClip){
+        int newClipPriority = this.priorityList.indexOf(audioClip);
+        int currentClipPriority = this.priorityList.indexOf(currentClip);
+        if (newClipPriority > currentClipPriority) {
+            this.currentClip.stop();
+            this.currentClip = audioClip;
+            this.currentClip.play();
         }
+        else if (!this.currentClip.isPlaying()) {
+            this.currentClip = audioClip;
+            this.currentClip.play();
+        }
+    }
+
+    private AudioClip loadClip(String path) {
+        return new AudioClip(getClass().getResource(path).toExternalForm());
     }
 }
 
