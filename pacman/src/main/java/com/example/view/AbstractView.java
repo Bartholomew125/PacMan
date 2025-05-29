@@ -1,8 +1,11 @@
 package com.example.view;
 
 import javafx.scene.Group;
+import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
@@ -68,13 +71,24 @@ public abstract class AbstractView implements View {
      * @param y
      * @param rotation
      */
-    public void addTextToSurface(Text text, int x, int y, int rotation) {
+    public void addTextToSurface(Text text, int x, int y, int textSize) {
         text.setX(x);
         text.setY(y);
-        text.setRotate(rotation);
+        text.setFill(Color.WHITE);
+        text.setFont(Font.font("Emulogic", textSize));
         this.getSurface().getChildren().add(text);
     }
 
+    public Button addButtonToSuface(String text, int textSize, int width, int height, double x, double y) {
+        Button newButton = new Button(text);
+        newButton.setPrefWidth(width);
+        newButton.setPrefHeight(height);
+        newButton.setLayoutX(x);
+        newButton.setLayoutY(y);
+        newButton.setFont(Font.font("Emulogic", textSize));
+        return newButton;
+    }
+    
     public Group getSurface() {
         return this.surface;
     }

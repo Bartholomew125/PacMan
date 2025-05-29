@@ -23,15 +23,14 @@ public class Main extends Application {
         Group root = new Group();
 
         // Create the Game, Viewer and Controller
-        Game game = new Game();
-        Viewer viewer = new Viewer(800, 800, game);
-        MainController controller = new MainController(game, viewer);
+      
+        MainController controller = new MainController(800,800);
 
         // Attach the viewers surface to the root, so it is displayed
-        root.getChildren().add(viewer.getSurface());
+        root.getChildren().add(controller.getView().getSurface());
 
         // Create the scene with the root, and the size of the viewers surface.
-        Scene scene = new Scene(root, viewer.getWidth(), viewer.getHeight());
+        Scene scene = new Scene(root, controller.getView().getWidth(), controller.getView().getHeight());
 
         // Send all key press events to the controller to be handled.
         scene.setOnKeyPressed(event -> controller.handleKeyPress(event));
