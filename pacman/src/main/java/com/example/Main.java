@@ -1,8 +1,6 @@
 package com.example;
 
 import com.example.controller.MainController;
-import com.example.model.Game;
-import com.example.view.Viewer;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
