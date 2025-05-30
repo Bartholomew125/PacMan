@@ -121,7 +121,8 @@ forbedre brugeroplevelsen i den forstand at man skal kunne bevæge omkring
 hjørner uden at sidde fast. Beskrivelsen af implementeringen af denne ændring
 kan ses i \autoref{sub:PacMan Kontrol}.
 
-\textbf{SPØGELSER SØGER VÆK}
+Udover dette nåede vi ikke kravet om at spøgelserne skal flygte fra PacMan når
+han er i power stadiet.
 
 
 % \begin{itemize}
@@ -337,7 +338,7 @@ skifter vi bare retning ved tastetryk. Hvis det er sådan at PacMan står stille
 så er vi ikke interesseret i at kigge efter en passage, og han skal bare bevæge
 sig i den retning som man trykker.
 
-For at lave alt dette med retninger, lavede vi en \code{enum} klasse. I denne
+For at lave alt dette med retninger, lavede vi en \class{enum} klasse. I denne
 klasse er der har vi defineret fire retninger : op, ned, højre og venstre. For
 at finde ud af hvilken en af disse retninger vores tastetryk svarer til, lavede
 vi også en \class{DirectionAdapter} klasse, som står for at konverterer imellem
@@ -598,24 +599,24 @@ frem til en løsning.
 
 \section{Diskussion}\label{sec:Diskussion} % (fold)
 
-Hvis vi skulle lave projektet om igen, så ville bruge mere tid på at overveje
+Hvis vi skulle lave projektet om igen, så ville vi bruge mere tid på at overveje
 strukturen af det hele i starten. På den måde kunne vi undgå alle de
 refaktoriseringer vi har haft. Dog havde vi ikke noget erfaring med større
-projekter i starten, så vi ville nok ikke have kunne forudse hvor komplekst det
-blev.
+projekter i starten, så vi ville nok ikke have kunne forudse hvor kompleks
+kodebasen blev.
 
 Vi nåede ikke at implementere sådan at spøgelserne flygter fra PacMan når de er
 bange. Dog mener vi ikke at det ville være særlig svært at lave, med vores
 nuværende kodebase, da det bare ville være at ændre på hvad vi giver som målet
 til søgealgoritmen i \class{GhostController}.
 
-\begin{itemize}
-  \item Ville I gøre noget anderledes hvis I skulle implementere projektet
-  forfra?
-  \item Var der dele af projektbeskrivelsen I ikke nåede? I så fald, hvordan er
-  disse dele kompatible med jeres design? Ville I foretage ændringer for at
-  imødekomme ændringer?
-\end{itemize}
+% \begin{itemize}
+%   \item Ville I gøre noget anderledes hvis I skulle implementere projektet
+%   forfra?
+%   \item Var der dele af projektbeskrivelsen I ikke nåede? I så fald, hvordan er
+%   disse dele kompatible med jeres design? Ville I foretage ændringer for at
+%   imødekomme ændringer?
+% \end{itemize}
 % section Diskussion (en
 
 \newpage
