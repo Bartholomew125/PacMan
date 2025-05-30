@@ -12,6 +12,7 @@ public class SoundController implements Controller {
     private final AudioClip chomp;
     private final AudioClip death;
     private final AudioClip eatGhost;
+    private final AudioClip wompWomp;
     private AudioClip currentClip;
     private final List<AudioClip> priorityList;
     
@@ -22,13 +23,15 @@ public class SoundController implements Controller {
         this.chomp = this.loadClip("/com/example/sound/pacman_chomp.wav");
         this.death = this.loadClip("/com/example/sound/pacman_death.wav");
         this.eatGhost = this.loadClip("/com/example/sound/pacman_eatghost.wav");
-        this.currentClip = this.chomp;
-        this.currentClip.play();
-
+        this.wompWomp = this.loadClip("/com/example/sound/gg.wav");
+        // this.currentClip = this.chomp;
+        // this.currentClip.play();
+        this.startPlaying();
         this.priorityList = new ArrayList<>();
         this.priorityList.add(this.chomp);
         this.priorityList.add(this.eatGhost);
         this.priorityList.add(this.death);
+        this.priorityList.add(this.wompWomp);
     }
 
     @Override
@@ -58,6 +61,13 @@ public class SoundController implements Controller {
     }
 
     /**
+     * Attempts to play the end-game sound.
+     */
+    public void playWompWompSound(){
+        this.playSound(this.wompWomp);
+    }
+
+    /**
      * Plays the given audioclip, but only if it has a higher priority than the one already playing, or there is norting else playing.
      * 
      * @param audioClip
@@ -66,6 +76,9 @@ public class SoundController implements Controller {
         int newClipPriority = this.priorityList.indexOf(audioClip);
         int currentClipPriority = this.priorityList.indexOf(currentClip);
         if (newClipPriority > currentClipPriority) {
+            if (this.currentClip == null) {
+                return;
+            }
             this.currentClip.stop();
             this.currentClip = audioClip;
             this.currentClip.play();
@@ -84,5 +97,12 @@ public class SoundController implements Controller {
     private AudioClip loadClip(String path) {
         return new AudioClip(getClass().getResource(path).toExternalForm());
     }
-}
 
+    public void startPlaying() {
+        if (this.currentClip != null && this.currentClip.isPlaying()) {
+            this.currentClip.stop();
+        } 
+        this.currentClip = this.chomp;
+        this.currentClip.play();
+    }
+}

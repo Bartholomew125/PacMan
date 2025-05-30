@@ -75,8 +75,8 @@ public class MainController implements Controller {
     public void restart() {
         this.game.restart();
         this.stateController.setState(new NormalState());
-        this.soundController.playChompSound();
         this.viewer.showEndView(false);
+        this.soundController.startPlaying();
     }
 
     /**
@@ -136,7 +136,7 @@ public class MainController implements Controller {
                        this.soundController.playDeathSound();
                     } else {
                         this.stateController.setState(new EndState());
-                        this.soundController.playDeathSound();
+                        this.soundController.playWompWompSound();
                         this.viewer.showEndView(true);
                     }
                 }
