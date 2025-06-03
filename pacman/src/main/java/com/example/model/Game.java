@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.example.controller.TextualMaze;
 import com.example.controller.searching.BreadthFirstSearch;
+import com.example.controller.searching.DepthFirstSearch;
+import com.example.controller.searching.SearchAlgorithm;
 import com.example.model.states.State;
 
 import javafx.scene.paint.Color;
@@ -203,8 +205,16 @@ public class Game {
         }
 
         Pos2D[] ghostPositions = this.textualMaze.getGhostPositions();
+        Class<?>[] options = new Class<?>[]{BreadthFirstSearch.class, DepthFirstSearch.class};
         for (Pos2D pos : ghostPositions) {
-            this.ghosts.add(new Ghost(pos.getX(), pos.getY(), Color.hsb(Math.random()*255, 1, 1, 1), new BreadthFirstSearch()));
+            int index = (int) (Math.random()*options.length);
+            SearchAlgorithm sa = new BreadthFirstSearch();
+            try {
+                sa = (SearchAlgorithm) options[index].getConstructor().newInstance();
+            }
+            catch (Exception e) {}
+
+            this.ghosts.add(new Ghost(pos.getX(), pos.getY(), Color.hsb(Math.random()*255, 1, 1, 1), sa));
         }
 
         this.score = 0;
