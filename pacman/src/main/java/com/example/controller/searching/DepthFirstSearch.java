@@ -3,7 +3,6 @@ package com.example.controller.searching;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import com.example.model.Maze;
 import com.example.model.Pos2D;
 
 /**
@@ -11,8 +10,7 @@ import com.example.model.Pos2D;
  */
 public class DepthFirstSearch extends AbstractSearchAlgorithm {
 
-    public DepthFirstSearch(Maze maze) {
-        super(maze);
+    public DepthFirstSearch() {
     }
 
     @Override

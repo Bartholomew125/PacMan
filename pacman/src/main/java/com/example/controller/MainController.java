@@ -38,7 +38,7 @@ public class MainController implements Controller {
         this.game = new Game();
         this.viewer = new Viewer(maxWidth, maxHeight, this.game, this);
         this.pacManController = new PacManController(this.game.getPacMan(), this.game.getMaze());
-        this.ghostController = new GhostController(this.game.getGhosts(), this.game.getPacMan());
+        this.ghostController = new GhostController(this.game.getGhosts(), this.game.getPacMan(), this.game.getMaze());
         this.stateController = new StateController(this.game);
         this.soundController = new SoundController();
         this.soundController.playChompSound();
@@ -118,6 +118,7 @@ public class MainController implements Controller {
             if (Algebra.distanceBetween(pill, pacMan) < 0.8) {
                 this.game.pacManEatLargePill(pill);
                 this.stateController.setState(new PowerState());
+                this.ghostController.clearMoveStacks();
             }
         }
 

@@ -16,7 +16,7 @@ import com.example.model.Pos2D;
  */
 public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
     
-    private final Maze maze; 
+    private Maze maze; 
     private Pos2D startPos;
     private Pos2D goalPos;
 
@@ -25,8 +25,7 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
      * 
      * @param maze
      */
-    public AbstractSearchAlgorithm(Maze maze) {
-        this.maze = maze;
+    public AbstractSearchAlgorithm() {
     }
 
     @Override
@@ -47,6 +46,10 @@ public abstract class AbstractSearchAlgorithm implements SearchAlgorithm{
     public void setStart(Moveable m) {
         Pos2D pos = new Pos2D((int) m.getX(), (int) m.getY());
         this.setStart(pos);
+    }
+
+    public void setMaze(Maze maze) {
+        this.maze = maze;
     }
 
     @Override

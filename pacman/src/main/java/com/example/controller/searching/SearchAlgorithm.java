@@ -2,6 +2,7 @@ package com.example.controller.searching;
 
 import java.util.Stack;
 
+import com.example.model.Maze;
 import com.example.model.Pos2D;
 
 /**
@@ -34,4 +35,10 @@ public interface SearchAlgorithm {
      * @param pos
      */
     public void setGoal(Pos2D pos);
+
+    /**
+     * Sets the maze of the search algorithm.
+     * @param maze
+     */
+    public void setMaze(Maze maze);
 }

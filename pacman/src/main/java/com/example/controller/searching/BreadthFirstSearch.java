@@ -3,7 +3,6 @@ package com.example.controller.searching;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import com.example.model.Maze;
 import com.example.model.Pos2D;
 
 /**
@@ -17,8 +16,7 @@ public class BreadthFirstSearch extends AbstractSearchAlgorithm{
      * @param game
      * @param ghost
      */
-    public BreadthFirstSearch(Maze maze) {
-        super(maze);
+    public BreadthFirstSearch() {
     }
 
     @Override
