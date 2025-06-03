@@ -22,7 +22,6 @@ public class FleeAlgorithm extends AbstractSearchAlgorithm {
 
         Node start = new Node(this.getStartPos());
         Node end = new Node(bestPos);
-        System.out.println(bestPos);
 
         start.addChild(end);
         end.setParent(start);
