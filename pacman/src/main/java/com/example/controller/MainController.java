@@ -96,14 +96,6 @@ public class MainController implements Controller {
             if (Algebra.distanceBetween(wall, pacMan) < 1) {
                 pacMan.stop();
             }
-            // Ghosts
-            for (Ghost g : this.game.getGhosts()) {
-                if (Algebra.distanceBetween(wall, g) < 1) {
-                    // g.stop();
-                    // dummyPath(g);
-                    // g.move();
-                }
-            }
         }
         
         // Check for collisions between smallPills and pacMan.
