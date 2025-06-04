@@ -1,4 +1,6 @@
+/Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/TextualMaze.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/model/Maze.java
+/Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/SoundController.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/GhostController.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/searching/AbstractSearchAlgorithm.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/Main.java
@@ -8,6 +10,7 @@
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/EndView.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/MazeView.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/model/states/PowerState.java
+/Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/searching/FleeAlgorithm.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/Viewer.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/StateController.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/model/SmallPill.java
@@ -20,12 +23,12 @@
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/MainController.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/Controller.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/model/states/State.java
-/Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/Algebra.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/AnimatedImage.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/HeaderView.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/View.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/searching/BreadthFirstSearch.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/GhostView.java
+/Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/Algebra.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/view/AbstractView.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/controller/searching/SearchAlgorithm.java
 /Users/aske/Documents/sdu/Semester 2/dm575  - Objektorienteret programmering/exam_project/PacMan/pacman/src/main/java/com/example/model/Direction.java

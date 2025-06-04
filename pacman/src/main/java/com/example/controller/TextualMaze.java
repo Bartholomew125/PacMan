@@ -43,7 +43,7 @@ public class TextualMaze {
      * @return A 2D array of strings
      */
     private String[][] readMazeFromFile() {
-        String fileName = "maze.txt";
+        String fileName = "maze3.txt";
         String pathName = "src/main/resources/com/example/";
         Path path = Paths.get(pathName + fileName);
 
