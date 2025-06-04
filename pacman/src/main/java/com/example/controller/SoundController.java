@@ -24,8 +24,6 @@ public class SoundController implements Controller {
         this.death = this.loadClip("/com/example/sound/pacman_death.wav");
         this.eatGhost = this.loadClip("/com/example/sound/pacman_eatghost.wav");
         this.wompWomp = this.loadClip("/com/example/sound/gg.wav");
-        // this.currentClip = this.chomp;
-        // this.currentClip.play();
         this.startPlaying();
         this.priorityList = new ArrayList<>();
         this.priorityList.add(this.chomp);
@@ -98,6 +96,9 @@ public class SoundController implements Controller {
         return new AudioClip(getClass().getResource(path).toExternalForm());
     }
 
+    /**
+     * Initializes the soundcontoller to play the chomp sound by default.
+     */
     public void startPlaying() {
         if (this.currentClip != null && this.currentClip.isPlaying()) {
             this.currentClip.stop();
